@@ -212,6 +212,38 @@ body {
   color: var(--color-violet);
 }
 
+/* ─────────────── Custom cursor (desktop / fine pointer only) ─────────────── */
+@media (pointer: fine) {
+  .custom-cursor,
+  .custom-cursor * {
+    cursor: none !important;
+  }
+}
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  border-radius: 50%;
+  mix-blend-mode: difference;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  background: #fff;
+}
+.cursor-ring {
+  width: 38px;
+  height: 38px;
+  margin: -19px 0 0 -19px;
+  border: 1.5px solid #fff;
+}
+
 /* ─────────────── Mobile performance: drop GPU-heavy effects ─────────────── */
 @media (max-width: 767px) {
   /* backdrop-filter is the single most expensive effect on mobile GPUs.
