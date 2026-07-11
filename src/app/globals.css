@@ -104,7 +104,9 @@ body {
   color: var(--color-fg);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  /* clip, not hidden — hidden makes body a scroll container and breaks
+     #anchor navigation on mobile browsers */
+  overflow-x: clip;
 }
 
 ::selection {
