@@ -27,9 +27,9 @@ export default function Hero() {
       {/* Ambient background: aurora blobs + grid */}
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="grid-overlay absolute inset-0" />
-        <div className="animate-aurora absolute -top-40 left-1/4 h-[20rem] w-[20rem] rounded-full bg-violet/25 blur-[100px] sm:h-[34rem] sm:w-[34rem] sm:blur-[140px]" />
+        <div className="absolute -top-40 left-1/4 h-[20rem] w-[20rem] rounded-full bg-violet/25 blur-[100px] sm:h-[34rem] sm:w-[34rem] sm:animate-aurora sm:blur-[140px]" />
         <div
-          className="animate-aurora absolute -right-32 top-1/3 h-[16rem] w-[16rem] rounded-full bg-cyan/15 blur-[100px] sm:h-[28rem] sm:w-[28rem] sm:blur-[140px]"
+          className="absolute -right-32 top-1/3 hidden rounded-full bg-cyan/15 sm:block sm:h-[28rem] sm:w-[28rem] sm:animate-aurora sm:blur-[140px]"
           style={{ animationDelay: "-8s" }}
         />
         <div className="absolute -bottom-48 left-1/3 h-[16rem] w-[16rem] rounded-full bg-indigo/20 blur-[110px] sm:h-[26rem] sm:w-[26rem] sm:blur-[160px]" />

@@ -21,7 +21,7 @@ export default function Reveal({
 
   return (
     <motion.div
-      className={className}
+      className={`reveal-fx ${className ?? ""}`}
       initial={{
         opacity: 0,
         y: reduce ? 0 : y,

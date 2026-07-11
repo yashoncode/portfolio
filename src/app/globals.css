@@ -183,6 +183,26 @@ body {
   color: var(--color-violet);
 }
 
+/* ─────────────── Mobile performance: drop GPU-heavy effects ─────────────── */
+@media (max-width: 767px) {
+  /* backdrop-filter is the single most expensive effect on mobile GPUs.
+     Swap glass for a solid near-identical surface. */
+  .glass {
+    backdrop-filter: none;
+    background: linear-gradient(180deg, #12151d, #0c0f15);
+  }
+  /* Blur is animated by scroll reveals — skip the filter entirely on mobile
+     (overrides the inline style motion animates). */
+  .reveal-fx {
+    filter: none !important;
+  }
+  /* Repaints the whole heading every frame — static gradient on mobile. */
+  .text-gradient {
+    animation: none;
+    background-position: 45% 50%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
