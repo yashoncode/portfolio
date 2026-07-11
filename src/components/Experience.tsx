@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import Section from "./Section";
 import Reveal from "./Reveal";
+import CurrentEgg from "./CurrentEgg";
 import { experience } from "@/data/resume";
 
 const icons: Record<string, LucideIcon> = {
@@ -94,11 +95,7 @@ export default function Experience() {
                 </div>
                 <p className="mb-6 font-mono text-xs tracking-wider text-dim">
                   {job.period}
-                  {job.current && (
-                    <span className="ml-3 rounded-full border border-violet/40 bg-violet/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-violet">
-                      Current
-                    </span>
-                  )}
+                  {job.current && <CurrentEgg />}
                 </p>
 
                 {/* Achievement cards */}

@@ -226,7 +226,18 @@ export default function Navbar() {
                 <li key={id}>
                   <a
                     href={`#${id}`}
-                    onClick={() => setOpen(false)}
+                    onClick={(e) => {
+                      // native smooth hash-scroll gets canceled by the menu's
+                      // exit animation on mobile — scroll manually after it
+                      e.preventDefault();
+                      setOpen(false);
+                      setTimeout(() => {
+                        document
+                          .getElementById(id)
+                          ?.scrollIntoView({ behavior: "smooth" });
+                        history.replaceState(null, "", `#${id}`);
+                      }, 300);
+                    }}
                     className="block rounded-lg px-3 py-2 text-sm text-muted transition-colors hover:bg-surface-2 hover:text-fg"
                   >
                     {label}

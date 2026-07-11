@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { ArrowDown } from "lucide-react";
 import { profile, stats } from "@/data/resume";
@@ -19,6 +20,15 @@ const item = {
 };
 
 export default function Hero() {
+  // Click the trailing "D" to reveal the full family name; auto-collapses
+  const [showDev, setShowDev] = useState(false);
+
+  useEffect(() => {
+    if (!showDev) return;
+    const t = setTimeout(() => setShowDev(false), 3000);
+    return () => clearTimeout(t);
+  }, [showDev]);
+
   return (
     <section
       id="top"
@@ -49,12 +59,40 @@ export default function Hero() {
         <motion.h1
           variants={item}
           aria-label={profile.name}
-          className="text-gradient -mt-4 max-w-4xl pt-4 text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
+          className={`text-gradient -mt-4 max-w-4xl whitespace-nowrap pt-4 font-bold leading-[1.05] tracking-tight transition-all duration-500 ${
+            showDev
+              ? "text-3xl sm:text-5xl md:text-6xl lg:text-7xl"
+              : "text-4xl sm:text-6xl md:text-7xl lg:text-8xl"
+          }`}
         >
           {profile.name.split("").map((ch, i) =>
             ch === " " ? (
               <span key={i} aria-hidden="true">
                 &nbsp;
+              </span>
+            ) : i === profile.name.length - 1 && ch === "D" ? (
+              <span
+                key={i}
+                aria-hidden="true"
+                onClick={() => setShowDev((v) => !v)}
+                className={`name-letter-d inline-block cursor-pointer select-none ${
+                  showDev
+                    ? "d-open font-black [-webkit-text-fill-color:var(--color-fg)]"
+                    : ""
+                }`}
+              >
+                D
+                {showDev && (
+                  <motion.span
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    className="inline-block"
+                  >
+                    ev
+                    <span className="font-bold opacity-15">adoss</span>
+                  </motion.span>
+                )}
               </span>
             ) : (
               <span key={i} aria-hidden="true" className="name-letter inline-block">
