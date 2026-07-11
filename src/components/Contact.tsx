@@ -1,4 +1,4 @@
-import { Mail, Phone, ArrowUpRight } from "lucide-react";
+import { Mail, ArrowUpRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./icons";
 import Section from "./Section";
 import Reveal from "./Reveal";
@@ -38,13 +38,6 @@ export default function Contact() {
                   size={16}
                   className="shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                 />
-              </a>
-              <a
-                href={`tel:${profile.phone.replace(/\s/g, "")}`}
-                className="glass inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-xs font-semibold text-fg transition-colors hover:border-border-strong sm:px-7 sm:text-sm"
-              >
-                <Phone size={16} className="shrink-0" />
-                {profile.phone}
               </a>
             </div>
 

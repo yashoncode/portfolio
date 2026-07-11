@@ -12,7 +12,6 @@ export const profile = {
   summary:
     "Software Engineer with 3+ years building and owning Laravel REST APIs, CRM systems, and workflow automation for logistics and ERP platforms, now extending into full-stack development with Next.js and React. Comfortable across the full development cycle — from API and database design to testing, CI/CD deployment, and integration with internal and third-party services. Hands-on with AI and LLM tools to automate workflows and ship faster.",
   email: "yashwanth.devadoss@gmail.com",
-  phone: "+91 98411 59909",
   links: {
     linkedin: "https://www.linkedin.com/in/yashwanth-devadoss/",
     github: "https://github.com/yashoncode",
