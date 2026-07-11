@@ -85,7 +85,7 @@ export default function Navbar() {
       {/* Persistent glass backdrop, cross-faded to avoid class-swap flicker */}
       <div
         aria-hidden
-        className={`glass absolute inset-0 border-b border-border shadow-lg shadow-black/30 transition-opacity duration-500 ${
+        className={`glass glass-keep absolute inset-0 border-b border-border shadow-lg shadow-black/30 transition-opacity duration-500 ${
           scrolled ? "opacity-100" : "opacity-0"
         }`}
       />
@@ -219,7 +219,7 @@ export default function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="glass relative overflow-hidden border-b border-border md:hidden"
+            className="glass glass-keep relative overflow-hidden border-b border-border md:hidden"
           >
             <ul className="flex flex-col gap-1 px-6 py-4">
               {navSections.map(({ id, label }) => (

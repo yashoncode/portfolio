@@ -215,8 +215,9 @@ body {
 /* ─────────────── Mobile performance: drop GPU-heavy effects ─────────────── */
 @media (max-width: 767px) {
   /* backdrop-filter is the single most expensive effect on mobile GPUs.
-     Swap glass for a solid near-identical surface. */
-  .glass {
+     Swap glass for a solid near-identical surface — except .glass-keep
+     (the navbar), where one blurred element is affordable. */
+  .glass:not(.glass-keep) {
     backdrop-filter: none;
     background: linear-gradient(180deg, #12151d, #0c0f15);
   }
