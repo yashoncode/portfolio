@@ -119,18 +119,28 @@ export default function Hero() {
           variants={item}
           className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:mt-20 md:grid-cols-3 lg:grid-cols-5"
         >
-          {stats.map(({ value, label }, i) => (
+          {stats.map(({ value, label, fun }, i) => (
             <div
               key={label}
-              className={`glass rounded-2xl p-4 transition-colors hover:border-border-strong sm:p-5 ${
+              className={`glass group relative rounded-2xl p-4 transition-colors hover:border-violet/40 sm:p-5 ${
                 i === stats.length - 1 && stats.length % 2 === 1
                   ? "col-span-2 md:col-span-1"
                   : ""
               }`}
             >
-              <div className="text-2xl font-bold text-fg md:text-3xl">{value}</div>
-              <div className="mt-1 text-xs leading-snug text-muted md:text-sm">
-                {label}
+              <div className="transition-opacity duration-300 group-hover:opacity-0">
+                <div className="text-2xl font-bold text-fg md:text-3xl">
+                  {value}
+                </div>
+                <div className="mt-1 text-xs leading-snug text-muted md:text-sm">
+                  {label}
+                </div>
+              </div>
+              {/* Funny fact, revealed on hover */}
+              <div className="absolute inset-0 flex items-center justify-center p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <p className="text-center font-mono text-[11px] leading-relaxed text-cyan">
+                  {fun}
+                </p>
               </div>
             </div>
           ))}

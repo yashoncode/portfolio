@@ -40,6 +40,19 @@ export default function Navbar() {
   const [active, setActive] = useState("");
   const [open, setOpen] = useState(false);
   const [eggOpen, setEggOpen] = useState(false);
+  // "ashwanth" docks next to the Y once the hero name scrolls out of view
+  const [nameDocked, setNameDocked] = useState(false);
+
+  useEffect(() => {
+    const heroName = document.querySelector("h1");
+    if (!heroName) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setNameDocked(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    obs.observe(heroName);
+    return () => obs.disconnect();
+  }, []);
 
   // Easter egg closes on Escape
   useEffect(() => {
@@ -99,6 +112,42 @@ export default function Navbar() {
             <span className="logo-flip inline-flex">
               <YMark size={30} />
             </span>
+            <AnimatePresence>
+              {nameDocked && (
+                <motion.span
+                  className="-ml-1.5 flex translate-y-[4px] items-baseline"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0, transition: { duration: 0.25 } }}
+                >
+                  {"ashwanth".split("").map((ch, i) => (
+                    <motion.span
+                      key={i}
+                      initial={{ opacity: 0, y: 80, scale: 1.12 }}
+                      animate={{
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        transition: {
+                          delay: i * 0.024,
+                          duration: 0.5,
+                          ease: [0.25, 1, 0.5, 1],
+                        },
+                      }}
+                      exit={{
+                        opacity: 0,
+                        y: 5,
+                        transition: { delay: (7 - i) * 0.015, duration: 0.12 },
+                      }}
+                      className="nav-script-letter inline-block text-[1.35rem]"
+                      style={{ animationDelay: `${-i * 0.4}s` }}
+                    >
+                      {ch}
+                    </motion.span>
+                  ))}
+                </motion.span>
+              )}
+            </AnimatePresence>
           </button>
 
           <AnimatePresence>

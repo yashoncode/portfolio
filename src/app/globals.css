@@ -212,6 +212,36 @@ body {
   color: var(--color-violet);
 }
 
+/* Docked navbar name: cursive, each letter clips its own flowing gradient
+   (per-letter backgrounds survive transform animation; a parent clip would
+   render moving letters invisible) */
+.nav-script-letter {
+  font-family: var(--font-dancing), cursive;
+  font-weight: 700;
+  /* script glyphs overhang their boxes; widen the painted area so the
+     background-clip fill covers the whole glyph (net layout unchanged) */
+  padding: 0.3em 0.18em;
+  margin: -0.3em -0.18em;
+  /* same hues as the Y mark, looping seamlessly — no white stops */
+  background: linear-gradient(
+    100deg,
+    #a78bfa,
+    #6366f1,
+    #22d3ee,
+    #6366f1,
+    #a78bfa
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: name-flow 6s linear infinite;
+}
+@keyframes name-flow {
+  from { background-position: 0% 50%; }
+  to { background-position: 300% 50%; }
+}
+
 /* ─────────────── Custom cursor (desktop / fine pointer only) ─────────────── */
 @media (pointer: fine) {
   .custom-cursor,

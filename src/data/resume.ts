@@ -19,12 +19,33 @@ export const profile = {
 };
 
 // Headline metrics surfaced in the hero + about sections.
+// `fun` shows on hover — keep them short enough to fit the card.
 export const stats = [
-  { value: "3+", label: "Years shipping production backends" },
-  { value: "200+", label: "People using tools I built" },
-  { value: "15×", label: "Faster reports (~5 min → ~5 sec)" },
-  { value: "1", label: "Patent filed" },
-  { value: "2", label: "IEEE publications" },
+  {
+    value: "3+",
+    label: "Years shipping production backends",
+    fun: "Still zero DROP TABLE incidents. Touch wood.",
+  },
+  {
+    value: "200+",
+    label: "People using tools I built",
+    fun: "Also 200+ people who know exactly who to blame.",
+  },
+  {
+    value: "15×",
+    label: "Faster reports (~5 min → ~5 sec)",
+    fun: "Reports now load faster than my excuses.",
+  },
+  {
+    value: "1",
+    label: "Patent filed",
+    fun: "I promise I'll stop bringing it up. (I won't.)",
+  },
+  {
+    value: "2",
+    label: "IEEE publications",
+    fun: "My mom cites them at every family function.",
+  },
 ];
 
 // Icon keys map to lucide icons in the Experience component.
