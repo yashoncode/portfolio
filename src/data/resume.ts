@@ -27,23 +27,23 @@ export const stats = [
     fun: "Still zero DROP TABLE incidents. Touch wood.",
   },
   {
-    value: "200+",
+    value: "1,000+",
     label: "People using tools I built",
-    fun: "Also 200+ people who know exactly who to blame.",
+    fun: "Also 1,000+ people who know exactly who to blame.",
   },
   {
-    value: "15×",
+    value: "60×",
     label: "Faster reports (~5 min → ~5 sec)",
     fun: "Reports now load faster than my excuses.",
   },
   {
-    value: "1",
-    label: "Patent filed",
-    fun: "I promise I'll stop bringing it up. (I won't.)",
+    value: "3",
+    label: "Systems built solo, end to end",
+    fun: "CRM, ERP & asset management. The standups were very quiet.",
   },
   {
-    value: "2",
-    label: "IEEE publications",
+    value: "1 + 2",
+    label: "Patent filed · IEEE papers published",
     fun: "My mom cites them at every family function.",
   },
 ];
@@ -82,9 +82,9 @@ export const experience: Experience[] = [
       },
       {
         icon: "users",
-        title: "200+ daily users",
+        title: "1,000+ users",
         featured: true,
-        text: "Built and maintain workflow-automation tools used every day by 200+ people across the company, streamlining operations for every team.",
+        text: "Built and maintain workflow-automation tools relied on by 1,000+ people every day, streamlining operations for every team.",
       },
       {
         icon: "server",

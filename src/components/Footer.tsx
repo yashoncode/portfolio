@@ -1,4 +1,5 @@
 import { profile } from "@/data/resume";
+import SpaceEgg from "@/components/SpaceEgg";
 
 export default function Footer() {
   return (
@@ -7,8 +8,8 @@ export default function Footer() {
         <p>
           © {new Date().getFullYear()} {profile.name}. All rights reserved.
         </p>
-        <p className="font-mono tracking-wider">
-          Built with Next.js · Tailwind · Motion
+        <p className="flex items-center gap-2 font-mono tracking-wider">
+          Built with Next.js · Tailwind · Motion · <SpaceEgg />
         </p>
       </div>
     </footer>
