@@ -8,7 +8,7 @@ export default function Contact() {
   return (
     <Section
       id="contact"
-      eyebrow="06 · Contact"
+      eyebrow="07 · Contact"
       title="Let's build something together."
       alt
     >
@@ -23,7 +23,7 @@ export default function Contact() {
           <div className="glass rounded-3xl p-6 sm:p-8 md:p-14">
             <p className="max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
               Whether it&apos;s a role, a project, or just an idea worth
-              exploring — I&apos;d love to hear from you. My inbox is always
+              exploring, I&apos;d love to hear from you. My inbox is always
               open.
             </p>
 

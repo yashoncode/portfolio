@@ -32,6 +32,7 @@
   --animate-spark: spark-float 3.2s ease-in-out infinite;
   --animate-shine: shine-sweep 3.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   --animate-edge-pulse: edge-pulse 3.6s ease-in-out infinite;
+  --animate-twinkle: twinkle 3s ease-in-out infinite;
 }
 
 /* Glossy reflection band sweeping across the logo */
@@ -73,9 +74,11 @@
 }
 
 /* The clickable D: bigger pop that springs up and stays while hovered.
-   No pop while expanded (.d-open) — the whole word scaling feels wrong. */
+   No pop while expanded (.d-open), the whole word scaling feels wrong.
+   Deliberately NOT position:relative — a positioned inline child paints after
+   the parent's background-clip:text pass, so the gradient never fills its
+   glyph and the D renders invisible until hover swaps in a solid fill. */
 .name-letter-d {
-  position: relative;
   transition:
     transform 0.4s cubic-bezier(0.34, 1.8, 0.5, 1),
     -webkit-text-fill-color 0.45s ease;
@@ -101,6 +104,27 @@
 @keyframes spark-float {
   0%, 100% { transform: translateY(0); opacity: 1; }
   50% { transform: translateY(-1.6px); opacity: 0.75; }
+}
+
+/* Hero eyebrow star: dims and shrinks, then flares with a soft halo.
+   The quarter turn keeps the four points catching the light unevenly, the
+   way a real one does, instead of reading as a plain fade. */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.82) rotate(0deg);
+    filter: drop-shadow(0 0 0 rgba(34, 211, 238, 0));
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1.18) rotate(72deg);
+    filter: drop-shadow(0 0 5px rgba(34, 211, 238, 0.75));
+  }
+  70% {
+    opacity: 0.72;
+    transform: scale(0.96) rotate(90deg);
+    filter: drop-shadow(0 0 2px rgba(139, 92, 246, 0.5));
+  }
 }
 
 @keyframes aurora {
@@ -212,36 +236,6 @@ body {
   color: var(--color-violet);
 }
 
-/* Docked navbar name: cursive, each letter clips its own flowing gradient
-   (per-letter backgrounds survive transform animation; a parent clip would
-   render moving letters invisible) */
-.nav-script-letter {
-  font-family: var(--font-dancing), cursive;
-  font-weight: 700;
-  /* script glyphs overhang their boxes; widen the painted area so the
-     background-clip fill covers the whole glyph (net layout unchanged) */
-  padding: 0.3em 0.18em;
-  margin: -0.3em -0.18em;
-  /* same hues as the Y mark, looping seamlessly — no white stops */
-  background: linear-gradient(
-    100deg,
-    #a78bfa,
-    #6366f1,
-    #22d3ee,
-    #6366f1,
-    #a78bfa
-  );
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: name-flow 6s linear infinite;
-}
-@keyframes name-flow {
-  from { background-position: 0% 50%; }
-  to { background-position: 300% 50%; }
-}
-
 /* ─────────────── Custom cursor (desktop / fine pointer only) ─────────────── */
 @media (pointer: fine) {
   .custom-cursor,
@@ -260,6 +254,7 @@ body {
   mix-blend-mode: difference;
   opacity: 0;
   transition: opacity 0.3s ease;
+  will-change: transform;
 }
 .cursor-dot {
   width: 8px;

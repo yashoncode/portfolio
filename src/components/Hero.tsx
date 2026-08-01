@@ -52,8 +52,21 @@ export default function Hero() {
         className="mx-auto w-full max-w-6xl px-6 pt-24 pb-16"
       >
         <motion.p variants={item} className="eyebrow mb-5 flex items-center gap-2">
-          <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
-          Software Engineer · Open to opportunities
+          <span
+            aria-hidden
+            className="animate-twinkle inline-block text-[0.95em] leading-none text-cyan"
+          >
+            ✦
+          </span>
+          AI Engineer · Backend Engineer · Full-Stack Engineer
+          {/* offset so the pair never twinkles in lockstep */}
+          <span
+            aria-hidden
+            style={{ animationDelay: "-1.4s" }}
+            className="animate-twinkle inline-block text-[0.95em] leading-none text-cyan"
+          >
+            ✦
+          </span>
         </motion.p>
 
         <motion.h1
@@ -106,12 +119,16 @@ export default function Hero() {
           variants={item}
           className="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg md:text-xl"
         >
-          {profile.tagline}{" "}
-          <span className="text-fg">Laravel</span>{" "}
-          APIs, CRM &amp; ERP systems, and workflow automation for logistics —
-          now going full-stack with{" "}
-          <span className="text-fg">Next.js</span> and{" "}
-          <span className="text-fg">React</span>.
+          {profile.tagline} Full-stack{" "}
+          <span className="text-fg">Laravel</span>,{" "}
+          <span className="text-fg">React</span> and{" "}
+          <span className="text-fg">Next.js</span>
+          {" for logistics and freight forwarding, plus open-source "}
+          <span className="text-fg">agentic AI</span>
+          {": "}
+          <span className="text-fg">multi-agent systems</span>,{" "}
+          <span className="text-fg">RAG</span> pipelines and{" "}
+          <span className="text-fg">FastAPI</span>.
         </motion.p>
 
         {/* Headline stats */}

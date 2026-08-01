@@ -13,6 +13,7 @@ import {
   Wrench,
   Activity,
   Cloud,
+  Bot,
   ArrowUpRight,
   type LucideIcon,
 } from "lucide-react";
@@ -36,6 +37,7 @@ const icons: Record<string, LucideIcon> = {
   wrench: Wrench,
   activity: Activity,
   cloud: Cloud,
+  bot: Bot,
 };
 
 export default function Experience() {

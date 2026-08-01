@@ -6,11 +6,13 @@ import { skillGroups, softSkills } from "@/data/resume";
 const marqueeSkills = [
   "Laravel", "PHP", "Next.js", "React", "TypeScript", "MySQL", "MongoDB",
   "Docker", "n8n", "AWS", "GitHub CI/CD", "Python", "REST APIs", "Metabase",
+  "FastAPI", "LangGraph", "LangChain", "RAG", "Multi-Agent Systems",
+  "PGVector", "ChromaDB", "Langfuse", "MCP", "Prompt Engineering",
 ];
 
 export default function Skills() {
   return (
-    <Section id="skills" eyebrow="03 · Skills" title="What I work with." glow="cyan">
+    <Section id="skills" eyebrow="04 · Skills" title="What I work with." glow="cyan">
       {/* Marquee strip */}
       <Reveal className="mb-12">
         <div className="glass relative overflow-hidden rounded-2xl py-4 [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]">

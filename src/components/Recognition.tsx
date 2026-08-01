@@ -7,7 +7,7 @@ export default function Recognition() {
   return (
     <Section
       id="recognition"
-      eyebrow="05 · Recognition"
+      eyebrow="06 · Recognition"
       title="Research & recognition."
       glow="indigo"
     >

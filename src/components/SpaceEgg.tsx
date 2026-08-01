@@ -52,7 +52,7 @@ export default function SpaceEgg() {
                 Certified space nerd.
               </span>
               <span className="mt-2 block text-sm leading-relaxed text-muted">
-                The stars behind this site aren&apos;t decoration — I&apos;m
+                The stars behind this site aren&apos;t decoration, I&apos;m
                 genuinely obsessed with space. Look up: that meteor shower is
                 for you. ☄️
               </span>

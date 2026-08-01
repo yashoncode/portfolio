@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Dancing_Script } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import Cursor from "@/components/Cursor";
 import Galaxy from "@/components/Galaxy";
 import "./globals.css";
@@ -14,30 +14,32 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const dancingScript = Dancing_Script({
-  variable: "--font-dancing",
-  subsets: ["latin"],
-  weight: "700",
-});
-
 export const metadata: Metadata = {
-  title: "Yashwanth D — Software Engineer",
+  title: "Yashwanth D | AI Engineer & Full-Stack Engineer",
   description:
-    "Software Engineer with 3+ years building Laravel REST APIs, CRM & ERP systems, and workflow automation — now going full-stack with Next.js and React.",
+    "AI Engineer and Full-Stack Engineer building agentic AI (multi-agent systems, RAG, FastAPI) and Laravel, React and Next.js applications for logistics.",
   keywords: [
     "Yashwanth D",
+    "AI Engineer",
+    "Generative AI Engineer",
     "Software Engineer",
+    "Full Stack Engineer",
+    "Agentic AI",
+    "Multi-Agent Systems",
+    "RAG",
+    "LangGraph",
+    "LangChain",
+    "FastAPI",
     "Laravel",
     "Next.js",
     "React",
-    "Backend Developer",
-    "Full-Stack Developer",
+    "Python",
     "India",
   ],
   openGraph: {
-    title: "Yashwanth D — Software Engineer",
+    title: "Yashwanth D | AI Engineer & Full-Stack Engineer",
     description:
-      "Laravel APIs, CRM & ERP systems, and workflow automation — now full-stack with Next.js and React.",
+      "AI Engineer · Full-Stack Engineer · Agentic AI · Multi-Agent Systems · RAG · FastAPI · React · Laravel",
     type: "website",
   },
 };
@@ -50,7 +52,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${dancingScript.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <Galaxy />

@@ -47,7 +47,7 @@ export default function CurrentEgg() {
                 Day one, still here.
               </span>
               <span className="mt-2 block text-sm leading-relaxed text-muted">
-                Stockarea is my first company after college — and I&apos;m
+                Stockarea is my first company after college, and I&apos;m
                 still here, growing with it.
               </span>
             </motion.span>

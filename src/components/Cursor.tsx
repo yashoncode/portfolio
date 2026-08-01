@@ -46,10 +46,10 @@ export default function Cursor() {
 
     let raf: number;
     const loop = () => {
-      rx += (x - rx) * 0.06;
-      ry += (y - ry) * 0.06;
+      rx += (x - rx) * 0.32;
+      ry += (y - ry) * 0.32;
       targetScale = down ? 0.2 : hovering ? 1.2 : 0.5;
-      scale += (targetScale - scale) * 0.2;
+      scale += (targetScale - scale) * 0.35;
       ring.style.transform = `translate(${rx}px, ${ry}px) scale(${scale})`;
       raf = requestAnimationFrame(loop);
     };

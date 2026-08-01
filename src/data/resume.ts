@@ -6,11 +6,11 @@
 
 export const profile = {
   name: "Yashwanth D",
-  title: "Software Engineer",
+  title: "AI Engineer · Full-Stack Engineer",
   tagline: "I build reliable systems that people depend on every day.",
   location: "India",
   summary:
-    "Software Engineer with 3+ years building and owning Laravel REST APIs, CRM systems, and workflow automation for logistics and ERP platforms, now extending into full-stack development with Next.js and React. Comfortable across the full development cycle — from API and database design to testing, CI/CD deployment, and integration with internal and third-party services. Hands-on with AI and LLM tools to automate workflows and ship faster.",
+    "Software Engineer at Stockarea building scalable full-stack applications with Laravel, React, and Next.js. I develop software that streamlines logistics and freight forwarding operations, plus AI-powered automation workflows that improve business processes and operational efficiency. Deeply into Generative AI, and actively building open-source AI projects with Python and FastAPI: LLM applications, multi-agent systems, RAG pipelines, AI document analysis, and AI-powered SQL query generation.",
   email: "yashwanth.devadoss@gmail.com",
   links: {
     linkedin: "https://www.linkedin.com/in/yashwanth-devadoss/",
@@ -22,29 +22,29 @@ export const profile = {
 // `fun` shows on hover — keep them short enough to fit the card.
 export const stats = [
   {
-    value: "3+",
-    label: "Years shipping production backends",
+    value: "4+",
+    label: "Years shipping production software",
     fun: "Still zero DROP TABLE incidents. Touch wood.",
   },
   {
-    value: "1,000+",
-    label: "People using tools I built",
-    fun: "Also 1,000+ people who know exactly who to blame.",
+    value: "3",
+    label: "Open-source AI projects shipped",
+    fun: "Multi-agent RAG, text-to-SQL, prompt engineering. All public.",
   },
   {
     value: "60×",
-    label: "Faster reports (~5 min → ~5 sec)",
-    fun: "Reports now load faster than my excuses.",
+    label: "Faster logistics report APIs (~5 min → ~5 sec)",
+    fun: "Reports now load faster than my excuses. Btw I love optimizing slow code.",
   },
   {
     value: "3",
-    label: "Systems built solo, end to end",
+    label: "Production systems built solo",
     fun: "CRM, ERP & asset management. The standups were very quiet.",
   },
   {
     value: "1 + 2",
     label: "Patent filed · IEEE papers published",
-    fun: "My mom cites them at every family function.",
+    fun: "My super productive side: research, prototyping, and publishing.",
   },
 ];
 
@@ -68,28 +68,27 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
-    role: "Software Engineer L2",
+    role: "Software Engineer L1 → L2",
     company: "Stockarea",
     companyUrl: "https://stockarea.io/",
-    period: "Oct 2024 — Present",
+    period: "Oct 2024 - Present · L2 since Apr 2026",
     current: true,
     points: [
       {
         icon: "zap",
         title: "3 GB → 200 MB",
         featured: true,
-        text: "Diagnosed and fixed a major report-generation bottleneck — memory cut from ~3 GB to ~200 MB, response time from ~5 min to ~5 sec, by restructuring how large datasets are queried and processed.",
+        text: "Diagnosed and fixed a major report-generation bottleneck: memory cut from ~3 GB to ~200 MB, response time from ~5 min to ~5 sec, by restructuring how large datasets are queried and processed.",
       },
       {
         icon: "users",
-        title: "1,000+ users",
-        featured: true,
-        text: "Built and maintain workflow-automation tools relied on by 1,000+ people every day, streamlining operations for every team.",
+        title: "Company-wide automation",
+        text: "Built and maintain the workflow-automation tools every team runs on, streamlining daily operations across the company.",
       },
       {
         icon: "server",
-        title: "Core logistics APIs",
-        text: "Build and own Laravel REST APIs powering core logistics workflows across internal modules and services.",
+        title: "684 routes, one admin API",
+        text: "Build and own the Laravel admin API, 684 registered routes powering core logistics workflows across internal modules and services.",
       },
       {
         icon: "sparkles",
@@ -99,7 +98,7 @@ export const experience: Experience[] = [
       {
         icon: "database",
         title: "Asset management backend",
-        text: "Designed and built the positions & asset-management backend end to end as the sole engineer — data structuring, architecture, and implementation.",
+        text: "Designed and built the positions & asset-management backend end to end as the sole engineer, covering data structuring, architecture, and implementation.",
       },
       {
         icon: "layout",
@@ -107,14 +106,20 @@ export const experience: Experience[] = [
         text: "Developing internal web applications, extending ownership from backend APIs to full-stack delivery.",
       },
       {
+        icon: "bot",
+        title: "AI automation in production",
+        featured: true,
+        text: "Build AI-powered automation workflows into logistics and CRM processes, with LLM-driven document and data handling that removes manual steps and speeds up operations.",
+      },
+      {
         icon: "file-text",
         title: "ERP for billing & finance",
-        text: "Architect and maintain the ERP backend for billing, invoicing, and purchase orders — improving accuracy and consistency of financial records.",
+        text: "Architect and maintain the ERP backend for billing, invoicing, and purchase orders, improving accuracy and consistency of financial records.",
       },
       {
         icon: "workflow",
         title: "n8n automations",
-        text: "WhatsApp messaging, website-to-email alerts, and scheduled jobs wired together — eliminating manual follow-ups and repetitive data entry.",
+        text: "Email, WhatsApp reminders, and AI voice calls wired together for the sales team, cutting follow-up work that filled a rep's day to 5 to 15 minutes.",
       },
       {
         icon: "rocket",
@@ -127,7 +132,7 @@ export const experience: Experience[] = [
     role: "Solutions Architect",
     company: "Stockarea",
     companyUrl: "https://stockarea.io/",
-    period: "Aug 2023 — Oct 2024",
+    period: "Aug 2023 - Oct 2024",
     points: [
       {
         icon: "workflow",
@@ -152,9 +157,9 @@ export const experience: Experience[] = [
     ],
   },
   {
-    role: "Founder & Software Analyst",
+    role: "Founder & Software Lead",
     company: "Flare Innovations",
-    period: "Feb 2022 — Jun 2023",
+    period: "Feb 2022 - Jun 2023",
     points: [
       {
         icon: "rocket",
@@ -184,6 +189,37 @@ export type SkillGroup = { label: string; skills: string[] };
 
 export const skillGroups: SkillGroup[] = [
   {
+    label: "Agentic AI & LLM",
+    skills: [
+      "Multi-Agent Systems",
+      "RAG Pipelines",
+      "LangChain",
+      "LangGraph",
+      "LangFlow",
+      "MCP",
+      "Prompt Engineering",
+      "Human-in-the-Loop",
+      "Agentic Knowledge Bases",
+      "Text-to-SQL",
+      "AI Document Analysis",
+    ],
+  },
+  {
+    label: "AI Engineering Stack",
+    skills: [
+      "Python",
+      "FastAPI",
+      "PGVector",
+      "ChromaDB",
+      "Langfuse",
+      "Hybrid Retrieval (BM25 + Vector)",
+      "Cross-Encoder Reranking",
+      "Embeddings",
+      "Streaming (SSE)",
+      "Streamlit",
+    ],
+  },
+  {
     label: "Backend Development",
     skills: [
       "Laravel",
@@ -196,9 +232,9 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     label: "Frontend Development",
-    skills: ["Next.js", "React", "JavaScript", "HTML", "CSS"],
+    skills: ["Next.js", "React", "TypeScript", "JavaScript", "Tailwind CSS", "HTML", "CSS"],
   },
-  { label: "Databases", skills: ["MySQL", "MongoDB", "SQL"] },
+  { label: "Databases", skills: ["MySQL", "PostgreSQL", "MongoDB", "SQL"] },
   {
     label: "Async Processing",
     skills: ["Laravel Jobs", "Event-Based Processing", "Task Scheduling"],
@@ -215,16 +251,75 @@ export const skillGroups: SkillGroup[] = [
     label: "Tools & Platforms",
     skills: ["Git", "GitHub", "Postman", "Linux", "Metabase"],
   },
+  { label: "Languages", skills: ["Python", "PHP", "JavaScript", "TypeScript"] },
+];
+
+export type Project = {
+  name: string;
+  blurb: string;
+  url: string;
+  liveUrl?: string;
+  /** Two or three lines of what makes it interesting. */
+  points: string[];
+  stack: string[];
+};
+
+export const projects: Project[] = [
   {
-    label: "AI & Automation",
-    skills: [
-      "AI-Assisted Development",
-      "AI Workflow Automation",
-      "LLM Tools",
-      "Prompt Engineering",
+    name: "DocMagic",
+    blurb:
+      "Multi-agent RAG assistant that answers questions over logistics, ERP and CRM documents. Every answer is cited to the exact page or sheet.",
+    url: "https://github.com/yashoncode/docmagic/tree/langgraph",
+    liveUrl: "https://docmagic.streamlit.app/",
+    points: [
+      "LangGraph supervisor routes each question to one capability specialist (documents, spreadsheet data, arithmetic or live web search), so the model never juggles every tool at once.",
+      "Hybrid retrieval fuses dense vector search with BM25, then re-scores with a cross-encoder reranker; ingestion runs metadata → analyst → reviewer with a bounded revision loop.",
+      "Built twice on two branches, Next.js + FastAPI + pgvector and Streamlit + LCEL + Chroma, so the architectural trade-offs are visible side by side.",
+    ],
+    stack: [
+      "Python",
+      "FastAPI",
+      "LangGraph",
+      "LangChain",
+      "Next.js",
+      "pgvector",
+      "Langfuse",
+      "SSE",
     ],
   },
-  { label: "Languages", skills: ["PHP", "JavaScript", "Python"] },
+  {
+    name: "Tevel IntelliDB",
+    blurb:
+      "An AI-first SQL client: a database engineer, not a chat box. Ask in plain English, get safe, reviewable SQL.",
+    url: "https://github.com/yashoncode/Tevel-IntelliDB",
+    points: [
+      "Schema-only RAG: the model reasons over metadata (tables, columns, keys, indexes, relationships) and never sees a single row of customer data.",
+      "Schema Intelligence Layer with an FK relationship graph, join-path finding, and a business vocabulary that decodes cryptic names (tbl_cust_hdr → customer header).",
+      "Read-only safety gate blocks writes and injection; invalid SQL goes through an auto-repair loop until it validates. Cross-platform desktop builds for Windows, macOS and Linux.",
+    ],
+    stack: [
+      "Electron",
+      "Vue 3",
+      "TypeScript",
+      "Node.js",
+      "MySQL",
+      "PostgreSQL",
+      "SQLite",
+      "Embeddings",
+    ],
+  },
+  {
+    name: "ImaGen",
+    blurb:
+      "A prompt-engineering playground for image editing. Pick the technique, see exactly how it changes the result.",
+    url: "https://github.com/yashoncode/imaGen-Prompt-Enhancement",
+    points: [
+      "Eight selectable prompting strategies (zero-shot, few-shot, structured, chain-of-thought, self-refine, meta-prompt, tree-of-thought and raw) compared on the same instruction.",
+      "Always shows the exact messages sent to the LLM and the final prompt handed to the image model, so the technique's effect is measurable rather than magic.",
+      "Brush a mask, and the edited frame is composited back over the original inside your region only, working around an image model with no server-side mask.",
+    ],
+    stack: ["Python", "Streamlit", "NVIDIA NIM", "FLUX.2", "Prompt Engineering", "Pillow"],
+  },
 ];
 
 export const softSkills = [
@@ -242,19 +337,25 @@ export type Education = {
   degree: string;
   period: string;
   detail?: string;
+  /** Present on the card that hides an easter egg (see Education.tsx). */
+  egg?: { title: string; text: string };
 };
 
 export const education: Education[] = [
   {
     school: "Sri Sairam Engineering College, Chennai",
     degree: "B.E. in Electronics & Communication Engineering",
-    period: "2019 — 2023",
+    period: "2019 - 2023",
     detail: "CGPA: 9.05 / 10",
   },
   {
     school: "Leo Matriculation Higher Secondary School, Chennai",
     degree: "Higher Secondary (Computer Science)",
     period: "2019",
+    egg: {
+      title: "Average kid, then school topper.",
+      text: "I finished school as the topper, but I did not start anywhere near the top. I was an average student until self learning and plain curiosity took over, and that is still how I pick up anything new.",
+    },
   },
 ];
 
@@ -283,9 +384,9 @@ export const patents = [
 ];
 
 export const awards = [
-  "Mentor, Smart India Hackathon (SIH) Finalist Team — 2024",
-  "Best Outgoing Student, Institution of Engineers India (IEI) — 2023",
-  "School Topper, SSLC (98%) — 2017",
+  "Mentor, Smart India Hackathon (SIH) Finalist Team, 2024",
+  "Best Outgoing Student, Institution of Engineers India (IEI), 2023",
+  "School Topper, SSLC (98%), 2017",
 ];
 
 export const languages = ["English", "Tamil"];
@@ -294,6 +395,7 @@ export const languages = ["English", "Tamil"];
 export const navSections = [
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
   { id: "skills", label: "Skills" },
   { id: "education", label: "Education" },
   { id: "recognition", label: "Recognition" },

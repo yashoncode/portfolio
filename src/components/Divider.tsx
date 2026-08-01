@@ -53,7 +53,7 @@ export default function Divider() {
               <p className="eyebrow mb-3">🥚 easter egg · 02</p>
               <p className="text-lg font-bold text-fg">Certified introvert.</p>
               <p className="mt-2 text-sm leading-relaxed text-muted">
-                Real fact: I&apos;m an introvert — so I built this website to
+                Real fact: I&apos;m an introvert, so I built this website to
                 do the talking for me.
               </p>
             </motion.div>

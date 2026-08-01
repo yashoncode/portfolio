@@ -1,28 +1,28 @@
-import { Sparkles, Server, Workflow, Layout } from "lucide-react";
+import { Bot, Server, Workflow, Layout } from "lucide-react";
 import Section from "./Section";
 import Reveal from "./Reveal";
 import { profile } from "@/data/resume";
 
 const focus = [
   {
-    icon: Server,
-    title: "Backend Ownership",
-    text: "Laravel REST APIs, CRM & ERP modules designed, built, and run end to end — often as the sole engineer.",
+    icon: Bot,
+    title: "Agentic AI Systems",
+    text: "Multi-agent systems, RAG pipelines, and agentic knowledge bases in Python and FastAPI: LangGraph, LangChain, MCP, pgvector, Langfuse.",
   },
   {
-    icon: Workflow,
-    title: "Workflow Automation",
-    text: "n8n, Google Apps Script, and custom tools automating daily operations for an entire company.",
+    icon: Server,
+    title: "Backend Ownership",
+    text: "Laravel REST APIs, CRM & ERP modules designed, built, and run end to end, often as the sole engineer.",
   },
   {
     icon: Layout,
     title: "Full-Stack Delivery",
-    text: "Extending backend ownership into Next.js and React apps — design to deploy via CI/CD, Docker, and Coolify.",
+    text: "Laravel, React, and Next.js apps for logistics and freight forwarding, design to deploy via CI/CD, Docker, and Coolify.",
   },
   {
-    icon: Sparkles,
-    title: "AI-Powered Shipping",
-    text: "LLM tools and AI automation woven into workflows and the development process itself to ship faster.",
+    icon: Workflow,
+    title: "AI Workflow Automation",
+    text: "n8n, LLM-driven document handling, and custom tools automating daily operations for an entire company.",
   },
 ];
 
@@ -31,7 +31,7 @@ export default function About() {
     <Section
       id="about"
       eyebrow="01 · About"
-      title="Building reliable systems, end to end."
+      title="Full-stack systems, now with agents."
       glow="violet"
     >
       <div className="grid gap-12 lg:grid-cols-5">
