@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { ArrowDown } from "lucide-react";
-import { profile, stats } from "@/data/resume";
+import { profile, stats, type StatDetail } from "@/data/resume";
+import StatModal from "./StatModal";
 
 const container = {
   hidden: {},
@@ -22,6 +23,8 @@ const item = {
 export default function Hero() {
   // Click the trailing "D" to reveal the full family name; auto-collapses
   const [showDev, setShowDev] = useState(false);
+  // One dialog for all stat cards — the open card's detail is the state.
+  const [openDetail, setOpenDetail] = useState<StatDetail | null>(null);
 
   useEffect(() => {
     if (!showDev) return;
@@ -51,14 +54,18 @@ export default function Hero() {
         animate="show"
         className="mx-auto w-full max-w-6xl px-6 pt-24 pb-16"
       >
-        <motion.p variants={item} className="eyebrow mb-5 flex items-center gap-2">
+        <motion.p
+          variants={item}
+          whileHover={{ y: -2 }}
+          className="eyebrow mb-5 inline-flex items-center gap-2"
+        >
           <span
             aria-hidden
             className="animate-twinkle inline-block text-[0.95em] leading-none text-cyan"
           >
             ✦
           </span>
-          AI Engineer · Backend Engineer · Full-Stack Engineer
+          Full-Stack Developer · AI Systems
           {/* offset so the pair never twinkles in lockstep */}
           <span
             aria-hidden
@@ -136,33 +143,63 @@ export default function Hero() {
           variants={item}
           className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:mt-20 md:grid-cols-3 lg:grid-cols-5"
         >
-          {stats.map(({ value, label, fun }, i) => (
-            <div
-              key={label}
-              className={`glass group relative rounded-2xl p-4 transition-colors hover:border-violet/40 sm:p-5 ${
-                i === stats.length - 1 && stats.length % 2 === 1
-                  ? "col-span-2 md:col-span-1"
-                  : ""
-              }`}
-            >
-              <div className="transition-opacity duration-300 group-hover:opacity-0">
-                <div className="text-2xl font-bold text-fg md:text-3xl">
-                  {value}
+          {stats.map(({ value, label, fun, href, detail }, i) => {
+            const cls = `glass group relative rounded-2xl p-4 transition-colors hover:border-violet/40 sm:p-5 ${
+              i === stats.length - 1 && stats.length % 2 === 1
+                ? "col-span-2 md:col-span-1"
+                : ""
+            }`;
+            const body = (
+              <>
+                <div className="transition-opacity duration-300 group-hover:opacity-0">
+                  {/* Word values ("Researcher") need a smaller size than numbers
+                      or they overflow the card at the 5-column breakpoint. */}
+                  <div
+                    className={`font-bold text-fg ${
+                      /\d/.test(value) ? "text-2xl md:text-3xl" : "text-xl md:text-2xl"
+                    }`}
+                  >
+                    {value}
+                  </div>
+                  <div className="mt-1 text-xs leading-snug text-muted md:text-sm">
+                    {label}
+                  </div>
                 </div>
-                <div className="mt-1 text-xs leading-snug text-muted md:text-sm">
-                  {label}
+                {/* Funny fact, revealed on hover */}
+                <div className="absolute inset-0 flex items-center justify-center p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <p className="text-center font-mono text-[11px] leading-relaxed text-cyan">
+                    {fun}
+                  </p>
                 </div>
+              </>
+            );
+            if (href)
+              return (
+                <a key={label} href={href} className={cls}>
+                  {body}
+                </a>
+              );
+            if (detail)
+              return (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={() => setOpenDetail(detail)}
+                  className={`${cls} text-left`}
+                >
+                  {body}
+                </button>
+              );
+            return (
+              <div key={label} className={cls}>
+                {body}
               </div>
-              {/* Funny fact, revealed on hover */}
-              <div className="absolute inset-0 flex items-center justify-center p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <p className="text-center font-mono text-[11px] leading-relaxed text-cyan">
-                  {fun}
-                </p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </motion.div>
       </motion.div>
+
+      <StatModal detail={openDetail} onDismiss={() => setOpenDetail(null)} />
 
       <motion.a
         href="#about"

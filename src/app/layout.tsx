@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Yashwanth D | AI Engineer & Full-Stack Engineer",
+  title: "Yashwanth D | Full-Stack Developer & AI Systems",
   description:
-    "AI Engineer and Full-Stack Engineer building agentic AI (multi-agent systems, RAG, FastAPI) and Laravel, React and Next.js applications for logistics.",
+    "Full-Stack Developer building AI systems: agentic AI (multi-agent systems, RAG, FastAPI) and Laravel, React and Next.js applications for logistics.",
   keywords: [
     "Yashwanth D",
     "AI Engineer",
@@ -37,9 +37,9 @@ export const metadata: Metadata = {
     "India",
   ],
   openGraph: {
-    title: "Yashwanth D | AI Engineer & Full-Stack Engineer",
+    title: "Yashwanth D | Full-Stack Developer & AI Systems",
     description:
-      "AI Engineer · Full-Stack Engineer · Agentic AI · Multi-Agent Systems · RAG · FastAPI · React · Laravel",
+      "Full-Stack Developer · AI Systems · Agentic AI · Multi-Agent Systems · RAG · FastAPI · React · Laravel",
     type: "website",
   },
 };

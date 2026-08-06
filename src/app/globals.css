@@ -236,12 +236,66 @@ body {
   color: var(--color-violet);
 }
 
+/* ─────────────── Stat detail modal (native <dialog>) ─────────────── */
+.stat-modal {
+  /* The UA stylesheet gives dialogs their own border and a max-width/height
+     that fights the sizing classes — clear them and let .glass draw the edge. */
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  color: inherit;
+  /* Clips the scrolling content to the rounded corners. */
+  overflow: hidden;
+}
+.stat-modal::backdrop {
+  background: rgba(5, 7, 12, 0.65);
+  backdrop-filter: blur(10px);
+}
+.stat-modal[open] {
+  animation: modal-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stat-modal[open]::backdrop {
+  animation: modal-backdrop-in 0.3s ease;
+}
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+}
+@keyframes modal-backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+/* showModal() makes the page inert but does not stop it scrolling behind. */
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
 /* ─────────────── Custom cursor (desktop / fine pointer only) ─────────────── */
 @media (pointer: fine) {
   .custom-cursor,
   .custom-cursor * {
     cursor: none !important;
   }
+  /* showModal() paints the dialog in the top layer, which sits above every
+     z-index in the normal document — so the dot and ring end up buried and
+     the pointer looks lost. Hand the real cursor back for as long as a
+     modal is open. */
+  html:has(dialog[open]).custom-cursor,
+  html:has(dialog[open]).custom-cursor * {
+    cursor: auto !important;
+  }
+  /* UA gives buttons an arrow, so the close control needs this back. */
+  html:has(dialog[open]).custom-cursor :is(a, button, [role="button"]) {
+    cursor: pointer !important;
+  }
+}
+/* JS writes opacity inline, so this needs !important to win. */
+html:has(dialog[open]) .cursor-dot,
+html:has(dialog[open]) .cursor-ring {
+  opacity: 0 !important;
 }
 .cursor-dot,
 .cursor-ring {

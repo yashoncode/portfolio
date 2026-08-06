@@ -6,7 +6,7 @@
 
 export const profile = {
   name: "Yashwanth D",
-  title: "AI Engineer · Full-Stack Engineer",
+  title: "Full-Stack Developer · AI Systems",
   tagline: "I build reliable systems that people depend on every day.",
   location: "India",
   summary:
@@ -20,31 +20,109 @@ export const profile = {
 
 // Headline metrics surfaced in the hero + about sections.
 // `fun` shows on hover — keep them short enough to fit the card.
-export const stats = [
+// `href` makes the card a link; use it to point at the section that proves the number.
+// `detail` makes the card open a modal instead — for numbers that need the story,
+// not just a destination. Set one or the other, never both.
+export type StatDetail = {
+  title: string;
+  intro: string;
+  sections: { heading: string; body?: string; points?: string[] }[];
+};
+
+export type Stat = {
+  value: string;
+  label: string;
+  fun: string;
+  href?: string;
+  detail?: StatDetail;
+};
+
+export const stats: Stat[] = [
   {
     value: "4+",
     label: "Years shipping production software",
     fun: "Still zero DROP TABLE incidents. Touch wood.",
+    href: "#experience",
   },
   {
     value: "3",
     label: "Open-source AI projects shipped",
     fun: "Multi-agent RAG, text-to-SQL, prompt engineering. All public.",
+    href: "#projects",
   },
   {
     value: "60×",
     label: "Faster logistics report APIs (~5 min → ~5 sec)",
-    fun: "Reports now load faster than my excuses. Btw I love optimizing slow code.",
+    fun: "Reports now load faster than my excuses. Click for the how.",
+    detail: {
+      title: "From 5 minutes to 5 seconds",
+      intro:
+        "The Excel export API was the slowest thing in the platform. Reports took around 5 minutes and peaked near 3 GB of memory. It now takes about 5 seconds at roughly 200 MB, and memory no longer grows with row count.",
+      sections: [
+        {
+          heading: "The problem: Blade was building spreadsheets",
+          body: "The export was rendered through Blade, Laravel's HTML template engine, with a PHP class per report and the sheet markup assembled from a template. Blade has no concept of flushing: it compiles the whole view and buffers it into a single string before returning anything. So a large export held the dataset in memory twice over, once as hydrated models and again as the fully rendered output, and both grew linearly with the number of rows. Blade is the right tool for a web page and the wrong one for a 100k-row file.",
+        },
+        {
+          heading: "The fix: OpenSpout, a streaming writer",
+          body: "OpenSpout is a PHP reader and writer for CSV, XLSX and ODS files, and the maintained successor to the abandoned box/spout. Instead of building an in-memory object model of the workbook, it writes one row at a time straight to the output file and immediately releases it. Memory stays flat regardless of file size, and the project documents staying under about 3 MB. That is the opposite of PhpSpreadsheet, which materialises every cell as a PHP object, so its memory scales with rows multiplied by columns.",
+        },
+        {
+          heading: "My tweaks on top of it",
+          points: [
+            "Replaced the Blade render step with a row-by-row OpenSpout writer, so nothing is buffered before it is written.",
+            "Fed the writer from a chunked query instead of one big result set, so the ORM never holds every record at once.",
+            "Worked with plain arrays rather than fully hydrated models, cutting per-row object overhead.",
+            "Resolved lookups once before the loop instead of querying inside it.",
+            "Streamed the file out as it was written rather than assembling it and then sending it.",
+          ],
+        },
+        {
+          heading: "Result",
+          body: "Peak memory fell from roughly 3 GB to roughly 200 MB and response time from about 5 minutes to about 5 seconds. The important part is not the multiple, it is that memory is now roughly constant, so the next tenfold increase in report size does not bring the endpoint down.",
+        },
+      ],
+    },
   },
   {
-    value: "3",
-    label: "Production systems built solo",
-    fun: "CRM, ERP & asset management. The standups were very quiet.",
+    value: "4",
+    label: "Production systems built end to end",
+    fun: "CRM, ERP, warehouse & finance. Click for what each one does.",
+    detail: {
+      title: "Four systems, built end to end",
+      intro:
+        "Four domains of Stockarea's platform where I owned the data model, the architecture and the implementation rather than a slice of it.",
+      sections: [
+        {
+          heading: "CRM: leads through to onboarding",
+          body: "Lead management with deals, carrying a lead all the way to onboarding as either a customer or a vendor organisation. Onboarded organisations are then linked to warehouses and the other modules, so the rest of the platform can act on them instead of the CRM being a dead end.",
+        },
+        {
+          heading: "ERP: the freight and customs enquiry lifecycle",
+          body: "An enquiry management system covering the full cycle. An enquiry arrives for freight or customs services, schedules are collected from the vendors, pricing is quoted back to the customer, and once confirmed the flow moves into onboarding and the operations that follow.",
+        },
+        {
+          heading: "Warehouse and asset management",
+          points: [
+            "Product kits: grouping individual products so they can be stocked and moved as one unit.",
+            "Warehouse position management: which lot position holds the stock from a given inventory, so storage is traceable and space is used profitably.",
+            "Contract and expense-contract management.",
+            "Inward and outward movement of inventory.",
+            "Organisation management.",
+          ],
+        },
+        {
+          heading: "Finance: Zoho Books integration",
+          body: "Invoices, purchase orders and bills kept in sync with the Zoho Books API over webhooks. On top of that, automated profit and revenue reporting so the finance team can send, track and follow up on invoices, plus vendor management for bill payments and expense tracking.",
+        },
+      ],
+    },
   },
   {
-    value: "1 + 2",
-    label: "Patent filed · IEEE papers published",
-    fun: "My super productive side: research, prototyping, and publishing.",
+    value: "Researcher",
+    label: "1 patent filed, 2 IEEE publications",
+    fun: "Click to read the papers and the patent.",
+    href: "#recognition",
   },
 ];
 
@@ -87,13 +165,13 @@ export const experience: Experience[] = [
       },
       {
         icon: "server",
-        title: "684 routes, one admin API",
-        text: "Build and own the Laravel admin API, 684 registered routes powering core logistics workflows across internal modules and services.",
+        title: "One admin API, four domains",
+        text: "Build and own the Laravel admin API powering core logistics workflows across CRM, ERP, positions, and asset management.",
       },
       {
         icon: "sparkles",
-        title: "CRM built solo, end to end",
-        text: "Single-handedly designed and developed the company's CRM modules and workflows, with AI-powered automation integrated into the flows.",
+        title: "CRM built, end to end",
+        text: "Designed and built the company's CRM modules and workflows end to end, with AI-powered automation integrated into the flows.",
       },
       {
         icon: "database",
@@ -113,13 +191,13 @@ export const experience: Experience[] = [
       },
       {
         icon: "file-text",
-        title: "ERP for billing & finance",
-        text: "Architect and maintain the ERP backend for billing, invoicing, and purchase orders, improving accuracy and consistency of financial records.",
+        title: "Finance module & Zoho Books",
+        text: "Built and maintain the finance module: invoices, purchase orders, and bills synced with the Zoho Books API over webhooks, with automated profit and revenue reporting for the finance team, plus vendor bill-payment and expense tracking.",
       },
       {
         icon: "workflow",
-        title: "n8n automations",
-        text: "Email, WhatsApp reminders, and AI voice calls wired together for the sales team, cutting follow-up work that filled a rep's day to 5 to 15 minutes.",
+        title: "AI voice calls in production",
+        text: "Three outreach channels for the sales team on n8n with open-source LLMs: email, WhatsApp reminders, and AI voice calls handling 100+ calls a week, with constrained prompts, response validation, failure logging, and automatic retries. Follow-up work that filled a rep's day now takes 5 to 15 minutes.",
       },
       {
         icon: "rocket",
@@ -129,7 +207,7 @@ export const experience: Experience[] = [
     ],
   },
   {
-    role: "Solutions Architect",
+    role: "Solutions Architect, Automation",
     company: "Stockarea",
     companyUrl: "https://stockarea.io/",
     period: "Aug 2023 - Oct 2024",
@@ -178,8 +256,13 @@ export const experience: Experience[] = [
       },
       {
         icon: "users",
-        title: "Team leadership",
-        text: "Coordinated small development teams through product prototyping and testing.",
+        title: "Led a 10-person team",
+        text: "Led a 10-person team through product prototyping, deployment, and testing.",
+      },
+      {
+        icon: "sparkles",
+        title: "Incubated and deployed",
+        text: "Incubated at ICAR-CIBA (Central Institute of Brackishwater Aquaculture) and Annamalai University, with a pilot system deployed at CIBA. Wound down after graduation to join Stockarea.",
       },
     ],
   },
@@ -228,6 +311,9 @@ export const skillGroups: SkillGroup[] = [
       "CRM & ERP Modules",
       "API Integration",
       "Feature Testing",
+      "Unit Testing",
+      "PHPUnit",
+      "Pytest",
     ],
   },
   {
@@ -245,7 +331,7 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     label: "DevOps & Deployment",
-    skills: ["AWS", "GitHub CI/CD", "Coolify", "Docker"],
+    skills: ["AWS", "AWS RDS", "GitHub CI/CD", "Coolify", "Docker"],
   },
   {
     label: "Tools & Platforms",
