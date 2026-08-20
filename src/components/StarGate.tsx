@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useRouter } from "next/navigation";
+import { WarpOut, WARP_MS, armWarp } from "@/components/Warp";
 
 /** Moons: small lit spheres on their own slow, mismatched orbits. */
 const MOONS = [
@@ -61,7 +62,8 @@ export default function StarGate() {
     }
     setAsking(false);
     setWarping(true);
-    setTimeout(() => router.push("/origin"), 1150);
+    armWarp();
+    setTimeout(() => router.push("/origin"), WARP_MS);
   }
 
   return (
@@ -186,7 +188,7 @@ export default function StarGate() {
                 }`}
               />
               <p className="mt-3 h-4 font-mono text-[11px] text-dim">
-                {wrong ? "not the hour. try again." : "hint: HHMM, 24-hour"}
+                {wrong ? "not the hour. try again." : ""}
               </p>
               <button
                 type="submit"
@@ -199,27 +201,7 @@ export default function StarGate() {
         )}
       </AnimatePresence>
 
-      {/* Portal: flash, then a swallowing iris */}
-      {warping && (
-        <div className="pointer-events-none fixed inset-0 z-[100]">
-          <motion.div
-            className="absolute inset-0 bg-white"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 1, 0.15, 0.4] }}
-            transition={{ duration: 0.5, times: [0, 0.12, 0.4, 1] }}
-          />
-          <motion.div
-            className="absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle, #ffffff 0%, #ddd6fe 25%, #8b5cf6 50%, #22d3ee 68%, #0b0714 100%)",
-            }}
-            initial={{ scale: 0, opacity: 0.9, rotate: 0 }}
-            animate={{ scale: 22, opacity: 1, rotate: 120 }}
-            transition={{ duration: 1.15, ease: [0.65, 0, 0.35, 1] }}
-          />
-        </div>
-      )}
+      {warping && <WarpOut />}
     </>
   );
 }

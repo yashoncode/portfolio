@@ -1,33 +1,89 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// The biopic behind the star (/origin). Everything below is a placeholder —
-// rewrite the prose, add or drop chapters freely, the page renders whatever
-// this array holds.
+// The biopic behind the star (/origin). Chapters are added as the story gets
+// written, the page renders whatever this array holds.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const story = {
   title: "Origin",
   subtitle: "the long version, for whoever found the star",
   intro:
-    "PLACEHOLDER — a paragraph or two setting the scene. Where this starts, and why you are telling it.",
+    "Every portfolio has a résumé. This is the other file. The one where the timeline is not a clean upward line, but a quiet kid, a big family dream that changed direction, and a year and a half alone with a stack of books that ended up mattering more than any of it.",
   chapters: [
     {
-      year: "0000",
-      title: "Chapter title",
+      year: "2001 - 2019",
+      title: "The year the school lost me",
       body: [
-        "PLACEHOLDER — first paragraph of this chapter.",
-        "PLACEHOLDER — second paragraph. Add as many as you want.",
+        "Chennai, 15 December 2001. We ended up a family of four. My brother arrived five years later, into a house where the older one had already set an unfortunate precedent: silent and obedient. I was the kid every teacher writes 'well behaved' about because there is genuinely nothing else to report. I did not talk back. I did not talk much at all. I just sat there absorbing the room like a very polite houseplant.",
+        "School started at Daniel Thomas, which lasted till LKG. Then we moved to Anna Nagar and I landed at Leo Matriculation. Good school, normal life, homework, tiffin box, the usual. And then my family got ambitious.",
+        "The plan was the UK. Not a holiday, the whole thing: further studies for me, a new life for all of us. My parents were betting big on their kid, which is a lovely thing to be on the receiving end of, and I was pulled out of school in the middle of fourth standard because a boy about to move continents does not need to finish fourth standard. Big dreams sometimes take a different route. The UK stayed where it was, and so did we, and suddenly there was a nine year old at home with no school, no classmates, and a year and a half of calendar to fill.",
+        "So fifth standard happened at home. No uniform, no bell, no friends. Just books, a house, and me. And here is the part I still like: at the end of it I walked into an exam hall, wrote the finals, and got **double promoted straight to sixth**. Skipped a whole grade. The polite houseplant had quietly figured out that if nobody is teaching you, you can teach yourself, which is the single most useful thing I have ever learned and nobody meant to teach me it.",
+        "Sixth and seventh, back at Leo. Then my father's business took us to Ooty and eighth standard happened at Nilgiri Matriculation, one year in the hills, cold enough that I now treat Chennai weather as a personal insult. Then back down to Chennai, and back to Leo, third entry. At that point the school office had probably stopped filing my records and just left them on the desk.",
+        "But this return was different. I came back with something to prove, and the only language I could say it in was marks. Ninth to twelfth I went from the quiet one at the back to the name read out at the front. The **2017 SSLC state board** exam came, and I finished **school first**. The kid who studied fifth standard alone at home was now the announcement.",
+        "And something else happened in 2017 that nobody graded me on. I opened **Visual Studio** and built **a small calculator app**. Not for a class, not for marks, just to find out whether I could make a machine do what I told it to. It was a tiny thing. It also flipped a switch. Everyone around me was studying to score, and I had quietly discovered that I liked building the logic underneath the answer. Strange hobby for a fifteen year old in a state board exam year. It ended up deciding everything after it.",
+        "Chess ran alongside all of it. **Three medals at school level**, then **district level** play, and a habit of thinking five moves ahead that never really switched off after I left the board. Eleventh and twelfth I stayed at Leo as a scholar and topped again. And then the school did something nobody saw coming: for **2018 to 2019** they made me **School Pupil Leader**. The boy who did not speak was now the one holding the microphone at assembly, telling twelve hundred students to keep quiet. Same school, same building, same file on the same desk, completely different story.",
+        "Silent boy to school first, badge on the shirt, microphone in hand. Chapter one is mostly the school finding out the quiet one was just buffering.",
       ],
     },
     {
-      year: "0000",
-      title: "Chapter title",
-      body: ["PLACEHOLDER — what changed here, and what it cost."],
+      year: "2019 - 2020",
+      title: "Third choice, right choice",
+      body: [
+        "The plan out of school was **aerospace engineering**. I had the marks, I had the aim, and I had a very specific daydream about being the person who understands why the thing flies. So I went after the big names: MIT, the Madras one, and Anna University. I wrote SRM as well. The shortlist of a boy who had decided the sky was a career option.",
+        "Then, somewhere in the middle of all that chasing, I had the thought that quietly rerouted my whole life. I liked aerospace. I did not like the idea of only aerospace. Pick that at eighteen and you have signed a contract with one industry before you have met any of the others. I wanted room to look around.",
+        "So I went for **ECE, electronics and communication**. Close enough to aerospace to keep the dream in frame, but with electronics and computers both inside the syllabus, which meant three doors instead of one. Eighteen year old me thought this was a shrewd move. Eighteen year old me was, for once, completely right.",
+        "Then **Sri Sairam Engineering College** called. I did my homework on it, liked what I found, and put it third on my counselling list, right behind Anna and MIT. Counselling day arrived, the seats moved the way seats move, and my third choice became my only choice. Sairam it was. Turns out the backup plan and the right plan are allowed to be the same thing.",
+        "First year, ECE. Same operating system as school: quiet, well behaved, and quietly finishing first. I came out of year one as the **department topper**, which surprised exactly nobody who had seen my report cards and surprised me every single time.",
+        "But something new happened that year too. I stopped waiting for permission to build things. First year students are supposed to sit still and learn the theory. Instead I started jumping into projects, joining teams that were not mine, working with people from other years and other departments, useful mostly because I was willing to be the one who showed up. The houseplant had grown legs and was now attending meetings.",
+        "And then, right as all of it was picking up speed, 2020 walked in with a virus and switched off the lights.",
+      ],
     },
     {
-      year: "Now",
-      title: "Chapter title",
-      body: ["PLACEHOLDER — where the story stands today."],
+      year: "2020 - 2023",
+      title: "The pond was the real exam",
+      body: [
+        "The pandemic shut the campus and, going by the internet, everyone spent it baking bread. We formed a team of five and started building things instead. **Hydroponics**, because growing plants without soil felt like the correct amount of showing off. A **DTMF robot**, controlled over a phone call, because in 2020 a phone call was the only thing anyone was doing anyway. Then we wrote the work up properly and got **IEEE papers** published, which is a strange sentence to say about a year nobody was allowed outside.",
+        "The lockdown had a second effect too. With the world on pause I went at **online courses** properly, not the collect the certificate way, the sit down and actually finish it way. And once that habit switched on it refused to stay in one lane. I got into finance and started **crypto trading**, and earned from it, which teaches you about risk faster than any syllabus will. I also fell into the **custom ROM** scene, flashing a custom OS onto my own Android phone with the community, breaking it, fixing it, breaking it again on purpose. Somewhere in there I learned something about myself that is still true: I like changing how things work, and I like being early. Default settings have never once survived contact with me.",
+        "Then the big one landed. A **pond water quality management system**, with incubation support from **CIBA**, the Central Institute of Brackishwater Aquaculture. Aquaculture is a real industry with real money in it, and pond owners were still reading water the way their grandparents did. Suddenly we were not doing a college project. We were doing somebody's livelihood.",
+        "So in 2022 we stopped calling it a project. We **registered a startup, in my name**, and got to work. Research, prototypes, and then the part that changes you: taking the hardware out to actual ponds and actual owners and watching your very confident assumptions get corrected by water. Lab conditions are polite. Ponds are not. Every version got better because reality kept filing bug reports.",
+        "It worked. We won startup competition after startup competition, and then picked up a second incubator, **AIIRF**, the Annamalai Innovation and Incubation Research Foundation at Annamalai University, Chidambaram. Two incubators, one undergraduate team, a lot of very long bus journeys.",
+        "Somewhere in there the quiet kid became a known quantity across every department. Not the ECE topper any more, just the guy with the startup. We ended up as regulars at the **Sairam Incubation Center**, the only one the college had and the place where anything interesting was happening. If the lights were on in there, one of us was in the building.",
+        "And because I cannot leave a working system alone, I kept building side things. The one I am still smug about is an **RFID check in system** for the incubation center itself, because a room full of innovators had no idea who was actually in it. I also ran workshops on electronics basics for the juniors, many of them, which is how I found out that explaining something simply is much harder than knowing it.",
+        "Final year closed out better than I had any right to expect. **Outstanding student**, with an award and an honour from the IEI Hosur community. Graduated **first class with distinction, 9.05 CGPA**. And a **Prodapt** offer letter in hand before the gown came off.",
+        "Four years earlier I had picked ECE because I did not want to be locked into one domain. I left with a published paper, a registered company, two incubators, and a job. The hedge had paid out.",
+      ],
+    },
+    {
+      year: "2023",
+      title: "The boring envelope won",
+      body: [
+        "College ended in May 2023 and there were two futures on the table. One was the startup, the thing five of us had built out of a pond and a lot of stubbornness. The other was the **Prodapt** offer letter: a real company, a real salary, a real joining date. Every founder story tells you which one to pick. Every founder story is also written by someone who had a safety net.",
+        "I did not have one. Nobody had been standing behind me at any point of this, and I say that without drama, it is just the load bearing fact of my life. I built myself brick by brick, got knocked down often enough to know the floor personally, and got up a little stronger every time. There was no family money to fall back on, because I was the one holding the family up. The degree itself had been paid for by **educational loans** and **merit scholarships**, which is the polite way of saying my qualification arrived with a bill attached.",
+        "So the decision was not really a decision. A startup pays you in equity and adrenaline. A loan wants rupees, monthly, on a date it picks. I took **Prodapt**. It looks like the safe choice and it was actually the harder one, because chasing the exciting thing is easy when somebody else is covering rent.",
+        "And then came the part nobody warns you about. The wait. An offer letter is not a job, it is a promise with no date attached, and I sat inside that gap for what felt like a geological era. I am also physically incapable of being idle. Give me nothing to do and I will invent something, usually badly.",
+        "So in June I took a **data entry job** at a **food and water inspection lab** in Anna Nagar. Typing results into a computer, one row at a time, for a month, purely because the work was there and I was not doing anything. The joke wrote itself: I had spent two years building sensors so nobody would have to read water quality by hand, and now I was manually keying in water test results for a living. But I walked out of that month with my **first salary**. Real money, earned, mine. No trophy from any startup competition ever felt the way that amount did.",
+        "In the same stretch I started tutoring. **Five school students** heading into their board exams, roughly my brother's age, which meant I knew precisely how much they wanted to be there. Sitting on the other side of the board exam is a strange chair. I had written the state board myself and finished school first, and I still had to work out how to explain a chapter to a kid whose entire body language said elsewhere. The workshops for juniors had partly trained me for this. The juniors, at least, had volunteered.",
+        "One month in, I had a small **bike accident**. Nothing cinematic, no slow motion, just enough to end the experiment. I stopped the job, went home, and spent the whole of July doing the one thing I had avoided all year: resting. One month of it. For someone who cannot sit still, forced downtime is its own kind of exam, and I was failing it beautifully.",
+        "The offer letter was still on the table. I was, at that point, mostly horizontal. And the thing that actually changed my life was already in motion, in a car, on the other side of the city, and had nothing to do with me.",
+      ],
+    },
+    {
+      year: "2023 - now",
+      title: "The interview I never applied for",
+      body: [
+        "July 2023. I am at home, healing, waiting on a joining date that has still not arrived. My father, meanwhile, is at work. He drives a **cab**. Somewhere in that month one of his passengers happened to be the CEO of a logistics company called **Stockarea**, and my father did the thing fathers do: he talked about his son. Sharp kid, serious about the work, looking for a job.",
+        "That is usually where the story ends. Polite nod, fare paid, door closed. Instead the CEO said send him in. I sat the interview the next day, **12 August 2023**. I have thought about that date more than any other date in here. I had spent years completely certain that nobody was behind me, and then the door opened from the driver's seat of my father's taxi.",
+        "On paper I was the wrong candidate. The tech they actually needed, I did not have, and I did not pretend otherwise. What I had was business sense, logic, and an inability to leave a problem alone once it has annoyed me. That, it turned out, was what was being tested. So instead of dropping me into a team, the CEO kept me beside him and made me **junior solutions architect**.",
+        "Which is a fancy title for the best two months of schooling I have ever been paid to attend. My job was to research: **logistics**, the industry, how any of it actually works and where the money moves. I read the way I read in fifth standard with no teacher in the house, except this time somebody was funding the books and asking me questions afterwards.",
+        "Then I did the thing I always do, which is stop admiring a system and start editing it. Operations was running on daily manual work, so I began automating it with **Apps Script** inside Google Sheets. Deeply unglamorous. Nobody writes a conference talk about Apps Script. It also handed a team back hours of their day, every day, which is a better bragging right than the talk.",
+        "A year in, I went after the real thing. **Laravel and PHP**, learned properly, until backend engineer was a description and not an ambition. Then I did to the backend what I had done to the spreadsheets and automated everything within reach, only now with a database behind it and consequences if I got it wrong.",
+        "**December 2024**, the job went **remote**, which for most people means the same room in worse trousers. I read it as permission to move. Since then I have worked out of a long list of cities and a few different states, laptop open in places the boy writing his fifth standard finals alone in one room would not have believed were an option. The work travels with me now. No city has broken a deploy yet, though a couple have tested the wifi theory.",
+        "By 2025 I came for the other half. **React and Next.js**, the layer people actually touch, because knowing how the engine runs and not what the dashboard looks like is only half a skill. Which makes me **full stack** now, and the senior in a team of six to eight people.",
+        "And now, 2026, I have started from zero again on purpose. **AI**, from the basics upward, the whole ladder: Python, prompts, retrieval, **agents**, the parts that are actually hard rather than the parts that demo well. Learned the same way I learned fifth standard, alone with the material until it gives in. The proof is **open source**, public repositories rather than screenshots, and it is all listed elsewhere on this site, so I will not sell it to you twice here.",
+        "Eighteen year old me picked ECE specifically because he refused to be locked into one domain. He would find this extremely funny. Electronics, then research, then automation, then backend, then frontend, and none of the doors closed behind me.",
+        "Data entry desk to full stack senior in two years, and the whole thing started with a conversation I was not present for.",
+      ],
     },
   ],
-  closing: "PLACEHOLDER — the last line. Make it land.",
+  closing:
+    "The quiet kid, the year with no school, the third choice college, the first salary from a data entry desk, the career that opened from the front seat of my father's cab. Every detour turned out to be the road. I am still learning, still building, still early, and enjoying it more than any version of me expected to. Thanks for clicking the star.",
 };
