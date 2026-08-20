@@ -68,7 +68,7 @@ export default function StarGate() {
 
   return (
     <>
-      <div className="animate-drift group/sigil pointer-events-none absolute right-[7%] top-[22%] hidden h-56 w-56 lg:block xl:h-72 xl:w-72">
+      <div className="animate-drift group/sigil pointer-events-none absolute right-[4%] top-[11%] h-20 w-20 sm:right-[6%] sm:top-[16%] sm:h-32 sm:w-32 lg:right-[7%] lg:top-[22%] lg:h-56 lg:w-56 xl:h-72 xl:w-72">
         <button
           type="button"
           onClick={onStarClick}
