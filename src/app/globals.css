@@ -360,3 +360,18 @@ html:has(dialog[open]) .cursor-ring {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* ─────────── Achievements checklist (native <details> disclosure) ─────────── */
+/* The UA marker triangle would sit outside the flex row and double up with the
+   chevron, so it goes. Both vendor forms are needed: Safari still uses the
+   pseudo-element even though list-style handles it everywhere else. */
+.ach > summary::-webkit-details-marker { display: none; }
+.ach > summary::marker { content: ""; }
+
+.ach-chevron {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ach[open] > summary .ach-chevron {
+  transform: rotate(90deg);
+}
+.ach[open] > summary { color: var(--color-fg); }
