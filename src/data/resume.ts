@@ -356,7 +356,7 @@ export const projects: Project[] = [
     blurb:
       "Multi-agent RAG assistant that answers questions over logistics, ERP and CRM documents. Every answer is cited to the exact page or sheet.",
     url: "https://github.com/yashoncode/docmagic/tree/langgraph",
-    liveUrl: "https://docmagic.streamlit.app/",
+    liveUrl: "https://docmagic-frontend-umber.vercel.app/",
     points: [
       "LangGraph supervisor routes each question to one capability specialist (documents, spreadsheet data, arithmetic or live web search), so the model never juggles every tool at once.",
       "Hybrid retrieval fuses dense vector search with BM25, then re-scores with a cross-encoder reranker; ingestion runs metadata → analyst → reviewer with a bounded revision loop.",
