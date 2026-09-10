@@ -40,6 +40,16 @@ export const achievementGroups: AchievementGroup[] = [
         ],
       },
       {
+        claim: "Name resolution from 490 ms to 0.8 ms with a Manticore infix index",
+        metric: "600×",
+        proof: [
+          "Root cause: LIKE '%x%' cannot use a B-tree index, so it scans linearly with table bytes. Manticore indexes every substring down to min_infix_len=2, which turns a partial name into a dictionary lookup instead of a scan.",
+          "The number to lead with is not 600×, it is the shape of the curve. LIKE went 2.7 ms to 493 ms as rows went 2.4k to 1M; Manticore went 0.3 ms to 0.8 ms over the same range. Benchmarked on 1M synthetic rows, since the live table is 2.4k today where the win is only 9×. It buys the next two orders of magnitude, not today's latency.",
+          "Nothing writes the index on save, no observers and no model events, so adding the trait to a model costs that model's writes nothing. A scheduled job per model reads what MySQL changed every 30 minutes, re-reading a 5-minute overlap window to catch rows committed by a transaction that opened before the last read.",
+          "A full rebuild stamps every document with a generation number and only then deletes the older ones, so search stays answerable throughout instead of going empty mid-refresh. Typo hits are reordered by recomputed Levenshtein distance, because Manticore ranks fuzzy matches by term rarity rather than closeness, and they are returned flagged as guesses so a caller cannot resolve an id off one.",
+        ],
+      },
+      {
         claim: "Moved heavy work off the request path with queues and events",
         proof: [
           "Laravel jobs and event-based processing for anything that does not need to block a response.",
@@ -154,6 +164,16 @@ export const achievementGroups: AchievementGroup[] = [
     probe: "What do you build when nobody assigns it, and how do you argue architecture?",
     items: [
       {
+        claim: "Reyaak: on-device Android agent with a bandit LLM router",
+        metric: "37 providers",
+        proof: [
+          "The router scores 37 free-tier providers every turn. Beta-posterior reliability with Thompson sampling, so exploration is proportional to uncertainty rather than a fixed epsilon. Signals normalize to [0,1] and combine as a convex combination, multiplied by headroom and rate-limit guardrails, instead of a sum of hand-tuned bonuses.",
+          "Memory and skills are separate concerns: facts the agent can search, and procedures it writes for itself. skill_write refuses to touch a shipped skill or one the user has edited. Curation runs on inactivity, archives instead of deleting, and anything pinned bypasses every automatic transition.",
+          "Native Kotlin, not a WebView wrapped around a bundled runtime. The :ui module has no platform source set, so fonts and the launcher mark arrive from the host as composition locals, and an iOS host could supply its own without :ui gaining an expect declaration.",
+          "NOTICE records the design debts to freellmapi and Hermes Agent line by line, including the ones MIT does not require, because attribution is owed for ideas even where it is not owed for code.",
+        ],
+      },
+      {
         claim: "DocMagic: multi-agent RAG over logistics, ERP and CRM documents",
         metric: "cited answers",
         proof: [
@@ -167,9 +187,10 @@ export const achievementGroups: AchievementGroup[] = [
         claim: "Tevel IntelliDB: an AI SQL client that never sees your data",
         metric: "schema-only RAG",
         proof: [
+          "Built on a fork of Antares SQL (MIT). The Electron and Vue shell is upstream; the AI layer is mine: IntentRouter, SchemaIntelligence, EmbeddingRetriever, SqlValidator and the pipeline, with 36 unit tests. Upstream copyright stays in LICENSE next to mine. Say this before an interviewer opens package.json and finds the antares key.",
           "The model reasons over metadata only, tables, columns, keys, indexes, relationships, and never touches a single customer row. That is the whole design premise.",
-          "Schema Intelligence Layer with an FK relationship graph and join-path finding, plus a business vocabulary that decodes cryptic names, so tbl_cust_hdr becomes customer header.",
-          "Read-only safety gate blocks writes and injection. Invalid SQL goes through an auto-repair loop until it validates.",
+          "Schema Intelligence ranks and enriches candidate tables through hybrid retrieval, a keyword ranker blended with cached table embeddings by cosine, falling back to keyword-only when embeddings are off. A business vocabulary decodes cryptic names, so tbl_cust_hdr becomes customer header.",
+          "classifyRisk() grades every statement safe, moderate or high, and anything above safe raises a confirm-to-run before it executes. Invalid SQL goes through an auto-repair loop until it validates.",
           "Ships as cross-platform desktop builds for Windows, macOS and Linux.",
         ],
       },

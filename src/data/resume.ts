@@ -320,7 +320,10 @@ export const skillGroups: SkillGroup[] = [
     label: "Frontend Development",
     skills: ["Next.js", "React", "TypeScript", "JavaScript", "Tailwind CSS", "HTML", "CSS"],
   },
-  { label: "Databases", skills: ["MySQL", "PostgreSQL", "MongoDB", "SQL"] },
+  {
+    label: "Databases & Search",
+    skills: ["MySQL", "PostgreSQL", "MongoDB", "SQL", "Manticore Search", "Full-Text Search"],
+  },
   {
     label: "Async Processing",
     skills: ["Laravel Jobs", "Event-Based Processing", "Task Scheduling"],

@@ -104,13 +104,13 @@
   <li>Diagnosed and fixed a major performance bottleneck in report-generation APIs, cutting memory usage from ~3 GB to ~200 MB and response time from ~5 minutes to ~5 seconds by restructuring how large datasets were queried and processed.</li>
   <li>Build and own the Laravel admin API powering core logistics workflows across CRM, ERP, positions, and asset management, plus internal Next.js and React applications, delivered end to end through GitHub CI/CD, Docker, and Coolify.</li>
   <li>Designed and built the company's CRM modules and the positions and asset-management backend end to end, owning data structuring and architecture.</li>
-  <li>Automated a core operations workflow that occupied one person for a full working day, cutting it to roughly 5 minutes of hands-off processing.</li>
-  <li>Built and maintain the finance module: invoices, purchase orders, and bills synced with the Zoho Books API over webhooks, with automated profit and revenue reporting for the finance team, plus vendor bill-payment and expense tracking.</li>
+  <li>Replaced LIKE table scans with a Manticore infix index: 600x faster name lookup at 1M rows, flat as the table grows, typo-tolerant.</li>
+  <li>Ship and maintain the finance module: invoices, purchase orders, and bills synced with the Zoho Books API over webhooks, with automated profit and revenue reporting for the finance team, plus vendor bill-payment and expense tracking.</li>
 </ul>
 
 <div class="subrole">Solutions Architect, Automation (August 2023 - October 2024)</div>
 <ul>
-  <li>Designed and built the foundation of Stockarea's internal automation, translating business operations into reliable backend workflows, with Laravel and Google API integrations connecting disparate internal tools.</li>
+  <li>Laid the foundation of Stockarea's internal automation, translating business operations into reliable backend workflows, with Laravel and Google API integrations connecting disparate internal tools.</li>
   <li>Established reporting with Metabase, MongoDB, and SQL, plus early workflow tools in Google Apps Script and AppSheet still used daily.</li>
 </ul>
 
@@ -123,16 +123,16 @@
 
 <h2>AI Projects</h2>
 <ul>
-  <li><b><a href="https://github.com/yashoncode/docmagic">DocMagic</a></b>, multi-agent RAG document assistant: a LangGraph supervisor routes each question to one specialist over hybrid retrieval (vector + BM25, reranked), with every answer cited to its source page. <i>Python, FastAPI, LangGraph, Next.js, PGVector.</i> github.com/yashoncode/docmagic</li>
-  <li><b><a href="https://github.com/yashoncode/Tevel-IntelliDB">Tevel IntelliDB</a></b>, AI-first SQL client: turns plain English into safe, reviewable SQL by reasoning over database metadata only, with a read-only validator and an auto-repair loop. <i>Electron, Vue 3, TypeScript, MySQL, PostgreSQL.</i> github.com/yashoncode/Tevel-IntelliDB</li>
-  <li><b><a href="https://github.com/yashoncode/imaGen-Prompt-Enhancement">ImaGen</a></b>, prompt-engineering playground: compares eight prompting strategies on the same image-editing instruction, exposing every message sent to the model. <i>Python, Streamlit, NVIDIA NIM.</i> github.com/yashoncode/imaGen-Prompt-Enhancement</li>
+  <li><b><a href="https://github.com/yashoncode/reyaak">Reyaak</a></b>, Android AI agent: a Thompson-sampling bandit routes every turn across 37 free-tier LLM providers on health, latency and rate-limit signals. It writes and curates its own skills and memory. <i>Kotlin, Compose, Room.</i></li>
+  <li><b><a href="https://github.com/yashoncode/docmagic">DocMagic</a></b>, multi-agent RAG assistant: a LangGraph supervisor routes each question to one specialist over hybrid retrieval (vector + BM25, reranked), every answer cited to its page. <i>Python, FastAPI, LangGraph, PGVector.</i></li>
+  <li><b><a href="https://github.com/yashoncode/Tevel-IntelliDB">Tevel IntelliDB</a></b>, AI SQL client on desktop and <a href="https://github.com/yashoncode/TevelMobile">Android</a>: plain English to reviewable SQL from schema metadata only, never rows. Desktop forks Antares SQL (MIT); Android is mine end to end, a native JDBC plugin because a WebView cannot open a TCP socket. <i>Electron, Vue 3, TypeScript, Capacitor.</i></li>
 </ul>
 
 <h2>Skills</h2>
 <div class="skills">
   <p><b>Generative AI:</b> Multi-Agent Systems, RAG Pipelines, LangChain, LangGraph, MCP, Prompt Engineering, PGVector, ChromaDB, Langfuse, Text-to-SQL</p>
   <p><b>Backend:</b> Laravel, PHP, FastAPI, REST API Development, CRM and ERP Modules, Async Jobs and Scheduling, n8n Automation, Feature and Unit Testing (PHPUnit, Pytest)</p>
-  <p><b>Databases:</b> MySQL, PostgreSQL, MongoDB | <b>Cloud and DevOps:</b> AWS (RDS), Docker, Git, GitHub CI/CD, Coolify, Linux</p>
+  <p><b>Databases and Search:</b> MySQL, PostgreSQL, MongoDB, Manticore | <b>Cloud and DevOps:</b> AWS (RDS), Docker, Git, GitHub CI/CD, Coolify, Linux</p>
   <p><b>Frontend:</b> Next.js, React, TypeScript, Tailwind CSS | <b>Programming Languages:</b> Python, PHP, JavaScript, TypeScript</p>
 </div>
 
