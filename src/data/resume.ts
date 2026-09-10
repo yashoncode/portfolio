@@ -159,6 +159,12 @@ export const experience: Experience[] = [
         text: "Diagnosed and fixed a major report-generation bottleneck: memory cut from ~3 GB to ~200 MB, response time from ~5 min to ~5 sec, by restructuring how large datasets are queried and processed.",
       },
       {
+        icon: "search",
+        title: "493 ms → 0.8 ms",
+        featured: true,
+        text: "Replaced substring LIKE scans with a Manticore full-text index, synced from MySQL by a scheduled job so indexed models pay nothing on write. Benchmarked at 1M rows: 493 ms to 0.8 ms, and flat as the table grows rather than linear in table bytes. Adds typo-tolerant matching LIKE cannot do at all.",
+      },
+      {
         icon: "users",
         title: "Company-wide automation",
         text: "Built and maintain the workflow-automation tools every team runs on, streamlining daily operations across the company.",
@@ -355,6 +361,18 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    name: "Reyaak",
+    blurb:
+      "An autonomous agent that runs on the phone itself, with a multi-armed bandit picking which of 37 LLM providers answers each turn.",
+    url: "https://github.com/yashoncode/reyaak",
+    points: [
+      "The router scores 37 free-tier providers every turn. Beta-posterior reliability with Thompson sampling, so exploration is proportional to uncertainty rather than a fixed epsilon, with headroom and rate-limit guardrails as always-on multipliers.",
+      "Memory and skills are separate concerns: facts the agent can search, and procedures it writes for itself. Curation runs on inactivity, archives instead of deleting, and refuses to touch a shipped skill or one you edited.",
+      "Native Kotlin, not a WebView wrapped around a bundled runtime. The :ui module has no platform source set, so an iOS host could supply its own fonts without :ui gaining an expect declaration.",
+    ],
+    stack: ["Kotlin", "Jetpack Compose", "Room", "Coroutines", "Thompson Sampling", "Android"],
+  },
+  {
     name: "DocMagic",
     blurb:
       "Multi-agent RAG assistant that answers questions over logistics, ERP and CRM documents. Every answer is cited to the exact page or sheet.",
@@ -379,21 +397,22 @@ export const projects: Project[] = [
   {
     name: "Tevel IntelliDB",
     blurb:
-      "An AI-first SQL client: a database engineer, not a chat box. Ask in plain English, get safe, reviewable SQL.",
+      "An AI-first SQL client on desktop and Android: a database engineer, not a chat box. Ask in plain English, get safe, reviewable SQL.",
     url: "https://github.com/yashoncode/Tevel-IntelliDB",
     points: [
-      "Schema-only RAG: the model reasons over metadata (tables, columns, keys, indexes, relationships) and never sees a single row of customer data.",
-      "Schema Intelligence Layer with an FK relationship graph, join-path finding, and a business vocabulary that decodes cryptic names (tbl_cust_hdr → customer header).",
-      "Read-only safety gate blocks writes and injection; invalid SQL goes through an auto-repair loop until it validates. Cross-platform desktop builds for Windows, macOS and Linux.",
+      "Built on a fork of Antares SQL (MIT). The Electron and Vue shell is upstream; the AI layer is mine, IntentRouter, SchemaIntelligence, EmbeddingRetriever and SqlValidator, with 36 unit tests. Upstream copyright stays in LICENSE alongside mine.",
+      "Schema-only RAG: the model reasons over metadata (tables, columns, keys, indexes, relationships) and never sees a single row of customer data. Hybrid retrieval blends a keyword ranker with cached table embeddings by cosine, falling back to keyword-only when embeddings are off.",
+      "classifyRisk() grades every statement safe, moderate or high, and anything above safe raises a confirm-to-run before it executes. Invalid SQL goes through an auto-repair loop until it validates.",
+      "A separate Android client, written from scratch rather than forked: Capacitor and Vue 3 over a native JDBC plugin, because a WebView cannot open a TCP socket. MySQL and PostgreSQL through bundled drivers, SQLite through Android's own engine.",
     ],
     stack: [
       "Electron",
       "Vue 3",
       "TypeScript",
-      "Node.js",
+      "Capacitor",
+      "Java (JDBC)",
       "MySQL",
       "PostgreSQL",
-      "SQLite",
       "Embeddings",
     ],
   },

@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { ArrowDown } from "lucide-react";
-import { profile, stats, type StatDetail } from "@/data/resume";
-import StatModal from "./StatModal";
+import { profile } from "@/data/resume";
 import StarGate from "./StarGate";
 
 const container = {
@@ -21,11 +20,9 @@ const item = {
   },
 };
 
-export default function Hero() {
+export default function Hero({ children }: { children?: React.ReactNode }) {
   // Click the trailing "D" to reveal the full family name; auto-collapses
   const [showDev, setShowDev] = useState(false);
-  // One dialog for all stat cards — the open card's detail is the state.
-  const [openDetail, setOpenDetail] = useState<StatDetail | null>(null);
 
   useEffect(() => {
     if (!showDev) return;
@@ -141,68 +138,13 @@ export default function Hero() {
           <span className="text-fg">FastAPI</span>.
         </motion.p>
 
-        {/* Headline stats */}
-        <motion.div
-          variants={item}
-          className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:mt-20 md:grid-cols-3 lg:grid-cols-5"
-        >
-          {stats.map(({ value, label, fun, href, detail }, i) => {
-            const cls = `glass group relative rounded-2xl p-4 transition-colors hover:border-violet/40 sm:p-5 ${
-              i === stats.length - 1 && stats.length % 2 === 1
-                ? "col-span-2 md:col-span-1"
-                : ""
-            }`;
-            const body = (
-              <>
-                <div className="transition-opacity duration-300 group-hover:opacity-0">
-                  {/* Word values ("Researcher") need a smaller size than numbers
-                      or they overflow the card at the 5-column breakpoint. */}
-                  <div
-                    className={`font-bold text-fg ${
-                      /\d/.test(value) ? "text-2xl md:text-3xl" : "text-xl md:text-2xl"
-                    }`}
-                  >
-                    {value}
-                  </div>
-                  <div className="mt-1 text-xs leading-snug text-muted md:text-sm">
-                    {label}
-                  </div>
-                </div>
-                {/* Funny fact, revealed on hover */}
-                <div className="absolute inset-0 flex items-center justify-center p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <p className="text-center font-mono text-[11px] leading-relaxed text-cyan">
-                    {fun}
-                  </p>
-                </div>
-              </>
-            );
-            if (href)
-              return (
-                <a key={label} href={href} className={cls}>
-                  {body}
-                </a>
-              );
-            if (detail)
-              return (
-                <button
-                  key={label}
-                  type="button"
-                  onClick={() => setOpenDetail(detail)}
-                  className={`${cls} text-left`}
-                >
-                  {body}
-                </button>
-              );
-            return (
-              <div key={label} className={cls}>
-                {body}
-              </div>
-            );
-          })}
-        </motion.div>
+        {/* GitHub activity, passed in from the server so the fetch stays off the client */}
+        {children ? (
+          <motion.div variants={item} className="mt-12 md:mt-16">
+            {children}
+          </motion.div>
+        ) : null}
       </motion.div>
-
-      <StatModal detail={openDetail} onDismiss={() => setOpenDetail(null)} />
 
       <motion.a
         href="#about"

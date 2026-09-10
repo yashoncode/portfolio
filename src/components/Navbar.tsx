@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Download, Mail, MapPin, Menu, X } from "lucide-react";
-import { GithubIcon, IndiaMap, LinkedinIcon, YMark } from "./icons";
+import { IndiaMap, LinkedinIcon, YMark } from "./icons";
 import { navSections, profile } from "@/data/resume";
 
 /** Icon link with a playful hint that drops in below on hover. */
@@ -76,12 +76,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <motion.header
-      initial={{ y: -64, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed inset-x-0 top-0 z-50"
-    >
+    <header className="fixed inset-x-0 top-0 z-50">
       {/* Persistent glass backdrop, cross-faded to avoid class-swap flicker */}
       <div
         aria-hidden
@@ -89,7 +84,12 @@ export default function Navbar() {
           scrolled ? "opacity-100" : "opacity-0"
         }`}
       />
-      <nav className="relative mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
+      <motion.nav
+        initial={{ y: -64, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="relative mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6"
+      >
         <div className="relative">
           <button
             onClick={() => setEggOpen((v) => !v)}
@@ -162,14 +162,6 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-3 md:flex">
           <IconHint
-            href={profile.links.github}
-            label="GitHub"
-            hint="where my code lives rent-free"
-            external
-          >
-            <GithubIcon size={18} />
-          </IconHint>
-          <IconHint
             href={profile.links.linkedin}
             label="LinkedIn"
             hint="me, but in my formal attire"
@@ -210,18 +202,19 @@ export default function Navbar() {
         >
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
-      </nav>
+      </motion.nav>
 
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
+            initial={{ height: 0 }}
+            animate={{ height: "auto" }}
+            exit={{ height: 0 }}
             transition={{ duration: 0.25 }}
-            className="glass glass-keep relative overflow-hidden border-b border-border md:hidden"
+            className="relative overflow-hidden border-b border-border md:hidden"
           >
-            <ul className="flex flex-col gap-1 px-6 py-4">
+            <div aria-hidden className="glass glass-keep absolute inset-0 border-0" />
+            <ul className="relative flex flex-col gap-1 px-6 py-4">
               {navSections.map(({ id, label }) => (
                 <li key={id}>
                   <a
@@ -262,15 +255,6 @@ export default function Navbar() {
                 </span>
                 <span className="flex items-center gap-5">
                   <a
-                    href={profile.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub"
-                    className="text-muted transition-colors hover:text-fg"
-                  >
-                    <GithubIcon size={18} />
-                  </a>
-                  <a
                     href={profile.links.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -292,6 +276,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 }

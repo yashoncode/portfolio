@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
+import GithubHeatmap from "@/components/GithubHeatmap";
 import Skills from "@/components/Skills";
 import Education from "@/components/Education";
 import Recognition from "@/components/Recognition";
@@ -17,7 +18,9 @@ export default function Home() {
       <WarpArrival />
       <Navbar />
       <main>
-        <Hero />
+        <Hero>
+          <GithubHeatmap />
+        </Hero>
         <Divider />
         <About />
         <Experience />

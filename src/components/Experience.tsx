@@ -14,6 +14,7 @@ import {
   Activity,
   Cloud,
   Bot,
+  Search,
   ArrowUpRight,
   type LucideIcon,
 } from "lucide-react";
@@ -38,6 +39,7 @@ const icons: Record<string, LucideIcon> = {
   activity: Activity,
   cloud: Cloud,
   bot: Bot,
+  search: Search,
 };
 
 export default function Experience() {
