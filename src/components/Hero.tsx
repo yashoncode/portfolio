@@ -82,7 +82,7 @@ function Identity() {
         <a href="#projects" className={styles.primaryAction}>
           View projects <ArrowRight size={15} aria-hidden="true" />
         </a>
-        <a href="#contact" className={styles.secondaryAction}>
+        <a href="#contact" className={`glass ${styles.secondaryAction}`}>
           Get in touch <ArrowUpRight size={15} aria-hidden="true" />
         </a>
       </div>

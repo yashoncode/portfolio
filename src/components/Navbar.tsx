@@ -38,7 +38,7 @@ function ThemeToggle() {
   }
   return (
     <button type="button" onClick={toggle}
-      className="grid size-9 cursor-pointer place-items-center rounded-md border border-border text-muted hover:border-accent/60 hover:text-accent">
+      className="glass grid size-9 cursor-pointer place-items-center rounded-md text-muted hover:text-accent">
       <span className="when-dark"><Sun size={16} aria-hidden /><span className="sr-only">Switch to light theme</span></span>
       <span className="when-light"><Moon size={16} aria-hidden /><span className="sr-only">Switch to dark theme</span></span>
     </button>
@@ -48,7 +48,7 @@ function ThemeToggle() {
 function DownloadCV() {
   return (
     <a href="/Yashwanth-D-Resume.pdf" download
-      className="inline-flex h-9 items-center justify-center gap-2 rounded-md border border-border bg-surface-2 px-3 font-mono text-xs font-medium text-fg hover:border-accent/60 hover:text-accent">
+      className="glass inline-flex h-9 items-center justify-center gap-2 rounded-md px-3 font-mono text-xs font-medium text-fg hover:text-accent">
       <Download size={14} /> Download CV
     </a>
   );
@@ -96,7 +96,7 @@ export default function Navbar() {
   ));
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-bg/95 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-bg/55 shadow-[inset_0_1px_0_rgb(255_255_255/0.04)] backdrop-blur-xl backdrop-saturate-150">
       <ScrollProgress />
       <nav aria-label="Main navigation" className="relative mx-auto flex h-16 w-full max-w-6xl items-center gap-4 px-5 sm:px-6">
         <div className="relative mr-auto lg:mr-0">
@@ -134,7 +134,7 @@ export default function Navbar() {
           <div className="hidden sm:block"><DownloadCV /></div>
           <button type="button" onClick={() => { setOpen(!open); setEggOpen(false); }}
             aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-nav"
-            className="grid size-9 place-items-center rounded-md border border-border text-fg lg:hidden">
+            className="glass grid size-9 cursor-pointer place-items-center rounded-md text-fg lg:hidden">
             {open ? <X size={19} /> : <Menu size={19} />}
           </button>
         </div>
