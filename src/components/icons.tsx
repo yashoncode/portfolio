@@ -24,21 +24,18 @@ export function IndiaMap({ className }: IconProps & { size?: number }) {
       className={className}
       aria-hidden="true"
     >
-      <path d={INDIA_PATH} fill="rgba(139, 92, 246, 0.22)" fillRule="nonzero" />
+      <path d={INDIA_PATH} fill="var(--color-muted)" opacity=".4" fillRule="nonzero" />
       <path
         d={TAMIL_NADU_PATH}
-        fill="#22d3ee"
+        fill="var(--color-accent)"
         fillRule="nonzero"
-        style={{ filter: "drop-shadow(0 0 3.5px rgba(34, 211, 238, 0.9))" }}
       />
     </svg>
   );
 }
 
 /**
- * Logo mark: a blade "Y" — faceted metal chevrons meeting at a point, with a
- * detached shard for the stem. Brushed-steel left blade, dark right blade
- * with a neon cyan edge, and a glossy shine that sweeps across on a loop.
+ * The faceted Y mark used in the navigation and favicon.
  */
 export function YMark({ size = 28, className }: IconProps) {
   return (
@@ -50,47 +47,10 @@ export function YMark({ size = 28, className }: IconProps) {
       className={className}
       aria-hidden="true"
     >
-      <defs>
-        {/* One continuous brand gradient across all facets */}
-        <linearGradient id="ymark-g" x1="3" y1="3" x2="29" y2="31" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#8b5cf6" />
-          <stop offset="0.5" stopColor="#6366f1" />
-          <stop offset="1" stopColor="#22d3ee" />
-        </linearGradient>
-        {/* Shine band */}
-        <linearGradient id="ymark-shine" x1="0" y1="0" x2="10" y2="0" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#ffffff" stopOpacity="0" />
-          <stop offset="0.5" stopColor="#ffffff" stopOpacity="0.85" />
-          <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
-        </linearGradient>
-        <clipPath id="ymark-body">
-          <polygon points="3.5,3.5 10.5,5 16.2,14.5 13.6,20.6" />
-          <polygon points="28.5,3 21.3,4.8 16.4,14.6 18.8,19.6" />
-          <polygon points="15.8,22 19.6,20.6 18.8,29.6 15.4,31" />
-        </clipPath>
-      </defs>
-
-      {/* Slight italic lean on the whole mark */}
-      <g transform="translate(2.6 0) skewX(-9)">
-        {/* Facets — one gradient, depth via subtle same-hue shading */}
-        <polygon points="3.5,3.5 10.5,5 16.2,14.5 13.6,20.6" fill="url(#ymark-g)" />
-        <polygon points="28.5,3 21.3,4.8 16.4,14.6 18.8,19.6" fill="url(#ymark-g)" />
-        <polygon points="28.5,3 21.3,4.8 16.4,14.6 18.8,19.6" fill="#000000" opacity="0.22" />
-        <polygon points="15.8,22 19.6,20.6 18.8,29.6 15.4,31" fill="url(#ymark-g)" />
-        <polygon points="15.8,22 19.6,20.6 18.8,29.6 15.4,31" fill="#000000" opacity="0.12" />
-
-        {/* Single edge highlight for the metal read */}
-        <path d="M3.5 3.5 L10.5 5" stroke="#ffffff" strokeWidth="0.6" opacity="0.7" fill="none" />
-
-        {/* Glossy sweep, clipped to the blades */}
-        <g clipPath="url(#ymark-body)">
-          <polygon
-            className="animate-shine"
-            points="0,0 7,0 -3,32 -10,32"
-            fill="url(#ymark-shine)"
-            opacity="0.7"
-          />
-        </g>
+      <g transform="translate(2.6 0) skewX(-9)" fill="var(--color-accent)">
+        <polygon points="3.5,3.5 10.5,5 16.2,14.5 13.6,20.6" />
+        <polygon points="28.5,3 21.3,4.8 16.4,14.6 18.8,19.6" opacity=".78" />
+        <polygon points="15.8,22 19.6,20.6 18.8,29.6 15.4,31" />
       </g>
     </svg>
   );

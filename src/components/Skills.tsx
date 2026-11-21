@@ -1,6 +1,7 @@
 import Section from "./Section";
 import Reveal from "./Reveal";
 import { skillGroups, softSkills } from "@/data/resume";
+import styles from "./sections.module.css";
 
 // Flat list for the scrolling marquee strip.
 const marqueeSkills = [
@@ -12,57 +13,48 @@ const marqueeSkills = [
 
 export default function Skills() {
   return (
-    <Section id="skills" eyebrow="04 · Skills" title="What I work with." glow="cyan">
+    <Section id="skills" eyebrow="04 · Skills" title="What I work with.">
       {/* Marquee strip */}
-      <Reveal className="mb-12">
-        <div className="glass relative overflow-hidden rounded-2xl py-4 [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]">
-          <div className="animate-marquee flex w-max gap-8 pr-8">
+      <Reveal className="mb-5">
+        <div className="overflow-hidden border-y border-border py-3.5 [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)] motion-reduce:overflow-x-auto">
+          <div className={`${styles.ticker} flex w-max gap-6 pr-6`}>
             {[...marqueeSkills, ...marqueeSkills].map((skill, i) => (
               <span
                 key={`${skill}-${i}`}
-                className="flex items-center gap-8 whitespace-nowrap font-mono text-sm text-muted"
+                aria-hidden={i >= marqueeSkills.length || undefined}
+                className={`flex items-center gap-6 font-mono text-xs whitespace-nowrap text-muted ${i >= marqueeSkills.length ? "motion-reduce:hidden" : ""}`}
               >
                 {skill}
-                <span aria-hidden className="text-violet/60">✦</span>
+                <span aria-hidden className="h-1 w-1 bg-accent" />
               </span>
             ))}
           </div>
         </div>
       </Reveal>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {skillGroups.map((group, i) => (
-          <Reveal key={group.label} delay={(i % 3) * 0.08}>
-            <div className="glass h-full rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-border-strong">
-              <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-fg">
-                {group.label}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {group.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="rounded-full border border-border bg-surface-2 px-3 py-1 text-xs text-muted transition-colors hover:border-violet/40 hover:text-fg"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </Reveal>
+      <ul className="mt-4">
+        {skillGroups.map((group) => (
+          <li key={group.label} className="rise relative grid gap-2 py-5 md:grid-cols-[14rem_minmax(0,1fr)] md:gap-8">
+            <span aria-hidden className="rule" />
+            <h3 className="font-mono text-[11px] font-medium tracking-[0.14em] text-dim uppercase md:pt-1">{group.label}</h3>
+            <p className="flex flex-wrap gap-x-2 gap-y-1 leading-relaxed text-fg">
+              {/* Separator rides at the end of each item so a wrap never starts a line with it. */}
+              {group.skills.map((skill, i) => (
+                <span key={skill} className="inline-flex items-center gap-2">
+                  <span className="transition-colors hover:text-accent">{skill}</span>
+                  {i < group.skills.length - 1 && <span aria-hidden className="text-dim">·</span>}
+                </span>
+              ))}
+            </p>
+          </li>
         ))}
-      </div>
-
-      <Reveal className="mt-10">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-dim">
-          <span className="eyebrow">Beyond code</span>
-          {softSkills.map((skill, i) => (
-            <span key={skill} className="flex items-center gap-3 text-muted">
-              {i > 0 && <span aria-hidden className="text-dim">·</span>}
-              {skill}
-            </span>
-          ))}
-        </div>
-      </Reveal>
+        <li className="rise relative grid gap-2 py-5 md:grid-cols-[14rem_minmax(0,1fr)] md:gap-8">
+          <span aria-hidden className="rule" />
+          <h3 className="font-mono text-[11px] font-medium tracking-[0.14em] text-dim uppercase md:pt-1">Beyond code</h3>
+          <p className="leading-relaxed text-muted">{softSkills.join(" · ")}</p>
+        </li>
+        <li aria-hidden className="rule relative! block" />
+      </ul>
     </Section>
   );
 }

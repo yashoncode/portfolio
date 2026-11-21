@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import styles from "./sections.module.css";
 
 /**
  * The 🪐 in the footer — hides easter egg #04. Opening it also fires a
@@ -21,45 +21,32 @@ export default function SpaceEgg() {
   }, [open]);
 
   return (
-    <span className="relative inline-block">
+    <span className="inline-block md:relative">
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label="A tiny planet. Probably decorative."
-        className="cursor-pointer text-sm transition-transform duration-300 hover:rotate-12 hover:scale-125 inline-block"
+        aria-expanded={open}
+        className="inline-flex size-6 cursor-pointer items-center justify-center text-sm motion-safe:transition-transform motion-safe:hover:rotate-12"
       >
         🪐
       </button>
 
-      <AnimatePresence>
-        {open && (
-          <>
-            <motion.span
-              className="fixed inset-0 z-40 block"
-              onClick={() => setOpen(false)}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            />
-            <motion.span
-              initial={{ opacity: 0, y: 8, scale: 0.92 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 8, scale: 0.92 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="glass absolute bottom-full right-0 z-50 mb-4 block w-72 max-w-[calc(100vw-2.5rem)] rounded-2xl p-5 text-left shadow-2xl shadow-black/50"
-            >
-              <span className="eyebrow mb-3 block">🥚 easter egg · 04</span>
-              <span className="block text-lg font-bold text-fg">
-                Certified space nerd.
-              </span>
-              <span className="mt-2 block text-sm leading-relaxed text-muted">
-                The stars behind this site aren&apos;t decoration, I&apos;m
-                genuinely obsessed with space. Look up: that meteor shower is
-                for you. ☄️
-              </span>
-            </motion.span>
-          </>
-        )}
-      </AnimatePresence>
+      {open && (
+        <>
+          <span aria-hidden className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
+          <span className={`${styles.popover} bottom-full left-0 mb-2 text-left font-sans tracking-normal md:right-0 md:left-auto`}>
+            <span className="eyebrow mb-3 block">🥚 easter egg · 04</span>
+            <span className="block text-lg font-bold text-fg">
+              Certified space nerd.
+            </span>
+            <span className="mt-2 block text-sm leading-relaxed text-muted">
+              The stars behind this site aren&apos;t decoration, I&apos;m
+              genuinely obsessed with space. Look up: that meteor shower is
+              for you. ☄️
+            </span>
+          </span>
+        </>
+      )}
     </span>
   );
 }

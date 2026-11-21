@@ -13,11 +13,7 @@ import { achievementGroups, achievementCount } from "@/data/achievements";
 export default function Achievements() {
   return (
     <main className="relative min-h-screen overflow-hidden">
-      <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="grid-overlay absolute inset-0" />
-        <div className="absolute -top-40 right-1/4 h-[26rem] w-[26rem] rounded-full bg-cyan/15 blur-[140px] sm:animate-aurora" />
-        <div className="absolute bottom-0 left-1/4 h-[22rem] w-[22rem] rounded-full bg-violet/15 blur-[150px]" />
-      </div>
+      <div aria-hidden className="grid-overlay pointer-events-none absolute inset-0" />
 
       <div className="relative z-10 mx-auto w-full max-w-3xl px-6 py-20 sm:py-28">
         <Link
@@ -29,7 +25,7 @@ export default function Achievements() {
         </Link>
 
         <p className="eyebrow mt-12 mb-4">the receipts · {achievementCount} of them</p>
-        <h1 className="text-gradient text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
+        <h1 className="text-fg text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
           What I&apos;ve actually done
         </h1>
         <p className="mt-6 text-lg leading-relaxed text-muted">
@@ -54,18 +50,18 @@ export default function Achievements() {
                 {group.items.map((item) => (
                   <li key={item.claim} className="border-b border-border/60">
                     <details className="ach group">
-                      <summary className="flex cursor-pointer list-none items-start gap-3 py-4 transition-colors hover:bg-white/[0.02]">
+                      <summary className="flex cursor-pointer list-none items-start gap-3 py-4 transition-colors hover:bg-surface">
                         <Check
                           size={15}
                           strokeWidth={3}
                           aria-hidden
-                          className="mt-0.5 shrink-0 text-cyan"
+                          className="mt-0.5 shrink-0 text-ok"
                         />
                         <span className="flex-1 font-medium leading-snug text-fg">
                           {item.claim}
                         </span>
                         {item.metric && (
-                          <span className="mt-px shrink-0 rounded-full border border-violet/30 bg-violet/10 px-2.5 py-0.5 font-mono text-[0.68rem] tracking-wide text-violet">
+                          <span className="mt-px max-w-28 rounded-sm border border-border bg-surface px-2.5 py-0.5 font-mono text-[0.68rem] tracking-wide text-accent">
                             {item.metric}
                           </span>
                         )}
@@ -97,7 +93,7 @@ export default function Achievements() {
         <div className="mt-20 flex justify-center border-t border-border pt-12">
           <Link
             href="/"
-            className="accent-gradient inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-[1.03] active:scale-95"
+            className="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-6 py-3 font-mono text-sm text-fg hover:border-accent hover:text-accent"
           >
             <ArrowLeft size={15} />
             back to the portfolio

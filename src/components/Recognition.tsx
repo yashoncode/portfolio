@@ -1,4 +1,4 @@
-import { BookOpen, FileBadge, Trophy, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Section from "./Section";
 import Reveal from "./Reveal";
 import { publications, patents, awards } from "@/data/resume";
@@ -9,19 +9,14 @@ export default function Recognition() {
       id="recognition"
       eyebrow="06 · Recognition"
       title="Research & recognition."
-      glow="indigo"
     >
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className="grid gap-x-12 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
         {/* Publications */}
         <Reveal>
-          <div className="glass h-full rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-border-strong">
-            <div className="mb-5 flex items-center gap-3">
-              <div className="rounded-xl bg-violet/10 p-2.5 text-violet">
-                <BookOpen size={20} />
-              </div>
-              <h3 className="font-semibold text-fg">Publications</h3>
-            </div>
-            <ul className="flex flex-col gap-4">
+          <div className="relative pt-5">
+            <span aria-hidden className="rule" />
+            <h3 className="mb-6 font-mono text-[11px] font-medium tracking-[0.14em] text-dim uppercase">Publications</h3>
+            <ul className="flex flex-col gap-5">
               {publications.map((pub) => (
                 <li key={pub.title}>
                   <a
@@ -30,11 +25,12 @@ export default function Recognition() {
                     rel="noopener noreferrer"
                     className="group/pub block"
                   >
-                    <p className="text-sm leading-snug text-fg transition-colors group-hover/pub:text-cyan">
+                    <p className="leading-snug text-fg transition-colors group-hover/pub:text-accent">
                       {pub.title}
                       <ArrowUpRight
                         size={13}
-                        className="ml-1 inline-block opacity-40 transition-all group-hover/pub:-translate-y-0.5 group-hover/pub:translate-x-0.5 group-hover/pub:opacity-100"
+                        aria-hidden
+                        className="ml-1 inline-block text-accent"
                       />
                     </p>
                     <p className="mt-1 font-mono text-xs text-dim">
@@ -49,16 +45,12 @@ export default function Recognition() {
 
         {/* Patent */}
         <Reveal delay={0.1}>
-          <div className="glass h-full rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-border-strong">
-            <div className="mb-5 flex items-center gap-3">
-              <div className="rounded-xl bg-cyan/10 p-2.5 text-cyan">
-                <FileBadge size={20} />
-              </div>
-              <h3 className="font-semibold text-fg">Patent</h3>
-            </div>
+          <div className="relative pt-5">
+            <span aria-hidden className="rule" />
+            <h3 className="mb-6 font-mono text-[11px] font-medium tracking-[0.14em] text-dim uppercase">Patent</h3>
             {patents.map((patent) => (
               <div key={patent.appNo}>
-                <p className="text-sm leading-snug text-fg">{patent.title}</p>
+                <p className="leading-snug text-fg">{patent.title}</p>
                 <p className="mt-2 text-xs leading-relaxed text-muted">
                   {patent.authority}
                 </p>
@@ -73,18 +65,14 @@ export default function Recognition() {
 
         {/* Awards */}
         <Reveal delay={0.2}>
-          <div className="glass h-full rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-border-strong">
-            <div className="mb-5 flex items-center gap-3">
-              <div className="rounded-xl bg-indigo/10 p-2.5 text-indigo">
-                <Trophy size={20} />
-              </div>
-              <h3 className="font-semibold text-fg">Awards</h3>
-            </div>
+          <div className="relative pt-5">
+            <span aria-hidden className="rule" />
+            <h3 className="mb-6 font-mono text-[11px] font-medium tracking-[0.14em] text-dim uppercase">Awards</h3>
             <ul className="flex flex-col gap-3">
               {awards.map((award) => (
                 <li
                   key={award}
-                  className="relative pl-5 text-sm leading-relaxed text-muted before:absolute before:left-0 before:top-[9px] before:h-1 before:w-2.5 before:rounded-full before:bg-indigo/50"
+                  className="relative pl-4 text-sm leading-relaxed text-muted before:absolute before:top-[11px] before:left-0 before:h-px before:w-2 before:bg-accent"
                 >
                   {award}
                 </li>

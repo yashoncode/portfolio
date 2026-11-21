@@ -1,6 +1,15 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
+
+const pointerQuery = "(pointer: fine) and (prefers-reduced-motion: no-preference)";
+function subscribePointer(change: () => void) {
+  const media = matchMedia(pointerQuery);
+  media.addEventListener("change", change);
+  return () => media.removeEventListener("change", change);
+}
+const pointerEnabled = () => matchMedia(pointerQuery).matches;
+const serverPointer = () => false;
 
 /**
  * Custom cursor: an instant dot plus a ring that trails with a lerp,
@@ -10,13 +19,12 @@ import { useEffect, useRef } from "react";
 export default function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
+  const enabled = useSyncExternalStore(subscribePointer, pointerEnabled, serverPointer);
 
   useEffect(() => {
-    const fine = window.matchMedia("(pointer: fine)").matches;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const dot = dotRef.current;
     const ring = ringRef.current;
-    if (!fine || reduce || !dot || !ring) return;
+    if (!enabled || !dot || !ring) return;
 
     document.documentElement.classList.add("custom-cursor");
     let x = -10, y = -10, rx = -10, ry = -10;
@@ -57,6 +65,7 @@ export default function Cursor() {
 
     return () => {
       cancelAnimationFrame(raf);
+      leave();
       document.documentElement.classList.remove("custom-cursor");
       window.removeEventListener("mousemove", move);
       window.removeEventListener("mouseover", over);
@@ -64,7 +73,7 @@ export default function Cursor() {
       window.removeEventListener("mouseup", upFn);
       document.documentElement.removeEventListener("mouseleave", leave);
     };
-  }, []);
+  }, [enabled]);
 
   return (
     <>

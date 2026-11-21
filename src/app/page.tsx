@@ -11,20 +11,22 @@ import Recognition from "@/components/Recognition";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { WarpArrival } from "@/components/Warp";
+import { getRepositoryStats } from "@/lib/github";
 
-export default function Home() {
+export default async function Home() {
+  const repositories = await getRepositoryStats();
   return (
     <>
       <WarpArrival />
       <Navbar />
       <main>
-        <Hero>
+        <Hero totalStars={repositories?.totalStars ?? null}>
           <GithubHeatmap />
         </Hero>
         <Divider />
         <About />
         <Experience />
-        <Projects />
+        <Projects repos={repositories?.counts ?? null} />
         <Skills />
         <Education />
         <Recognition />

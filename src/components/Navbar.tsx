@@ -1,19 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Download, Mail, MapPin, Menu, X } from "lucide-react";
+import { ScrollProgress } from "./motion";
+import { Download, Mail, MapPin, Menu, Moon, Sun, X } from "lucide-react";
 import { IndiaMap, LinkedinIcon, YMark } from "./icons";
 import { navSections, profile } from "@/data/resume";
 
-/** Icon link with a playful hint that drops in below on hover. */
-function IconHint({
-  href,
-  label,
-  hint,
-  external = false,
-  children,
-}: {
+function IconHint({ href, label, hint, external, children }: {
   href: string;
   label: string;
   hint: string;
@@ -21,261 +14,142 @@ function IconHint({
   children: React.ReactNode;
 }) {
   return (
-    <a
-      href={href}
-      aria-label={label}
+    <a href={href} aria-label={label}
       {...(external && { target: "_blank", rel: "noopener noreferrer" })}
-      className="group/icon relative text-muted transition-colors hover:text-fg"
-    >
+      className="group/icon relative grid size-8 place-items-center text-muted hover:text-accent">
       {children}
-      <span className="pointer-events-none absolute right-0 top-full mt-4 translate-y-1 whitespace-nowrap rounded-lg border border-border bg-surface-2 px-2.5 py-1.5 font-mono text-[10px] tracking-wide text-muted opacity-0 shadow-lg shadow-black/40 transition-all duration-200 ease-out group-hover/icon:translate-y-0 group-hover/icon:opacity-100">
+      <span className="pointer-events-none absolute right-0 top-full mt-2 hidden whitespace-nowrap rounded border border-border bg-surface px-2.5 py-1.5 font-mono text-[10px] text-muted group-hover/icon:block group-focus-visible/icon:block">
         {hint}
       </span>
     </a>
   );
 }
 
+function ThemeToggle() {
+  function toggle() {
+    const root = document.documentElement;
+    const theme = root.dataset.theme === "light" ? "dark" : "light";
+    root.dataset.theme = theme;
+    try {
+      localStorage.setItem("theme", theme);
+    } catch {
+      // The theme still applies to this document when storage is unavailable.
+    }
+  }
+  return (
+    <button type="button" onClick={toggle}
+      className="grid size-9 cursor-pointer place-items-center rounded-md border border-border text-muted hover:border-accent/60 hover:text-accent">
+      <span className="when-dark"><Sun size={16} aria-hidden /><span className="sr-only">Switch to light theme</span></span>
+      <span className="when-light"><Moon size={16} aria-hidden /><span className="sr-only">Switch to dark theme</span></span>
+    </button>
+  );
+}
+
+function DownloadCV() {
+  return (
+    <a href="/Yashwanth-D-Resume.pdf" download
+      className="inline-flex h-9 items-center justify-center gap-2 rounded-md border border-border bg-surface-2 px-3 font-mono text-xs font-medium text-fg hover:border-accent/60 hover:text-accent">
+      <Download size={14} /> Download CV
+    </a>
+  );
+}
+
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
   const [open, setOpen] = useState(false);
   const [eggOpen, setEggOpen] = useState(false);
 
-  // Easter egg closes on Escape
   useEffect(() => {
-    if (!eggOpen) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setEggOpen(false);
+    if (!open && !eggOpen) return;
+    const escape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setEggOpen(false);
+        setOpen(false);
+      }
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [eggOpen]);
+    window.addEventListener("keydown", escape);
+    return () => window.removeEventListener("keydown", escape);
+  }, [open, eggOpen]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Highlight the section currently in view.
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) setActive(entry.target.id);
-        }
-      },
-      { rootMargin: "-45% 0px -50% 0px" }
-    );
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      }
+    }, { rootMargin: "-20% 0px -50% 0px" });
     for (const { id } of navSections) {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     }
+    const hero = document.getElementById("top");
+    if (hero) observer.observe(hero);
     return () => observer.disconnect();
   }, []);
 
+  const links = navSections.map(({ id, label }) => (
+    <li key={id}>
+      <a href={`#${id}`} aria-current={active === id ? "location" : undefined} onClick={() => setOpen(false)}
+        className={`block rounded-sm px-2.5 py-2 hover:text-accent ${active === id ? "text-accent" : "text-muted"}`}>
+        {label}
+      </a>
+    </li>
+  ));
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
-      {/* Persistent glass backdrop, cross-faded to avoid class-swap flicker */}
-      <div
-        aria-hidden
-        className={`glass glass-keep absolute inset-0 border-b border-border shadow-lg shadow-black/30 transition-opacity duration-500 ${
-          scrolled ? "opacity-100" : "opacity-0"
-        }`}
-      />
-      <motion.nav
-        initial={{ y: -64, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6"
-      >
-        <div className="relative">
-          <button
-            onClick={() => setEggOpen((v) => !v)}
-            aria-label="Yashwanth D logo, click for a little secret"
-            className="group flex cursor-pointer items-center transition-transform duration-300 ease-out hover:scale-110"
-          >
-            <span className="logo-flip inline-flex">
-              <YMark size={30} />
-            </span>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-bg/95 backdrop-blur-md">
+      <ScrollProgress />
+      <nav aria-label="Main navigation" className="relative mx-auto flex h-16 w-full max-w-6xl items-center gap-4 px-5 sm:px-6">
+        <div className="relative mr-auto lg:mr-0">
+          <button type="button" onClick={() => { setEggOpen(!eggOpen); setOpen(false); }}
+            aria-expanded={eggOpen} aria-label="Yashwanth D logo, click for a little secret"
+            className="group grid size-9 cursor-pointer place-items-center rounded-md border border-accent/40 bg-accent/5">
+            <span className="logo-flip"><YMark size={24} /></span>
           </button>
-
-          <AnimatePresence>
-            {eggOpen && (
-              <>
-                {/* Click-away layer */}
-                <motion.div
-                  className="fixed inset-0 z-40"
-                  onClick={() => setEggOpen(false)}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                />
-                <motion.div
-                  initial={{ opacity: 0, y: 10, scale: 0.92 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 10, scale: 0.92 }}
-                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  className="glass absolute left-0 top-full z-50 mt-4 w-80 max-w-[calc(100vw-2.5rem)] origin-top-left rounded-2xl p-6 shadow-2xl shadow-black/50"
-                >
-                  <p className="eyebrow mb-3">🥚 easter egg · 01</p>
-                  <p className="text-2xl font-bold tracking-wide text-fg">
-                    Yashwanth
-                  </p>
-                  <p className="mt-1 font-mono text-xs text-violet">
-                    me
-                  </p>
-                  <p className="mt-4 text-sm leading-relaxed text-muted">
-                    Yashwanth means{" "}
-                    <span className="text-fg">
-                      &ldquo;one who is always famous&rdquo;
-                    </span>{" "}
-                     a bearer of lasting glory and success.
-                  </p>
-                  <p className="mt-3 font-mono text-[11px] text-dim">
-                    No pressure or anything.
-                  </p>
-                </motion.div>
-              </>
-            )}
-          </AnimatePresence>
+          {eggOpen && (
+            <>
+              <div className="fixed inset-0 z-40" onClick={() => setEggOpen(false)} />
+              <div className="absolute left-0 top-full z-50 mt-3 w-76 max-w-[calc(100vw-2.5rem)] rounded-lg border border-border bg-surface p-5 shadow-xl">
+                <p className="eyebrow mb-3">🥚 easter egg · 01</p>
+                <p className="text-2xl font-bold text-fg">Yashwanth</p>
+                <p className="mt-1 font-mono text-xs text-accent">me</p>
+                <p className="mt-4 text-sm leading-relaxed text-muted">
+                  Yashwanth means <span className="text-fg">&ldquo;one who is always famous&rdquo;</span> a bearer of lasting glory and success.
+                </p>
+                <p className="mt-3 font-mono text-[11px] text-dim">No pressure or anything.</p>
+              </div>
+            </>
+          )}
         </div>
-
-        {/* Desktop links */}
-        <ul className="hidden items-center gap-1 md:flex">
-          {navSections.map(({ id, label }) => (
-            <li key={id}>
-              <a
-                href={`#${id}`}
-                className={`rounded-full px-3.5 py-1.5 text-sm transition-colors ${
-                  active === id
-                    ? "bg-surface-2 text-fg"
-                    : "text-muted hover:text-fg"
-                }`}
-              >
-                {label}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <div className="hidden items-center gap-3 md:flex">
-          <IconHint
-            href={profile.links.linkedin}
-            label="LinkedIn"
-            hint="me, but in my formal attire"
-            external
-          >
-            <LinkedinIcon size={18} />
-          </IconHint>
-          <IconHint
-            href={`mailto:${profile.email}`}
-            label="Email"
-            hint="replies faster than my CI/CD"
-          >
-            <Mail size={18} />
-          </IconHint>
-          <a
-            href="/Yashwanth-D-Resume.pdf"
-            download
-            className="accent-gradient ml-2 inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold text-white shadow-md shadow-violet/25 transition-transform hover:scale-105 active:scale-95"
-          >
-            <Download size={13} />
-            Download CV
-          </a>
-          <span className="group/loc relative ml-1 hidden cursor-default items-center gap-1 text-xs text-dim transition-colors hover:text-muted lg:flex">
-            <MapPin size={13} />
-            {profile.location}
-            {/* India map popover — flashes Tamil Nadu on hover */}
-            <span className="pointer-events-none absolute right-0 top-full mt-3 flex origin-top-right scale-90 opacity-0 transition-all duration-300 ease-out group-hover/loc:scale-100 group-hover/loc:opacity-100">
-              <IndiaMap />
-            </span>
+        <ul className="mr-auto hidden items-center text-sm lg:flex">{links}</ul>
+        <div className="hidden items-center gap-1 lg:flex">
+          <IconHint href={profile.links.linkedin} label="LinkedIn" hint="me, but in my formal attire" external><LinkedinIcon size={16} /></IconHint>
+          <IconHint href={`mailto:${profile.email}`} label="Email" hint="replies faster than my CI/CD"><Mail size={16} /></IconHint>
+          <span className="group/loc relative mx-1 hidden items-center gap-1 font-mono text-xs text-muted xl:flex">
+            <MapPin size={13} />{profile.location}
+            <span className="pointer-events-none absolute right-0 top-full mt-2 hidden rounded border border-border bg-surface p-3 group-hover/loc:block"><IndiaMap /></span>
           </span>
         </div>
-
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Close menu" : "Open menu"}
-          className="text-fg md:hidden"
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </motion.nav>
-
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ height: 0 }}
-            animate={{ height: "auto" }}
-            exit={{ height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="relative overflow-hidden border-b border-border md:hidden"
-          >
-            <div aria-hidden className="glass glass-keep absolute inset-0 border-0" />
-            <ul className="relative flex flex-col gap-1 px-6 py-4">
-              {navSections.map(({ id, label }) => (
-                <li key={id}>
-                  <a
-                    href={`#${id}`}
-                    onClick={(e) => {
-                      // native smooth hash-scroll gets canceled by the menu's
-                      // exit animation on mobile — scroll manually after it
-                      e.preventDefault();
-                      setOpen(false);
-                      setTimeout(() => {
-                        document
-                          .getElementById(id)
-                          ?.scrollIntoView({ behavior: "smooth" });
-                        history.replaceState(null, "", `#${id}`);
-                      }, 300);
-                    }}
-                    className="block rounded-lg px-3 py-2 text-sm text-muted transition-colors hover:bg-surface-2 hover:text-fg"
-                  >
-                    {label}
-                  </a>
-                </li>
-              ))}
-              <li className="mt-2">
-                <a
-                  href="/Yashwanth-D-Resume.pdf"
-                  download
-                  onClick={() => setOpen(false)}
-                  className="accent-gradient flex items-center justify-center gap-1.5 rounded-full px-4 py-2.5 text-sm font-semibold text-white"
-                >
-                  <Download size={14} />
-                  Download CV
-                </a>
-              </li>
-              <li className="mt-3 flex items-center justify-between border-t border-border pt-4">
-                <span className="flex items-center gap-1.5 text-xs text-dim">
-                  <MapPin size={13} />
-                  {profile.location}
-                </span>
-                <span className="flex items-center gap-5">
-                  <a
-                    href={profile.links.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn"
-                    className="text-muted transition-colors hover:text-fg"
-                  >
-                    <LinkedinIcon size={18} />
-                  </a>
-                  <a
-                    href={`mailto:${profile.email}`}
-                    aria-label="Email"
-                    className="text-muted transition-colors hover:text-fg"
-                  >
-                    <Mail size={18} />
-                  </a>
-                </span>
-              </li>
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <div className="hidden sm:block"><DownloadCV /></div>
+          <button type="button" onClick={() => { setOpen(!open); setEggOpen(false); }}
+            aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-nav"
+            className="grid size-9 place-items-center rounded-md border border-border text-fg lg:hidden">
+            {open ? <X size={19} /> : <Menu size={19} />}
+          </button>
+        </div>
+      </nav>
+      {open && (
+        <nav id="mobile-nav" aria-label="Mobile navigation" className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-border bg-surface px-5 py-3 lg:hidden">
+          <ul className="font-mono text-sm">{links}</ul>
+          <div className="mt-3 flex items-center gap-2 border-t border-border pt-3">
+            <DownloadCV />
+            <span className="mr-auto flex items-center gap-1 font-mono text-xs text-muted"><MapPin size={13} />{profile.location}</span>
+            <IconHint href={profile.links.linkedin} label="LinkedIn" hint="me, but in my formal attire" external><LinkedinIcon size={16} /></IconHint>
+            <IconHint href={`mailto:${profile.email}`} label="Email" hint="replies faster than my CI/CD"><Mail size={16} /></IconHint>
+          </div>
+        </nav>
+      )}
     </header>
   );
 }

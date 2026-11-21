@@ -1,0 +1,223 @@
+.statusBar {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  padding: .65rem .95rem;
+  border: 1px solid var(--color-border);
+  border-radius: .5rem;
+  background: var(--color-surface);
+  font-family: var(--font-mono);
+  font-size: .7rem;
+}
+.shipping {
+  display: inline-flex;
+  align-items: center;
+  gap: .48rem;
+  border-left: 1px solid var(--color-border);
+  padding-left: 1rem;
+  color: var(--color-ok);
+  font-size: .65rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+}
+.shipping i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-ok);
+}
+.identityAndRoute {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+  padding-block: clamp(2.25rem, 5vw, 4rem);
+}
+
+/* ── Name: D unfolds into Devadoss without a font-size change ───────── */
+.name {
+  font-size: clamp(2.7rem, 6vw, 4.8rem);
+  font-weight: 650;
+  letter-spacing: -.065em;
+  line-height: 1.02;
+  white-space: nowrap;
+  transform-origin: left center;
+  transition: transform .6s cubic-bezier(.22, 1, .36, 1);
+}
+.expanded { transform: scale(.74); }
+.initial { display: inline-flex; align-items: baseline; }
+.tail {
+  display: inline-grid;
+  grid-template-columns: 0fr;
+  transition: grid-template-columns .6s cubic-bezier(.22, 1, .36, 1);
+}
+.tail > span {
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(-.15em);
+  transition: opacity .35s ease, transform .6s cubic-bezier(.22, 1, .36, 1);
+}
+.expanded .tail { grid-template-columns: 1fr; }
+.expanded .tail > span { opacity: .6; transform: none; transition-delay: .08s, 0s; }
+
+.primaryAction, .secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  min-height: 2.75rem;
+  padding: .5rem 1.05rem;
+  border: 1px solid var(--color-border);
+  border-radius: .4rem;
+  font-size: .87rem;
+  font-weight: 600;
+  transition: border-color .2s, background-color .2s, filter .2s, transform .2s;
+}
+.primaryAction { border-color: var(--color-accent); background: var(--color-accent); color: #0a0f1a; }
+.primaryAction:hover { filter: brightness(1.08); }
+.primaryAction svg { transition: transform .2s; }
+.primaryAction:hover svg { transform: translateX(3px); }
+.secondaryAction { background: transparent; color: var(--color-fg); }
+.secondaryAction:hover { border-color: var(--color-dim); background: var(--color-surface); }
+
+/* ── Panels (career route) ──────────────────────────────────────────── */
+.panel {
+  min-width: 0;
+  border: 1px solid var(--color-border);
+  border-radius: .65rem;
+  background: var(--color-surface);
+}
+.panelHeader {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  min-height: 3rem;
+  padding-inline: 1.1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.panelHeader h2 {
+  font-size: .88rem;
+  font-weight: 600;
+  letter-spacing: -.015em;
+}
+.panelMeta {
+  margin-left: auto;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.routeMap {
+  display: block;
+  width: 100%;
+  border-radius: 0 0 .65rem .65rem;
+  background: color-mix(in srgb, var(--color-bg) 56%, var(--color-surface));
+}
+.mapLabels {
+  paint-order: stroke fill;
+  stroke: var(--color-bg);
+  stroke-linejoin: round;
+  stroke-width: 3.5px;
+}
+.mapYear, .mapNext { font-family: var(--font-mono); font-size: 12px; font-weight: 500; }
+.mapYear { letter-spacing: .07em; }
+.mapRole { font-size: 16px; font-weight: 600; letter-spacing: -.025em; }
+.truck { display: none; offset-rotate: 0deg; }
+
+/* ── Manifest strip ─────────────────────────────────────────────────── */
+/* The 1px grid gap over a border-coloured ground draws every divider, so
+   rows and columns never double up whatever the column count. */
+.manifest {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  border-block: 1px solid var(--color-border);
+  background: var(--color-border);
+}
+.cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+  min-width: 0;
+  padding: 1.2rem 1rem 1.15rem;
+  background: var(--color-bg);
+  color: var(--color-muted);
+  font-size: .78rem;
+  line-height: 1.4;
+  text-align: left;
+  transition: background-color .25s;
+}
+a.cell, button.cell { cursor: pointer; }
+a.cell:hover, button.cell:hover { background: color-mix(in srgb, var(--color-surface) 70%, var(--color-bg)); }
+.figure, .word {
+  display: flex;
+  align-items: flex-end;
+  min-height: 2.5rem;
+  color: var(--color-fg);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -.06em;
+  font-variant-numeric: tabular-nums;
+  transition: color .25s;
+}
+.figure { font-size: clamp(2rem, 4.2vw, 2.55rem); }
+.word { font-size: clamp(1.05rem, 2vw, 1.3rem); letter-spacing: -.03em; padding-bottom: .2rem; }
+a.cell:hover :is(.figure, .word), button.cell:hover :is(.figure, .word) { color: var(--color-accent); }
+.captions { display: grid; }
+.captions > span { grid-area: 1 / 1; transition: opacity .25s; }
+.fun { opacity: 0; color: var(--color-fg); }
+.cell:focus-visible .fun { opacity: 1; }
+.cell:focus-visible .label { opacity: 0; }
+@media (hover: hover) {
+  .cell:hover .label { opacity: 0; }
+  .cell:hover .fun { opacity: 1; }
+}
+.cue {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  margin-top: auto;
+  padding-top: .2rem;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.cue span { transition: transform .2s; }
+.cell:hover .cue span { transform: translateX(3px); }
+.stars .figure { color: var(--color-accent); }
+.stars .cue { color: var(--color-ok); }
+.liveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-ok);
+}
+
+@media (min-width: 40rem) {
+  .manifest { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cell { padding: 1.35rem 1.25rem 1.25rem; }
+}
+@media (min-width: 64rem) {
+  .identityAndRoute {
+    grid-template-columns: minmax(0, 1.04fr) minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 3.5rem);
+  }
+  .manifest { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .shipping i, .liveDot { animation: signal 2.5s ease-out infinite; }
+  .truck { display: block; animation: drive 9s linear infinite; }
+  .scrollCue { animation: nudge 2.4s ease-in-out infinite; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .name, .tail, .tail > span { transition: none; }
+}
+@keyframes signal {
+  0%, 25% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-ok) 40%, transparent); }
+  80%, 100% { box-shadow: 0 0 0 5px transparent; }
+}
+@keyframes drive { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+@keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }

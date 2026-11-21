@@ -29,7 +29,8 @@ export default function StatModal({
   return (
     <dialog
       ref={ref}
-      className="stat-modal glass glass-keep w-[min(46rem,calc(100vw_-_2rem))] rounded-2xl p-0 text-left"
+      aria-labelledby="stat-detail-heading"
+      className="stat-modal w-[min(46rem,calc(100vw_-_2rem))] rounded-xl border border-border bg-surface p-0 text-left"
       // Esc and the close() call both fire this; keep React state in sync.
       onClose={onDismiss}
       // A click landing on the dialog itself is a click on the backdrop —
@@ -41,12 +42,12 @@ export default function StatModal({
       {detail && (
         <div className="max-h-[85vh] overflow-y-auto p-6 sm:p-8">
           <div className="mb-6 flex items-start justify-between gap-4">
-            <h2 className="text-xl font-bold text-fg sm:text-2xl">{detail.title}</h2>
+            <h2 id="stat-detail-heading" className="text-xl font-bold text-fg sm:text-2xl">{detail.title}</h2>
             <button
               type="button"
               onClick={onDismiss}
               aria-label="Close"
-              className="shrink-0 rounded-lg p-1.5 text-dim transition-colors hover:bg-white/5 hover:text-fg"
+              className="shrink-0 rounded-md p-1.5 text-dim transition-colors hover:bg-surface-2 hover:text-fg"
             >
               <X size={18} />
             </button>
@@ -59,7 +60,7 @@ export default function StatModal({
           <div className="flex flex-col gap-7">
             {detail.sections.map((s) => (
               <div key={s.heading}>
-                <h3 className="mb-2 font-mono text-xs uppercase tracking-[0.14em] text-violet">
+                <h3 className="mb-2 font-mono text-xs uppercase tracking-[0.14em] text-accent">
                   {s.heading}
                 </h3>
                 {s.body && (
@@ -70,7 +71,7 @@ export default function StatModal({
                     {s.points.map((p) => (
                       <li
                         key={p}
-                        className="relative pl-5 text-sm leading-relaxed text-muted before:absolute before:left-0 before:top-[9px] before:h-1 before:w-2.5 before:rounded-full before:bg-cyan/50"
+                        className="relative pl-5 text-sm leading-relaxed text-muted before:absolute before:left-0 before:top-[9px] before:h-1 before:w-2.5 before:rounded-full before:bg-accent/60"
                       >
                         {p}
                       </li>

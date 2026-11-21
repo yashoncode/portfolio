@@ -353,7 +353,10 @@ export type Project = {
   name: string;
   blurb: string;
   url: string;
+  repo?: string;
   liveUrl?: string;
+  downloadUrl?: string;
+  featured?: boolean;
   /** Two or three lines of what makes it interesting. */
   points: string[];
   stack: string[];
@@ -361,7 +364,70 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    name: "MeeTube",
+    blurb:
+      "A YouTube and YouTube Music client for Android. A tap on the logo switches its liquid glass interface from video to music.",
+    repo: "yashoncode/meetube",
+    url: "https://github.com/yashoncode/meetube",
+    downloadUrl: "https://github.com/yashoncode/meetube/releases/latest",
+    featured: true,
+    points: [
+      "MeeTune keeps songs playing in the background with synced lyrics, an equalizer and crossfades between tracks.",
+      "Save videos in up to 4K, or pick a channel or playlist and have new uploads download automatically.",
+    ],
+    stack: ["Java", "Android", "Gradle", "SponsorBlock"],
+  },
+  {
+    name: "KonnectTV",
+    blurb:
+      "A phone remote and app manager for Android TV and Google TV. It pairs over Wi-Fi and works without root.",
+    repo: "yashoncode/konnect-tv",
+    url: "https://github.com/yashoncode/konnect-tv",
+    points: [
+      "Turn off promotional apps, undo changes from a history log, and use the phone keyboard to type on the TV.",
+      "Glowlauncher replaces the stock home screen with a clock and a dock of favorite apps. On a 1 GB test TV, home screen memory use fell from 80 MB to 21 MB.",
+    ],
+    stack: ["Kotlin", "Jetpack Compose", "ADB", "Android TV"],
+  },
+  {
+    name: "MeeTube TV",
+    blurb:
+      "A YouTube client for Android TV, Google TV and Fire TV, with a glass sidebar and a player designed around the remote.",
+    repo: "yashoncode/meetube-tv",
+    url: "https://github.com/yashoncode/meetube-tv",
+    points: [
+      "Focusing a video card prepares it for playback before you press OK, even on a TV with 1 GB of RAM.",
+      "Browse Shorts with the up and down buttons, search by voice, or sign in with a code to see subscriptions.",
+    ],
+    stack: ["Java", "Android TV", "Gradle", "AV1"],
+  },
+  {
+    name: "WA Backup",
+    blurb:
+      "An offline Android viewer for exported WhatsApp chats. Open a text file or ZIP archive to read the conversation and its media on your phone.",
+    repo: "yashoncode/wa-backup",
+    url: "https://github.com/yashoncode/wa-backup",
+    points: [
+      "Read Android and iOS exports, search for a message, or jump straight to a date in the chat.",
+      "Explore reply times, busiest days and message counts for each participant. Imported chats stay on the device.",
+    ],
+    stack: ["Kotlin", "Jetpack Compose", "Android"],
+  },
+  {
+    name: "DBY",
+    blurb:
+      "A MySQL and MariaDB client for Android that lets you browse tables, run SQL and edit rows from your phone.",
+    repo: "yashoncode/DBY",
+    url: "https://github.com/yashoncode/DBY",
+    points: [
+      "A native Rust core speaks the MySQL wire protocol over TLS, including connections to Amazon RDS and Aurora MySQL.",
+      "Pin frequently used tables, build queries visually, and export results as CSV or JSON.",
+    ],
+    stack: ["Kotlin", "Jetpack Compose", "Rust", "UniFFI", "MySQL"],
+  },
+  {
     name: "Reyaak",
+    repo: "yashoncode/reyaak",
     blurb:
       "An autonomous agent that runs on the phone itself, with a multi-armed bandit picking which of 37 LLM providers answers each turn.",
     url: "https://github.com/yashoncode/reyaak",
@@ -374,6 +440,7 @@ export const projects: Project[] = [
   },
   {
     name: "DocMagic",
+    repo: "yashoncode/docmagic",
     blurb:
       "Multi-agent RAG assistant that answers questions over logistics, ERP and CRM documents. Every answer is cited to the exact page or sheet.",
     url: "https://github.com/yashoncode/docmagic/tree/langgraph",
@@ -396,6 +463,7 @@ export const projects: Project[] = [
   },
   {
     name: "Tevel IntelliDB",
+    repo: "yashoncode/Tevel-IntelliDB",
     blurb:
       "An AI-first SQL client on desktop and Android: a database engineer, not a chat box. Ask in plain English, get safe, reviewable SQL.",
     url: "https://github.com/yashoncode/Tevel-IntelliDB",
@@ -418,6 +486,7 @@ export const projects: Project[] = [
   },
   {
     name: "ImaGen",
+    repo: "yashoncode/imaGen-Prompt-Enhancement",
     blurb:
       "A prompt-engineering playground for image editing. Pick the technique, see exactly how it changes the result.",
     url: "https://github.com/yashoncode/imaGen-Prompt-Enhancement",

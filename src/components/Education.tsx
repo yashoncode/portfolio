@@ -1,19 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { GraduationCap } from "lucide-react";
 import Section from "./Section";
 import Reveal from "./Reveal";
 import { education } from "@/data/resume";
 
-const card =
-  "glass flex h-full gap-5 rounded-2xl p-6 text-left transition-all duration-300 hover:-translate-y-1 hover:border-border-strong";
+const row =
+  "relative grid w-full gap-2 py-6 text-left md:grid-cols-[minmax(0,1fr)_auto] md:gap-8";
 
 export default function Education() {
   // The school card hides easter egg #05; holds the school name that is open.
-  // It expands in flow rather than in a popover — Section clips overflow for
-  // its glow blob, so anything absolutely positioned here gets cut off.
   const [open, setOpen] = useState<string | null>(null);
 
   useEffect(() => {
@@ -31,51 +27,35 @@ export default function Education() {
       eyebrow="05 · Education"
       title="Where it started."
       alt
-      glow="violet"
     >
-      {/* Stretch, not items-start: cards side by side stay the same height,
-          and both grow together when the egg below expands. */}
-      <div className="grid gap-4 md:grid-cols-2">
+      <div>
         {education.map((edu, i) => {
           const details = (
-            <div>
-              <h3 className="font-semibold leading-snug text-fg">
-                {edu.school}
-              </h3>
-              <p className="mt-1 text-sm text-muted">{edu.degree}</p>
-              <p className="mt-2 font-mono text-xs tracking-wider text-dim">
-                {edu.period}
+            <>
+              <span aria-hidden className="rule" />
+              <div className="min-w-0">
+                <h3 className="text-lg leading-snug font-medium tracking-tight text-fg transition-colors group-hover/edu:text-accent sm:text-xl">
+                  {edu.school}
+                </h3>
+                <p className="mt-1 text-sm text-muted">{edu.degree}</p>
+              </div>
+              <p className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs text-muted md:flex-col md:items-end md:pt-1.5">
+                <span>{edu.period}</span>
                 {edu.detail && (
-                  <span className="ml-3 text-cyan">{edu.detail}</span>
+                  <span className="text-accent">{edu.detail}</span>
                 )}
               </p>
 
-              {edu.egg && (
-                <AnimatePresence initial={false}>
-                  {open === edu.school && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <p className="eyebrow mb-2 mt-5">🥚 easter egg · 05</p>
-                      <p className="font-semibold text-fg">{edu.egg.title}</p>
-                      <p className="mt-1.5 text-sm leading-relaxed text-muted">
-                        {edu.egg.text}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+              {edu.egg && open === edu.school && (
+                <div className="border-t border-border pt-4 md:col-span-2">
+                  <p className="eyebrow mb-2">🥚 easter egg · 05</p>
+                  <p className="font-semibold text-fg">{edu.egg.title}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                    {edu.egg.text}
+                  </p>
+                </div>
               )}
-            </div>
-          );
-
-          const icon = (
-            <div className="h-fit rounded-xl bg-violet/10 p-2.5 text-violet">
-              <GraduationCap size={22} />
-            </div>
+            </>
           );
 
           return (
@@ -86,20 +66,19 @@ export default function Education() {
                     setOpen((v) => (v === edu.school ? null : edu.school))
                   }
                   aria-expanded={open === edu.school}
-                  className={`${card} w-full cursor-pointer`}
+                  className={`${row} group/edu cursor-pointer`}
                 >
-                  {icon}
                   {details}
                 </button>
               ) : (
-                <div className={card}>
-                  {icon}
+                <div className={row}>
                   {details}
                 </div>
               )}
             </Reveal>
           );
         })}
+        <div aria-hidden className="rule relative!" />
       </div>
     </Section>
   );

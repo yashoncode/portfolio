@@ -3,10 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion } from "motion/react";
 import { ArrowLeft } from "lucide-react";
 import { story } from "@/data/story";
-import { WarpArrival, WarpOut, WARP_MS, armWarp } from "@/components/Warp";
+import { WarpArrival, WarpOut, armWarp } from "@/components/Warp";
 import StoryAside, { hasGlyph } from "@/components/StoryAside";
 
 /**
@@ -25,8 +24,7 @@ export default function Origin() {
     e.preventDefault();
     if (warping) return;
     setWarping(true);
-    armWarp();
-    setTimeout(() => router.push("/"), WARP_MS);
+    setTimeout(() => router.push("/"), armWarp());
   }
 
   /**
@@ -48,7 +46,7 @@ export default function Origin() {
           key={i}
           onMouseEnter={() => setTerm(part)}
           onMouseLeave={() => setTerm((t) => (t === part ? null : t))}
-          className="cursor-help font-semibold text-fg transition-colors hover:text-violet"
+          className="cursor-help font-semibold text-fg transition-colors hover:text-accent"
         >
           {part}
         </strong>
@@ -61,16 +59,9 @@ export default function Origin() {
       <WarpArrival />
       <StoryAside term={term} />
 
-      <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="grid-overlay absolute inset-0" />
-        <div className="absolute -top-40 left-1/3 h-[26rem] w-[26rem] rounded-full bg-violet/20 blur-[140px] sm:animate-aurora" />
-        <div className="absolute bottom-0 right-1/4 h-[22rem] w-[22rem] rounded-full bg-cyan/10 blur-[150px]" />
-      </div>
+      <div aria-hidden className="grid-overlay pointer-events-none absolute inset-0" />
 
-      <motion.div
-        initial={{ opacity: 0, scale: 1.04 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+      <div
         className="relative z-10 mx-auto w-full max-w-3xl px-6 py-24 sm:py-32"
       >
         <Link
@@ -83,7 +74,7 @@ export default function Origin() {
         </Link>
 
         <p className="eyebrow mt-12 mb-4">{story.subtitle}</p>
-        <h1 className="text-gradient text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl">
+        <h1 className="text-fg text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl">
           {story.title}
         </h1>
         <p className="mt-8 text-lg leading-relaxed text-muted">
@@ -92,16 +83,12 @@ export default function Origin() {
 
         <div className="mt-20 flex flex-col gap-16">
           {story.chapters.map((c, i) => (
-            <motion.section
+            <section
               key={`${c.year}-${c.title}-${i}`}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               className="relative border-l border-border pl-8"
             >
-              <span className="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-violet shadow-[0_0_14px_rgba(139,92,246,0.9)]" />
-              <p className="font-mono text-xs uppercase tracking-[0.18em] text-violet">
+              <span className="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-sm border border-accent bg-bg" />
+              <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent">
                 {c.year}
               </p>
               <h2 className="mt-2 text-2xl font-bold text-fg sm:text-3xl">
@@ -114,7 +101,7 @@ export default function Origin() {
                   </p>
                 ))}
               </div>
-            </motion.section>
+            </section>
           ))}
         </div>
 
@@ -126,13 +113,13 @@ export default function Origin() {
           <Link
             href="/"
             onClick={goBack}
-            className="accent-gradient inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-[1.03] active:scale-95"
+            className="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-6 py-3 font-mono text-sm text-fg hover:border-accent hover:text-accent"
           >
             <ArrowLeft size={15} />
             back through the portal
           </Link>
         </div>
-      </motion.div>
+      </div>
 
       {warping && <WarpOut />}
     </main>

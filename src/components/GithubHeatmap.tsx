@@ -13,11 +13,11 @@ const SRC = `https://github.com/users/${USER}/contributions`;
 /** Level 0 is a hairline well rather than pure transparency, so an empty day
  *  still reads as a cell and the grid keeps its shape. */
 const LEVELS = [
-  "rgba(255, 255, 255, 0.045)",
-  "color-mix(in oklab, var(--color-violet) 30%, transparent)",
-  "color-mix(in oklab, var(--color-violet) 52%, transparent)",
-  "color-mix(in oklab, var(--color-violet) 76%, transparent)",
-  "var(--color-violet)",
+  "var(--color-border)",
+  "color-mix(in srgb, var(--color-accent) 28%, var(--color-surface))",
+  "color-mix(in srgb, var(--color-accent) 52%, var(--color-surface))",
+  "color-mix(in srgb, var(--color-accent) 76%, var(--color-surface))",
+  "var(--color-accent)",
 ];
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -86,7 +86,9 @@ async function getData() {
     fetchDays(),
     ...years.map((y) => fetchDays(`?from=${y}-01-01&to=${y}-12-31`)),
   ]);
-  const allTime = perYear.flat().reduce((n, d) => n + d.count, 0);
+  const allTime = perYear.every((year) => year.length)
+    ? perYear.flat().reduce((n, d) => n + d.count, 0)
+    : null;
   return { days, allTime };
 }
 
@@ -118,35 +120,27 @@ export default async function GithubHeatmap() {
   }).filter((l): l is { col: number; name: string } => l !== null);
 
   return (
-    <div className="glass hm-glass rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 sm:p-6">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-        <div className="flex items-center gap-2">
-          <GithubIcon size={16} />
-          <a
-            href={profile.links.github}
-            target="_blank"
-            rel="noreferrer"
-            className="font-mono text-sm text-fg transition-colors hover:text-violet"
-          >
-            @{USER}
-          </a>
-        </div>
-        <p className="text-xs text-muted">
-          {/* Fixed locale: the server and the browser must format this the same
-              way or React reports a hydration mismatch. */}
-          <span className="font-mono text-fg">{allTime.toLocaleString("en-US")}</span> contributions
-          all time
-        </p>
+    <section aria-labelledby="contributions-title" className="rise">
+      <div className="mb-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 font-mono text-xs text-muted">
+        <h2 id="contributions-title" className="flex items-baseline gap-2.5">
+          <span className="tracking-[0.12em] text-dim uppercase">Contributions</span>
+          {allTime !== null && (
+            <span>
+              <span className="text-base font-medium tracking-tight text-fg tabular-nums">{allTime.toLocaleString("en-US")}</span> all time
+            </span>
+          )}
+        </h2>
+        <a href={profile.links.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 py-1 hover:text-accent">
+          <GithubIcon size={13} /> @{USER}
+        </a>
       </div>
-
-      {/* The grid is wider than a phone; it scrolls on its own rather than
-          forcing the page sideways. The padding is headroom for the hover lift:
-          overflow-x:auto forces overflow-y to auto, which would clip it. */}
-      <div className="-mx-1.5 mt-5 overflow-x-auto p-1.5">
-        <div className="min-w-max">
+      {/* Phones: keep cells legible and scroll sideways; rtl starts the scroll at
+          the newest weeks, the inner ltr restores normal order. */}
+      <div className="-mx-5 overflow-x-auto px-5 [direction:rtl] sm:mx-0 sm:overflow-visible sm:px-0">
+        <div className="min-w-[38rem] [direction:ltr] sm:min-w-0">
           <div
-            className="grid gap-[3px] text-[9px] text-muted"
-            style={{ gridTemplateColumns: `repeat(${weeks}, 11px)` }}
+            className="grid gap-0.5 font-mono text-[8px] text-muted sm:text-[9px]"
+            style={{ gridTemplateColumns: `repeat(${weeks}, minmax(0, 1fr))` }}
             aria-hidden
           >
             {labels.map((l) => (
@@ -156,25 +150,23 @@ export default async function GithubHeatmap() {
             ))}
           </div>
           <div
-            className="grid grid-flow-col grid-rows-7 gap-[3px]"
+            className="grid grid-flow-col grid-rows-7 gap-0.5"
+            style={{ gridTemplateColumns: `repeat(${weeks}, minmax(0, 1fr))` }}
             role="img"
-            aria-label={`GitHub contribution activity over the last year, ${allTime.toLocaleString("en-US")} contributions all time`}
+            aria-label="GitHub contribution activity over the last year"
           >
             {cells.map((c, i) =>
               c === null ? (
-                <span key={`pad-${i}`} className="size-[11px]" />
+                <span key={`pad-${i}`} className="aspect-square" />
               ) : (
                 <span
                   key={c.date}
                   title={`${label(c.date)} · ${c.count || "no"} contribution${c.count === 1 ? "" : "s"}`}
-                  className={`hm-cell size-[11px] rounded-[2px] ${
+                  className={`hm-cell aspect-square rounded-[1px] ${
                     c.date === last ? "hm-today" : ""
                   }`}
                   style={{
                     ["--hm-lvl" as string]: LEVELS[Math.min(c.level, 4)],
-                    // Delay by column, not by index, so the sweep runs left to
-                    // right as one wavefront instead of snaking down each week.
-                    animationDelay: `${Math.floor(i / 7) * 14}ms`,
                   }}
                 />
               ),
@@ -182,19 +174,18 @@ export default async function GithubHeatmap() {
           </div>
         </div>
       </div>
-
-      <div className="mt-4 flex items-center justify-between gap-4">
-        <p className="text-xs text-muted">
-          Private contributions included, counted without repository details.
-        </p>
-        <div className="flex shrink-0 items-center gap-[3px]" aria-hidden>
-          <span className="mr-1 text-[10px] text-muted">Less</span>
-          {LEVELS.map((bg) => (
-            <span key={bg} className="size-[11px] rounded-[2px]" style={{ background: bg }} />
-          ))}
-          <span className="ml-1 text-[10px] text-muted">More</span>
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+          <p className="text-[11px] text-dim">
+            Private contributions included, counted without repository details.
+          </p>
+          <div className="flex shrink-0 items-center gap-[3px] font-mono" aria-hidden>
+            <span className="mr-1 text-[10px] text-muted">Less</span>
+            {LEVELS.map((bg) => (
+              <span key={bg} className="size-2 rounded-[1px]" style={{ background: bg }} />
+            ))}
+            <span className="ml-1 text-[10px] text-muted">More</span>
+          </div>
         </div>
-      </div>
-    </div>
+    </section>
   );
 }

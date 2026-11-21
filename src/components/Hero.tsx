@@ -1,161 +1,173 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion } from "motion/react";
-import { ArrowDown } from "lucide-react";
-import { profile } from "@/data/resume";
-import StarGate from "./StarGate";
+import { useEffect, useState, type ReactNode } from "react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Clock3, Radio } from "lucide-react";
+import { profile, stats, type StatDetail } from "@/data/resume";
+import CareerRoute from "./CareerRoute";
+import StatModal from "./StatModal";
+import { CountUp } from "./motion";
+import styles from "./Hero.module.css";
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
-};
+const istClock = new Intl.DateTimeFormat("en-GB", {
+  timeZone: "Asia/Kolkata",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hourCycle: "h23",
+});
 
-const item = {
-  hidden: { opacity: 0, y: 12 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
-
-export default function Hero({ children }: { children?: React.ReactNode }) {
-  // Click the trailing "D" to reveal the full family name; auto-collapses
-  const [showDev, setShowDev] = useState(false);
+function Clock() {
+  const [time, setTime] = useState("--:--:--");
 
   useEffect(() => {
-    if (!showDev) return;
-    const t = setTimeout(() => setShowDev(false), 3000);
-    return () => clearTimeout(t);
-  }, [showDev]);
+    const tick = () => setTime(istClock.format(new Date()));
+    const firstTick = window.setTimeout(tick, 0);
+    const timer = window.setInterval(tick, 1000);
+    return () => {
+      window.clearTimeout(firstTick);
+      window.clearInterval(timer);
+    };
+  }, []);
 
   return (
-    <section
-      id="top"
-      className="relative flex min-h-screen flex-col justify-center overflow-hidden"
-    >
-      {/* Ambient background: aurora blobs + grid */}
-      <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="grid-overlay absolute inset-0" />
-        <div className="absolute -top-40 left-1/4 h-[20rem] w-[20rem] rounded-full bg-violet/25 blur-[100px] sm:h-[34rem] sm:w-[34rem] sm:animate-aurora sm:blur-[140px]" />
-        <div
-          className="absolute -right-32 top-1/3 hidden rounded-full bg-cyan/15 sm:block sm:h-[28rem] sm:w-[28rem] sm:animate-aurora sm:blur-[140px]"
-          style={{ animationDelay: "-8s" }}
-        />
-        <div className="absolute -bottom-48 left-1/3 h-[16rem] w-[16rem] rounded-full bg-indigo/20 blur-[110px] sm:h-[26rem] sm:w-[26rem] sm:blur-[160px]" />
+    <span className="inline-flex items-center gap-1.5 font-mono text-muted">
+      <Clock3 size={13} aria-hidden="true" className="mr-0.5 text-dim" />
+      <span className="tabular-nums text-fg">{time}</span>
+      IST
+    </span>
+  );
+}
+
+const FAMILY_TAIL = "evadoss";
+
+function Identity() {
+  const [expanded, setExpanded] = useState(false);
+  const split = profile.name.lastIndexOf(" ");
+
+  useEffect(() => {
+    if (!expanded) return;
+    const timer = setTimeout(() => setExpanded(false), 3000);
+    return () => clearTimeout(timer);
+  }, [expanded]);
+
+  return (
+    <div className="min-w-0 self-center">
+      {/* Same font size in both states: the tail letters unfold by width and the
+          whole line scales down on the compositor, so nothing reflows or jumps. */}
+      <h1 aria-label={profile.name} className={`${styles.name} ${expanded ? styles.expanded : ""}`}>
+        {profile.name.slice(0, split)}{" "}
+        <button
+          type="button"
+          aria-label={expanded ? "Devadoss, collapse family name" : "D, reveal family name"}
+          aria-expanded={expanded}
+          onClick={() => setExpanded(!expanded)}
+          className={`${styles.initial} cursor-pointer text-accent`}
+        >
+          {profile.name.slice(split + 1)}
+          <span className={styles.tail} aria-hidden="true">
+            <span>{FAMILY_TAIL}</span>
+          </span>
+        </button>
+      </h1>
+      <p className="mt-3 font-mono text-[0.74rem] font-medium tracking-[0.11em] text-accent uppercase sm:text-sm">
+        {profile.title}
+      </p>
+      <p className="mt-6 max-w-[34rem] text-xl leading-snug font-medium tracking-tight text-balance text-fg sm:text-[1.47rem]">
+        {profile.tagline}
+      </p>
+      <p className="mt-3 max-w-[34rem] text-sm leading-relaxed text-muted sm:text-[0.97rem]">
+        Full-stack Laravel, React and Next.js for logistics and freight forwarding, plus open-source agentic AI: multi-agent systems, RAG pipelines and FastAPI.
+      </p>
+      <div className="mt-7 flex flex-wrap items-center gap-3">
+        <a href="#projects" className={styles.primaryAction}>
+          View projects <ArrowRight size={15} aria-hidden="true" />
+        </a>
+        <a href="#contact" className={styles.secondaryAction}>
+          Get in touch <ArrowUpRight size={15} aria-hidden="true" />
+        </a>
       </div>
+    </div>
+  );
+}
 
-      <StarGate />
+/** One ruled strip, cells split by hairlines, instead of a row of tiles. */
+function Manifest({ totalStars }: { totalStars: number | null }) {
+  const [detail, setDetail] = useState<StatDetail | null>(null);
 
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="mx-auto w-full max-w-6xl px-6 pt-24 pb-16"
-      >
-        <motion.p
-          variants={item}
-          whileHover={{ y: -2 }}
-          className="eyebrow mb-5 inline-flex items-center gap-2"
-        >
-          <span
-            aria-hidden
-            className="animate-twinkle inline-block text-[0.95em] leading-none text-cyan"
-          >
-            ✦
+  return (
+    <>
+      <div className={styles.manifest} role="group" aria-label="Career and GitHub figures">
+        {stats.map((stat) => {
+          const numeric = /^\d/.test(stat.value);
+          const content = (
+            <>
+              <span className={numeric ? styles.figure : styles.word}>
+                {numeric ? <CountUp value={stat.value} /> : stat.value}
+              </span>
+              <span className={styles.captions}>
+                <span className={styles.label}>{stat.label}</span>
+                <span className={styles.fun}>{stat.fun}</span>
+              </span>
+              {(stat.href || stat.detail) && (
+                <span className={styles.cue}>{stat.detail ? "How" : "See"} <span aria-hidden="true">→</span></span>
+              )}
+            </>
+          );
+          if (stat.href) {
+            return <a key={stat.label} className={styles.cell} href={stat.href}>{content}</a>;
+          }
+          if (stat.detail) {
+            const d = stat.detail;
+            return (
+              <button key={stat.label} type="button" aria-haspopup="dialog" className={styles.cell} onClick={() => setDetail(d)}>
+                {content}
+              </button>
+            );
+          }
+          return <div key={stat.label} className={styles.cell}>{content}</div>;
+        })}
+        {totalStars !== null && (
+          <a className={`${styles.cell} ${styles.stars}`} href={profile.links.github} target="_blank" rel="noreferrer">
+            <span className={styles.figure}><CountUp value={totalStars.toLocaleString("en-US")} /></span>
+            <span className={styles.label}>GitHub stars across my repos</span>
+            <span className={styles.cue}><i className={styles.liveDot} aria-hidden="true" />Live from GitHub</span>
+          </a>
+        )}
+      </div>
+      <StatModal detail={detail} onDismiss={() => setDetail(null)} />
+    </>
+  );
+}
+
+export default function Hero({
+  children,
+  totalStars = null,
+}: {
+  children?: ReactNode;
+  totalStars?: number | null;
+}) {
+  return (
+    <section id="top" className="relative">
+      <div aria-hidden="true" className="grid-overlay pointer-events-none absolute inset-0" />
+      <div className="relative mx-auto w-full max-w-6xl px-5 pt-22 pb-10 sm:px-6 sm:pt-24 lg:pt-28">
+        <div className={styles.statusBar}>
+          <span className="inline-flex items-center gap-2 font-semibold tracking-[0.08em] text-fg">
+            <Radio size={16} className="text-accent" aria-hidden="true" />
+            YD / OPS
           </span>
-          Full-Stack Developer · AI Systems
-          {/* offset so the pair never twinkles in lockstep */}
-          <span
-            aria-hidden
-            style={{ animationDelay: "-1.4s" }}
-            className="animate-twinkle inline-block text-[0.95em] leading-none text-cyan"
-          >
-            ✦
-          </span>
-        </motion.p>
-
-        <motion.h1
-          variants={item}
-          aria-label={profile.name}
-          className={`text-gradient -mt-4 max-w-4xl whitespace-nowrap pt-4 font-bold leading-[1.05] tracking-tight transition-all duration-500 ${
-            showDev
-              ? "text-3xl sm:text-5xl md:text-6xl lg:text-7xl"
-              : "text-4xl sm:text-6xl md:text-7xl lg:text-8xl"
-          }`}
-        >
-          {profile.name.split("").map((ch, i) =>
-            ch === " " ? (
-              <span key={i} aria-hidden="true">
-                &nbsp;
-              </span>
-            ) : i === profile.name.length - 1 && ch === "D" ? (
-              <span
-                key={i}
-                aria-hidden="true"
-                onClick={() => setShowDev((v) => !v)}
-                className={`name-letter-d inline-block cursor-pointer select-none ${
-                  showDev
-                    ? "d-open font-black [-webkit-text-fill-color:var(--color-fg)]"
-                    : ""
-                }`}
-              >
-                D
-                {showDev && (
-                  <motion.span
-                    initial={{ opacity: 0, x: -12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="inline-block"
-                  >
-                    ev
-                    <span className="font-bold opacity-15">adoss</span>
-                  </motion.span>
-                )}
-              </span>
-            ) : (
-              <span key={i} aria-hidden="true" className="name-letter inline-block">
-                {ch}
-              </span>
-            )
-          )}
-        </motion.h1>
-
-        <motion.p
-          variants={item}
-          className="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg md:text-xl"
-        >
-          {profile.tagline} Full-stack{" "}
-          <span className="text-fg">Laravel</span>,{" "}
-          <span className="text-fg">React</span> and{" "}
-          <span className="text-fg">Next.js</span>
-          {" for logistics and freight forwarding, plus open-source "}
-          <span className="text-fg">agentic AI</span>
-          {": "}
-          <span className="text-fg">multi-agent systems</span>,{" "}
-          <span className="text-fg">RAG</span> pipelines and{" "}
-          <span className="text-fg">FastAPI</span>.
-        </motion.p>
-
-        {/* GitHub activity, passed in from the server so the fetch stays off the client */}
-        {children ? (
-          <motion.div variants={item} className="mt-12 md:mt-16">
-            {children}
-          </motion.div>
-        ) : null}
-      </motion.div>
-
-      <motion.a
-        href="#about"
-        aria-label="Scroll to about"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.6 }}
-        className="animate-float absolute bottom-8 left-1/2 -translate-x-1/2 text-dim transition-colors hover:text-fg"
-      >
-        <ArrowDown size={20} />
-      </motion.a>
+          <span className={styles.shipping}><i aria-hidden="true" />SHIPPING</span>
+          <span className="ml-auto"><Clock /></span>
+        </div>
+        <div className={styles.identityAndRoute}>
+          <Identity />
+          <CareerRoute />
+        </div>
+        <Manifest totalStars={totalStars} />
+        {children && <div className="mt-10 sm:mt-12">{children}</div>}
+        <a href="#about" aria-label="Scroll to about" className={`${styles.scrollCue} mx-auto mt-8 flex size-10 items-center justify-center rounded-md text-dim hover:text-accent`}>
+          <ArrowDown size={17} aria-hidden="true" />
+        </a>
+      </div>
     </section>
   );
 }
