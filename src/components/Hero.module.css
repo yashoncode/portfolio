@@ -233,6 +233,8 @@ a.cell:hover :is(.figure, .word), button.cell:hover :is(.figure, .word) { color:
 }
 .cue span { transition: transform .2s; }
 .cell:hover .cue span { transform: translateX(3px); }
+/* No GitHub stars cell (API failed): stretch the 5th cell over the gap. */
+.manifest > :last-child:nth-child(5) { grid-column: span 2; }
 .stars .figure { color: var(--color-accent); }
 .stars .cue { color: var(--color-ok); }
 .liveDot {
@@ -251,7 +253,9 @@ a.cell:hover :is(.figure, .word), button.cell:hover :is(.figure, .word) { color:
     grid-template-columns: minmax(0, 1.04fr) minmax(0, 1fr);
     gap: clamp(2rem, 4vw, 3.5rem);
   }
-  .manifest { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  /* One row, as many equal columns as there are cells (5 or 6). */
+  .manifest { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
+  .manifest > :last-child:nth-child(5) { grid-column: auto; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .flow { stroke-dasharray: 1.5 13; animation: flow 1.6s linear infinite; }
