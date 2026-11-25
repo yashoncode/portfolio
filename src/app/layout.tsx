@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Cursor from "@/components/Cursor";
 import Galaxy from "@/components/Galaxy";
+import { profile } from "@/data/resume";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,8 +15,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const pageTitle = `${profile.fullName} | Full-Stack Developer & AI Systems`;
+
 export const metadata: Metadata = {
-  title: "Yashwanth D | Full-Stack Developer & AI Systems",
+  title: pageTitle,
   description:
     "Full-Stack Developer building AI systems: agentic AI (multi-agent systems, RAG, FastAPI) and Laravel, React and Next.js applications for logistics.",
   keywords: [
@@ -37,7 +40,7 @@ export const metadata: Metadata = {
     "India",
   ],
   openGraph: {
-    title: "Yashwanth D | Full-Stack Developer & AI Systems",
+    title: pageTitle,
     description:
       "Full-Stack Developer · AI Systems · Agentic AI · Multi-Agent Systems · RAG · FastAPI · React · Laravel",
     type: "website",

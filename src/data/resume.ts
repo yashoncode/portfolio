@@ -6,6 +6,7 @@
 
 export const profile = {
   name: "Yashwanth D",
+  fullName: "Yashwanth Devadoss",
   title: "Full-Stack Developer · AI Systems",
   tagline: "I build reliable systems that people depend on every day.",
   location: "India",
