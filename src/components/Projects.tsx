@@ -137,9 +137,7 @@ export default function Projects({ repos }: { repos: RepoCounts | null }) {
     counts: project.repo ? repos?.[project.repo.toLowerCase()] : undefined,
   }));
   const featured = withCounts.find(({ project }) => project.featured);
-  const rest = withCounts
-    .filter(({ project }) => !project.featured)
-    .sort((a, b) => (b.counts?.stars ?? -1) - (a.counts?.stars ?? -1));
+  const rest = withCounts.filter(({ project }) => !project.featured);
 
   return (
     <Section id="projects" eyebrow="03 · Projects" title="Open source, shipped and starred.">

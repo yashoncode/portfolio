@@ -42,3 +42,4 @@ next-env.d.ts
 
 # AI assistant instructions (local only)
 AGENTS.md
+dev.log

@@ -21,7 +21,7 @@
 <meta charset="utf-8" />
 <title>Yashwanth D Resume</title>
 <style>
-  @page { size: A4; margin: 10mm 11mm; }
+  @page { size: A4; margin: 8mm 11mm; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     /* Calibri, not Arial: Arial's lowercase w has crossed middle strokes
@@ -54,7 +54,7 @@
     font-size: 8.46pt;
     text-transform: uppercase;
     letter-spacing: 0.9pt;
-    margin-top: 9pt;
+    margin-top: 7.2pt;
     padding-bottom: 1.8pt;
     border-bottom: 0.9pt solid #2a2a2a;
     margin-bottom: 4.05pt;
@@ -64,7 +64,7 @@
   .role:first-of-type { margin-top: 0; }
   .meta { color: #555; font-size: 8.1pt; margin: 0.45pt 0 2.25pt; }
   ul { margin: 0 0 1.8pt 11.7pt; }
-  li { margin-bottom: 2.25pt; }
+  li { margin-bottom: 1.6pt; }
   .skills p { margin-bottom: 2.25pt; }
   .edu-item { margin-bottom: 4.5pt; }
   .edu-degree { font-weight: bold; font-size: 9pt; }
@@ -79,7 +79,7 @@
 
 <header>
   <h1>YASHWANTH D</h1>
-  <div class="subtitle">Full-Stack Developer | AI Systems</div>
+  <div class="subtitle">Full-Stack Developer | AI Systems &amp; Automation</div>
   <div class="contact">
     India | +91 98411 59909 | yashwanth.devadoss@gmail.com<br />
     <a href="https://www.linkedin.com/in/yashwanth-devadoss/">linkedin.com/in/yashwanth-devadoss</a>
@@ -89,9 +89,8 @@
 
 <h2>Professional Summary</h2>
 <p>
-  Software Engineer with 4+ years of experience building and owning full-stack applications with Laravel, React, and
-  Next.js for logistics platforms. Now focused on AI engineering: production AI automation at work, and
-  open-source multi-agent RAG and text-to-SQL projects built in Python and FastAPI.
+  Software Engineer with 4+ years of experience spanning full-stack development, technical leadership, and business process automation. At Stockarea, <span style="white-space: nowrap">I build</span> the
+  automations, APIs, and database integrations that connect our CRM, ERP, and finance systems, along with LLM features in Python.
 </p>
 
 <h2>Work Experience</h2>
@@ -100,40 +99,43 @@
 <div class="meta">August 2023 - Present | India</div>
 <div class="subrole">Software Engineer L2 (April 2026 - Present), previously Software Engineer L1 (October 2024 - April 2026)</div>
 <ul>
-  <li>Built and run three automated outreach channels for the sales team (email, WhatsApp reminders, and AI voice calls) on n8n with open-source LLMs, handling 100+ voice calls a week. Constrained prompts and validated every response, with failure logging and automatic retries. Cut follow-up work that filled a rep's day to 5 to 15 minutes.</li>
-  <li>Diagnosed and fixed a major performance bottleneck in report-generation APIs, cutting memory usage from ~3 GB to ~200 MB and response time from ~5 minutes to ~5 seconds by restructuring how large datasets were queried and processed.</li>
-  <li>Build and own the Laravel admin API powering core logistics workflows across CRM, ERP, positions, and asset management, plus internal Next.js and React applications, delivered end to end through GitHub CI/CD, Docker, and Coolify.</li>
-  <li>Designed and built the company's CRM modules and the positions and asset-management backend end to end, owning data structuring and architecture.</li>
-  <li>Replaced LIKE table scans with a Manticore infix index: 600x faster name lookup at 1M rows, flat as the table grows, typo-tolerant.</li>
-  <li>Ship and maintain the finance module: invoices, purchase orders, and bills synced with the Zoho Books API over webhooks, with automated profit and revenue reporting for the finance team, plus vendor bill-payment and expense tracking.</li>
+  <li>Built the sales team's three outreach channels: email, WhatsApp reminders, and AI voice calls on open-source LLMs, now 100+ calls a week. Responses are checked before sending, and failures are logged and retried. Follow-ups that took a rep all day now take 5 to 15 minutes.</li>
+  <li>Build and maintain production workflows in n8n, Zapier, CopilotKit, and Google Apps Script that teams run daily, with LLM steps that extract fields from documents and process data for logistics and CRM.</li>
+  <li>Automate revenue and expense operations through the finance module: invoices, purchase orders, and bills synced with the Zoho Books API over webhooks, automated profit and revenue reporting for the finance team, and vendor bill-payment and expense tracking.</li>
+  <li>Cut report-generation API memory from ~3 GB to ~200 MB and response time from ~5 minutes to ~5 seconds by restructuring how large datasets are queried and written.</li>
+  <li>Replaced LIKE table scans with a Manticore index: name search went from 493 ms to 0.8 ms at 1M rows.</li>
+  <li>Designed and built the Laravel admin API, CRM modules, and asset-management backend and frontend end to end, shipped via GitHub CI/CD, Docker, and Coolify.</li>
 </ul>
 
 <div class="subrole">Solutions Architect, Automation (August 2023 - October 2024)</div>
 <ul>
-  <li>Laid the foundation of Stockarea's internal automation, translating business operations into reliable backend workflows, with Laravel and Google API integrations connecting disparate internal tools.</li>
-  <li>Established reporting with Metabase, MongoDB, and SQL, plus early workflow tools in Google Apps Script and AppSheet still used daily.</li>
+  <li>Laid the foundation of Stockarea's internal automation with Laravel and Google API integrations, reporting in Metabase, MongoDB, and SQL, and workflow tools in Google Apps Script and AppSheet still used daily.</li>
 </ul>
 
-<div class="role">Founder &amp; Software Lead, Flare Innovations</div>
+<div class="role">Flare Innovations</div>
 <div class="meta">February 2022 - June 2023 | India</div>
+<div class="subrole">Founder &amp; Software Lead (February 2022 - June 2023)</div>
 <ul>
-  <li>Founded and led development of IoT-based monitoring systems for aquaculture and hydroponics, building the Python applications that processed real-time sensor data and leading a 10-person team through prototyping, deployment, and testing.</li>
-  <li>Deployed a pilot with ICAR-CIBA (Central Institute of Brackishwater Aquaculture); incubated at CIBA and Annamalai University. Wound down after graduation to join Stockarea.</li>
+  <li>Founded the company and built Python applications processing real-time sensor data for aquaculture and hydroponics IoT monitoring. Led a 10-person team through prototyping, deployment, and testing.</li>
+  <li>Deployed a pilot with ICAR-CIBA (Central Institute of Brackishwater Aquaculture), incubated at CIBA and Annamalai University.</li>
 </ul>
 
-<h2>AI Projects</h2>
+<h2>Projects</h2>
 <ul>
-  <li><b><a href="https://github.com/yashoncode/reyaak">Reyaak</a></b>, Android AI agent: a Thompson-sampling bandit routes every turn across 37 free-tier LLM providers on health, latency and rate-limit signals. It writes and curates its own skills and memory. <i>Kotlin, Compose, Room.</i></li>
-  <li><b><a href="https://github.com/yashoncode/docmagic">DocMagic</a></b>, multi-agent RAG assistant: a LangGraph supervisor routes each question to one specialist over hybrid retrieval (vector + BM25, reranked), every answer cited to its page. <i>Python, FastAPI, LangGraph, PGVector.</i></li>
-  <li><b><a href="https://github.com/yashoncode/Tevel-IntelliDB">Tevel IntelliDB</a></b>, AI SQL client on desktop and <a href="https://github.com/yashoncode/TevelMobile">Android</a>: plain English to reviewable SQL from schema metadata only, never rows. Desktop forks Antares SQL (MIT); Android is mine end to end, a native JDBC plugin because a WebView cannot open a TCP socket. <i>Electron, Vue 3, TypeScript, Capacitor.</i></li>
+  <li><b><a href="https://github.com/yashoncode/meetube">MeeTube</a></b>, independently developed and maintained open-source Android media application, with AI-powered audio processing. Handle feature development, performance optimisation, bug fixes, releases, and community feedback. <i>Java, Android, Gradle.</i></li>
+  <li><b><a href="https://github.com/yashoncode/docmagic">DocMagic</a></b>, multi-agent RAG assistant: a LangGraph supervisor routes each question to a specialist over hybrid retrieval (BM25 + vector, cross-encoder reranked), every answer cited to its page or sheet. <i>Python, FastAPI, LangGraph, PGVector.</i></li>
+  <li><b><a href="https://github.com/yashoncode/reyaak">Reyaak</a></b>, on-device Android AI agent that routes each turn across 37 free-tier LLM providers using Thompson sampling. <i>Kotlin, Compose, Room.</i></li>
+  <li><b><a href="https://github.com/yashoncode/Tevel-IntelliDB">Tevel IntelliDB</a></b>, AI SQL client for desktop and Android: plain English to reviewable SQL from schema metadata only, never rows; a validator repairs invalid SQL and confirms risky statements. <i>Electron, Vue 3, TypeScript, Capacitor.</i></li>
 </ul>
 
-<h2>Skills</h2>
+<h2>Technical Skills</h2>
 <div class="skills">
-  <p><b>Generative AI:</b> Multi-Agent Systems, RAG Pipelines, LangChain, LangGraph, MCP, Prompt Engineering, PGVector, ChromaDB, Langfuse, Text-to-SQL</p>
-  <p><b>Backend:</b> Laravel, PHP, FastAPI, REST API Development, CRM and ERP Modules, Async Jobs and Scheduling, n8n Automation, Feature and Unit Testing (PHPUnit, Pytest)</p>
-  <p><b>Databases and Search:</b> MySQL, PostgreSQL, MongoDB, Manticore | <b>Cloud and DevOps:</b> AWS (RDS), Docker, Git, GitHub CI/CD, Coolify, Linux</p>
-  <p><b>Frontend:</b> Next.js, React, TypeScript, Tailwind CSS | <b>Programming Languages:</b> Python, PHP, JavaScript, TypeScript</p>
+  <p><b>Automation &amp; Integrations:</b> n8n, Zapier, Google Apps Script, AppSheet, REST APIs, Webhooks, Zoho Books API, Google APIs, WhatsApp Automation, AI Voice Calls</p>
+  <p><b>AI Engineering:</b> LLM Applications, RAG Pipelines, Multi-Agent Systems, LangChain, LangGraph, MCP, Prompt Engineering, Text-to-SQL, Embeddings, PGVector, ChromaDB, Langfuse</p>
+  <p><b>Backend:</b> Python, FastAPI, Laravel, PHP, Async Jobs and Queues, Task Scheduling, Pytest, PHPUnit</p>
+  <p><b>Frontend:</b> Next.js, React, TypeScript, JavaScript, Tailwind CSS</p>
+  <p><b>Databases:</b> MySQL, PostgreSQL, MongoDB, Manticore Search</p>
+  <p><b>Infrastructure:</b> Docker, AWS (RDS), GitHub CI/CD, Coolify, Linux, Git, Metabase</p>
 </div>
 
 <h2>Education</h2>

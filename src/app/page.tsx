@@ -1,6 +1,7 @@
 import Divider from "@/components/Divider";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import NowPanel from "@/components/NowPanel";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
@@ -41,7 +42,7 @@ export default async function Home() {
       <WarpArrival />
       <Navbar />
       <main>
-        <Hero totalStars={repositories?.totalStars ?? null}>
+        <Hero nowPanel={<NowPanel />} totalStars={repositories?.totalStars ?? null}>
           <GithubHeatmap />
         </Hero>
         <Divider />

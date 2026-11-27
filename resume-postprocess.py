@@ -16,8 +16,8 @@ META = {
     "/Author": "Yashwanth D",
     "/Subject": "Resume",
     "/Keywords": (
-        "AI Engineer, Backend Engineer, Full Stack Engineer, RAG, "
-        "Multi-Agent Systems, LangGraph, FastAPI, Laravel, React, Next.js"
+        "Full-Stack Developer, Automation Engineer, n8n, Zapier, Google Apps Script, "
+        "Python, REST APIs, Zoho Books, LLM, RAG, Laravel, Next.js"
     ),
     "/Creator": "Yashwanth D",
     "/Producer": "Yashwanth D",

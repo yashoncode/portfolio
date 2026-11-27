@@ -7,11 +7,13 @@
 export const profile = {
   name: "Yashwanth D",
   fullName: "Yashwanth Devadoss",
-  title: "Full-Stack Developer · AI Systems",
-  tagline: "I build reliable systems that people depend on every day.",
+  title: "Full-Stack Developer | AI Systems & Automation",
+  tagline: "I build business software and the automation that runs it.",
+  heroDescription:
+    "Developer at Stockarea, working on our CRM, ERP and finance systems, the AI automations between them, and LLM features in Python.",
   location: "India",
   summary:
-    "Software Engineer at Stockarea building scalable full-stack applications with Laravel, React, and Next.js. I develop software that streamlines logistics and freight forwarding operations, plus AI-powered automation workflows that improve business processes and operational efficiency. Deeply into Generative AI, and actively building open-source AI projects with Python and FastAPI: LLM applications, multi-agent systems, RAG pipelines, AI document analysis, and AI-powered SQL query generation.",
+    "I have 4+ years of combined experience in software engineering and technology leadership. I founded Flare Innovations in February 2022 and led its 10-person team until June 2023. Since joining Stockarea in August 2023, I've built production n8n workflows, REST APIs and database integrations for CRM, ERP and finance. I also build LLM applications in Python, including a document assistant that cites the page or sheet behind each answer.",
   email: "yashwanth.devadoss@gmail.com",
   links: {
     linkedin: "https://www.linkedin.com/in/yashwanth-devadoss/",
@@ -20,7 +22,7 @@ export const profile = {
 };
 
 // Headline metrics surfaced in the hero + about sections.
-// `fun` shows on hover — keep them short enough to fit the card.
+// Rendered as ledger rows: the figure, then its label.
 // `href` makes the card a link; use it to point at the section that proves the number.
 // `detail` makes the card open a modal instead — for numbers that need the story,
 // not just a destination. Set one or the other, never both.
@@ -33,7 +35,6 @@ export type StatDetail = {
 export type Stat = {
   value: string;
   label: string;
-  fun: string;
   href?: string;
   detail?: StatDetail;
 };
@@ -42,19 +43,16 @@ export const stats: Stat[] = [
   {
     value: "4+",
     label: "Years shipping production software",
-    fun: "Still zero DROP TABLE incidents. Touch wood.",
     href: "#experience",
   },
   {
-    value: "3",
-    label: "Open-source AI projects shipped",
-    fun: "Multi-agent RAG, text-to-SQL, prompt engineering. All public.",
-    href: "#projects",
+    value: "100+",
+    label: "AI voice calls a week, in production",
+    href: "#experience",
   },
   {
     value: "60×",
-    label: "Faster logistics report APIs (~5 min → ~5 sec)",
-    fun: "Reports now load faster than my excuses. Click for the how.",
+    label: "Faster report APIs, 5 min down to 5 sec",
     detail: {
       title: "From 5 minutes to 5 seconds",
       intro:
@@ -88,7 +86,6 @@ export const stats: Stat[] = [
   {
     value: "4",
     label: "Production systems built end to end",
-    fun: "CRM, ERP, warehouse & finance. Click for what each one does.",
     detail: {
       title: "Four systems, built end to end",
       intro:
@@ -120,9 +117,8 @@ export const stats: Stat[] = [
     },
   },
   {
-    value: "Researcher",
-    label: "1 patent filed, 2 IEEE publications",
-    fun: "Click to read the papers and the patent.",
+    value: "1",
+    label: "Patent filed, plus 2 IEEE papers",
     href: "#recognition",
   },
 ];
@@ -154,62 +150,57 @@ export const experience: Experience[] = [
     current: true,
     points: [
       {
+        icon: "workflow",
+        title: "AI voice calls in production",
+        featured: true,
+        text: "Three outreach channels for the sales team on n8n with open-source LLMs: email, WhatsApp reminders, and AI voice calls handling 100+ calls a week, with constrained prompts, response validation, failure logging, and automatic retries. Follow-up work that filled a rep's day now takes 5 to 15 minutes.",
+      },
+      {
+        icon: "users",
+        title: "Company-wide automation",
+        text: "I build and maintain the production workflows teams run daily in n8n, Zapier, CopilotKit and Google Apps Script. LLM steps extract fields from documents and process data for logistics and CRM.",
+      },
+      {
+        icon: "file-text",
+        title: "Finance automation with Zoho Books",
+        text: "Built and maintain the finance module. Webhooks keep invoices, purchase orders and bills in sync with the Zoho Books API. The module automates profit and revenue reporting and tracks vendor bill payments and expenses.",
+      },
+      {
+        icon: "layout",
+        title: "AI copilot in the Next.js app",
+        text: "Integrated an AI copilot into Stockarea's Next.js frontend. I build the backend APIs and React interfaces for internal web apps.",
+      },
+      {
         icon: "zap",
         title: "3 GB → 200 MB",
         featured: true,
-        text: "Diagnosed and fixed a major report-generation bottleneck: memory cut from ~3 GB to ~200 MB, response time from ~5 min to ~5 sec, by restructuring how large datasets are queried and processed.",
+        text: "Cut report memory use from about 3 GB to 200 MB and response time from about 5 minutes to 5 seconds by querying records in chunks and writing one row at a time.",
       },
       {
         icon: "search",
         title: "493 ms → 0.8 ms",
         featured: true,
-        text: "Replaced substring LIKE scans with a Manticore full-text index, synced from MySQL by a scheduled job so indexed models pay nothing on write. Benchmarked at 1M rows: 493 ms to 0.8 ms, and flat as the table grows rather than linear in table bytes. Adds typo-tolerant matching LIKE cannot do at all.",
-      },
-      {
-        icon: "users",
-        title: "Company-wide automation",
-        text: "Built and maintain the workflow-automation tools every team runs on, streamlining daily operations across the company.",
+        text: "Replaced substring LIKE scans with a typo-tolerant Manticore full-text index. Search fell from 493 ms to 0.8 ms at 1M rows and stayed flat as the table grew. A scheduled job syncs the index from MySQL, keeping indexing off the write path.",
       },
       {
         icon: "server",
         title: "One admin API, four domains",
-        text: "Build and own the Laravel admin API powering core logistics workflows across CRM, ERP, positions, and asset management.",
+        text: "Built and maintain the Laravel admin API for CRM, ERP, warehouse positions and asset management.",
       },
       {
         icon: "sparkles",
         title: "CRM built, end to end",
-        text: "Designed and built the company's CRM modules and workflows end to end, with AI-powered automation integrated into the flows.",
+        text: "Designed and built the CRM modules from lead management through customer and vendor onboarding, including AI-assisted sales follow-ups.",
       },
       {
         icon: "database",
         title: "Asset management backend",
-        text: "Designed and built the positions & asset-management backend end to end as the sole engineer, covering data structuring, architecture, and implementation.",
-      },
-      {
-        icon: "layout",
-        title: "Full-stack with Next.js & React",
-        text: "Developing internal web applications, extending ownership from backend APIs to full-stack delivery.",
-      },
-      {
-        icon: "bot",
-        title: "AI automation in production",
-        featured: true,
-        text: "Build AI-powered automation workflows into logistics and CRM processes, with LLM-driven document and data handling that removes manual steps and speeds up operations.",
-      },
-      {
-        icon: "file-text",
-        title: "Finance module & Zoho Books",
-        text: "Built and maintain the finance module: invoices, purchase orders, and bills synced with the Zoho Books API over webhooks, with automated profit and revenue reporting for the finance team, plus vendor bill-payment and expense tracking.",
-      },
-      {
-        icon: "workflow",
-        title: "AI voice calls in production",
-        text: "Three outreach channels for the sales team on n8n with open-source LLMs: email, WhatsApp reminders, and AI voice calls handling 100+ calls a week, with constrained prompts, response validation, failure logging, and automatic retries. Follow-up work that filled a rep's day now takes 5 to 15 minutes.",
+        text: "Designed the data model and architecture and built the backend for warehouse positions and asset management as the sole engineer.",
       },
       {
         icon: "rocket",
         title: "Own the whole pipeline",
-        text: "End-to-end delivery: design, testing, debugging, and deployment via GitHub CI/CD, Docker, and Coolify.",
+        text: "Design, test and debug applications, then deploy them with GitHub CI/CD, Docker and Coolify.",
       },
     ],
   },
@@ -222,22 +213,22 @@ export const experience: Experience[] = [
       {
         icon: "workflow",
         title: "Automation foundation",
-        text: "Designed and built the base of Stockarea's internal automation, translating business operations into reliable backend workflows.",
+        text: "Designed and built the backend workflows that formed the basis of Stockarea's internal automation.",
       },
       {
         icon: "plug",
         title: "Systems integration",
-        text: "Backend integrations with Laravel and Google APIs connecting disparate internal tools.",
+        text: "Connected internal tools through Laravel backend integrations and Google APIs.",
       },
       {
         icon: "bar-chart",
         title: "Data & reporting",
-        text: "Reporting and data-management with Metabase, MongoDB, and SQL to support operational decision-making.",
+        text: "Managed data and built reports with Metabase, MongoDB and SQL to guide operations.",
       },
       {
         icon: "wrench",
         title: "Early tooling",
-        text: "Workflow tools in Google Apps Script and AppSheet that became part of daily operations.",
+        text: "Built tools in Google Apps Script and AppSheet that teams used in daily operations.",
       },
     ],
   },
@@ -249,12 +240,12 @@ export const experience: Experience[] = [
       {
         icon: "rocket",
         title: "Founded the company",
-        text: "Founded and led development of IoT-based monitoring systems for aquaculture and hydroponics environments.",
+        text: "Founded Flare Innovations and led development of IoT monitoring systems for aquaculture and hydroponics.",
       },
       {
         icon: "activity",
         title: "Real-time sensor data",
-        text: "Python applications processing and analyzing live sensor data from hardware devices.",
+        text: "Built Python applications to process and analyze live data from hardware sensors.",
       },
       {
         icon: "cloud",
@@ -269,9 +260,32 @@ export const experience: Experience[] = [
       {
         icon: "sparkles",
         title: "Incubated and deployed",
-        text: "Incubated at ICAR-CIBA (Central Institute of Brackishwater Aquaculture) and Annamalai University, with a pilot system deployed at CIBA. Wound down after graduation to join Stockarea.",
+        text: "Flare Innovations received incubation support from ICAR-CIBA (Central Institute of Brackishwater Aquaculture) and Annamalai University. We deployed a pilot at CIBA. I wound down the company after graduation to join Stockarea.",
       },
     ],
+  },
+];
+
+export const workflows = [
+  {
+    name: "Feature release",
+    steps: ["Write the spec", "Code it (Next.js + Laravel)", "Deploy via CI/CD", "Live in production"],
+  },
+  {
+    name: "Sales follow-up",
+    steps: ["Lead goes cold (CRM)", "LLM drafts message", "Email + WhatsApp", "AI voice call"],
+  },
+  {
+    name: "Finance sync",
+    steps: ["Invoice created", "Webhook", "Zoho Books", "Profit report"],
+  },
+  {
+    name: "Document intake",
+    steps: ["Document uploaded", "LLM extracts fields", "Validate", "Record updated"],
+  },
+  {
+    name: "Open source",
+    steps: ["Issue reported", "Develop the fix", "PR reviewed and merged", "Release + user feedback"],
   },
 ];
 
@@ -279,75 +293,29 @@ export type SkillGroup = { label: string; skills: string[] };
 
 export const skillGroups: SkillGroup[] = [
   {
-    label: "Agentic AI & LLM",
-    skills: [
-      "Multi-Agent Systems",
-      "RAG Pipelines",
-      "LangChain",
-      "LangGraph",
-      "LangFlow",
-      "MCP",
-      "Prompt Engineering",
-      "Human-in-the-Loop",
-      "Agentic Knowledge Bases",
-      "Text-to-SQL",
-      "AI Document Analysis",
-    ],
+    label: "Automation & Integrations",
+    skills: ["n8n", "Zapier", "Google Apps Script", "AppSheet", "REST APIs", "Webhooks", "Zoho Books API", "Google APIs", "WhatsApp automation", "AI voice calls"],
   },
   {
-    label: "AI Engineering Stack",
-    skills: [
-      "Python",
-      "FastAPI",
-      "PGVector",
-      "ChromaDB",
-      "Langfuse",
-      "Hybrid Retrieval (BM25 + Vector)",
-      "Cross-Encoder Reranking",
-      "Embeddings",
-      "Streaming (SSE)",
-      "Streamlit",
-    ],
+    label: "AI Engineering",
+    skills: ["LLM Applications", "RAG Pipelines", "Multi-Agent Systems", "LangChain", "LangGraph", "MCP", "Prompt Engineering", "Text-to-SQL", "Embeddings", "PGVector", "ChromaDB", "Langfuse", "Hybrid Retrieval (BM25 + Vector)", "Cross-Encoder Reranking"],
   },
   {
-    label: "Backend Development",
-    skills: [
-      "Laravel",
-      "PHP",
-      "REST API Development",
-      "CRM & ERP Modules",
-      "API Integration",
-      "Feature Testing",
-      "Unit Testing",
-      "PHPUnit",
-      "Pytest",
-    ],
+    label: "Python & Backend",
+    skills: ["Python", "FastAPI", "Laravel", "PHP", "Laravel Jobs & Queues", "Task Scheduling", "Pytest", "PHPUnit"],
   },
   {
-    label: "Frontend Development",
-    skills: ["Next.js", "React", "TypeScript", "JavaScript", "Tailwind CSS", "HTML", "CSS"],
+    label: "Databases",
+    skills: ["MySQL", "PostgreSQL", "MongoDB", "SQL", "Manticore Full-Text Search"],
   },
   {
-    label: "Databases & Search",
-    skills: ["MySQL", "PostgreSQL", "MongoDB", "SQL", "Manticore Search", "Full-Text Search"],
+    label: "Infrastructure",
+    skills: ["Docker", "AWS", "AWS RDS", "GitHub CI/CD", "Coolify", "Linux", "Git", "Metabase"],
   },
   {
-    label: "Async Processing",
-    skills: ["Laravel Jobs", "Event-Based Processing", "Task Scheduling"],
+    label: "Frontend",
+    skills: ["Next.js", "React", "TypeScript", "JavaScript", "Tailwind CSS"],
   },
-  {
-    label: "Automation & Workflow",
-    skills: ["n8n", "Google Apps Script", "Zapier", "AppSheet"],
-  },
-  {
-    label: "DevOps & Deployment",
-    skills: ["AWS", "AWS RDS", "GitHub CI/CD", "Coolify", "Docker"],
-  },
-  {
-    label: "Tools & Platforms",
-    skills: ["Git", "GitHub", "Postman", "Linux", "Metabase"],
-  },
-  { label: "Languages", skills: ["Python", "PHP", "JavaScript", "TypeScript"] },
 ];
 
 export type Project = {
@@ -367,16 +335,72 @@ export const projects: Project[] = [
   {
     name: "MeeTube",
     blurb:
-      "A YouTube and YouTube Music client for Android. A tap on the logo switches its liquid glass interface from video to music.",
+      "I build and maintain this open-source YouTube and YouTube Music client for Android on my own. It downloads videos in up to 4K.",
     repo: "yashoncode/meetube",
     url: "https://github.com/yashoncode/meetube",
     downloadUrl: "https://github.com/yashoncode/meetube/releases/latest",
     featured: true,
     points: [
-      "MeeTune keeps songs playing in the background with synced lyrics, an equalizer and crossfades between tracks.",
-      "Save videos in up to 4K, or pick a channel or playlist and have new uploads download automatically.",
+      "MeeTune AI Karaoke removes vocals on the phone as the song plays. The on-device model downloads once (39 MB), keeping the APK the same size.",
+      "I develop features, tune performance, fix bugs and publish versioned releases.",
+      "I triage community issues and feedback, then document the changes in the changelog.",
     ],
     stack: ["Java", "Android", "Gradle", "SponsorBlock"],
+  },
+  {
+    name: "DocMagic",
+    repo: "yashoncode/docmagic",
+    blurb:
+      "I built two versions of this multi-agent RAG assistant for logistics, ERP and CRM documents. It cites the source page or sheet with each answer.",
+    url: "https://github.com/yashoncode/docmagic/tree/langgraph",
+    liveUrl: "https://docmagic-frontend-umber.vercel.app/",
+    points: [
+      "A LangGraph supervisor routes each question to a specialist for documents, spreadsheets, calculations or web search.",
+      "The retrieval pipeline combines BM25 keyword matches and vector search, then reranks the results with a cross-encoder.",
+    ],
+    stack: [
+      "Python",
+      "FastAPI",
+      "LangGraph",
+      "LangChain",
+      "Next.js",
+      "pgvector",
+      "Langfuse",
+      "SSE",
+    ],
+  },
+  {
+    name: "Reyaak",
+    repo: "yashoncode/reyaak",
+    blurb:
+      "A native Kotlin agent for Android that runs on the phone and picks an LLM provider for each turn.",
+    url: "https://github.com/yashoncode/reyaak",
+    points: [
+      "The router uses Thompson sampling to select among 37 free-tier providers, accounting for reliability and rate limits.",
+      "The agent stores searchable facts and writes its own procedures. During idle time it archives skills while preserving built-in and user-edited ones.",
+    ],
+    stack: ["Kotlin", "Jetpack Compose", "Room", "Coroutines", "Thompson Sampling", "Android"],
+  },
+  {
+    name: "Tevel IntelliDB",
+    repo: "yashoncode/Tevel-IntelliDB",
+    blurb:
+      "A desktop and Android SQL client that turns plain-English questions into SQL for review. I wrote the AI layer and its 36 unit tests.",
+    url: "https://github.com/yashoncode/Tevel-IntelliDB",
+    points: [
+      "Schema-only retrieval combines keyword matches with table embeddings. The model sees table definitions, keys and relationships while customer rows stay private.",
+      "The validator repairs invalid SQL and asks for confirmation before running statements it rates as moderate or high risk.",
+    ],
+    stack: [
+      "Electron",
+      "Vue 3",
+      "TypeScript",
+      "Capacitor",
+      "Java (JDBC)",
+      "MySQL",
+      "PostgreSQL",
+      "Embeddings",
+    ],
   },
   {
     name: "KonnectTV",
@@ -427,65 +451,6 @@ export const projects: Project[] = [
     stack: ["Kotlin", "Jetpack Compose", "Rust", "UniFFI", "MySQL"],
   },
   {
-    name: "Reyaak",
-    repo: "yashoncode/reyaak",
-    blurb:
-      "An autonomous agent that runs on the phone itself, with a multi-armed bandit picking which of 37 LLM providers answers each turn.",
-    url: "https://github.com/yashoncode/reyaak",
-    points: [
-      "The router scores 37 free-tier providers every turn. Beta-posterior reliability with Thompson sampling, so exploration is proportional to uncertainty rather than a fixed epsilon, with headroom and rate-limit guardrails as always-on multipliers.",
-      "Memory and skills are separate concerns: facts the agent can search, and procedures it writes for itself. Curation runs on inactivity, archives instead of deleting, and refuses to touch a shipped skill or one you edited.",
-      "Native Kotlin, not a WebView wrapped around a bundled runtime. The :ui module has no platform source set, so an iOS host could supply its own fonts without :ui gaining an expect declaration.",
-    ],
-    stack: ["Kotlin", "Jetpack Compose", "Room", "Coroutines", "Thompson Sampling", "Android"],
-  },
-  {
-    name: "DocMagic",
-    repo: "yashoncode/docmagic",
-    blurb:
-      "Multi-agent RAG assistant that answers questions over logistics, ERP and CRM documents. Every answer is cited to the exact page or sheet.",
-    url: "https://github.com/yashoncode/docmagic/tree/langgraph",
-    liveUrl: "https://docmagic-frontend-umber.vercel.app/",
-    points: [
-      "LangGraph supervisor routes each question to one capability specialist (documents, spreadsheet data, arithmetic or live web search), so the model never juggles every tool at once.",
-      "Hybrid retrieval fuses dense vector search with BM25, then re-scores with a cross-encoder reranker; ingestion runs metadata → analyst → reviewer with a bounded revision loop.",
-      "Built twice on two branches, Next.js + FastAPI + pgvector and Streamlit + LCEL + Chroma, so the architectural trade-offs are visible side by side.",
-    ],
-    stack: [
-      "Python",
-      "FastAPI",
-      "LangGraph",
-      "LangChain",
-      "Next.js",
-      "pgvector",
-      "Langfuse",
-      "SSE",
-    ],
-  },
-  {
-    name: "Tevel IntelliDB",
-    repo: "yashoncode/Tevel-IntelliDB",
-    blurb:
-      "An AI-first SQL client on desktop and Android: a database engineer, not a chat box. Ask in plain English, get safe, reviewable SQL.",
-    url: "https://github.com/yashoncode/Tevel-IntelliDB",
-    points: [
-      "Built on a fork of Antares SQL (MIT). The Electron and Vue shell is upstream; the AI layer is mine, IntentRouter, SchemaIntelligence, EmbeddingRetriever and SqlValidator, with 36 unit tests. Upstream copyright stays in LICENSE alongside mine.",
-      "Schema-only RAG: the model reasons over metadata (tables, columns, keys, indexes, relationships) and never sees a single row of customer data. Hybrid retrieval blends a keyword ranker with cached table embeddings by cosine, falling back to keyword-only when embeddings are off.",
-      "classifyRisk() grades every statement safe, moderate or high, and anything above safe raises a confirm-to-run before it executes. Invalid SQL goes through an auto-repair loop until it validates.",
-      "A separate Android client, written from scratch rather than forked: Capacitor and Vue 3 over a native JDBC plugin, because a WebView cannot open a TCP socket. MySQL and PostgreSQL through bundled drivers, SQLite through Android's own engine.",
-    ],
-    stack: [
-      "Electron",
-      "Vue 3",
-      "TypeScript",
-      "Capacitor",
-      "Java (JDBC)",
-      "MySQL",
-      "PostgreSQL",
-      "Embeddings",
-    ],
-  },
-  {
     name: "ImaGen",
     repo: "yashoncode/imaGen-Prompt-Enhancement",
     blurb:
@@ -498,16 +463,6 @@ export const projects: Project[] = [
     ],
     stack: ["Python", "Streamlit", "NVIDIA NIM", "FLUX.2", "Prompt Engineering", "Pillow"],
   },
-];
-
-export const softSkills = [
-  "Problem Solving",
-  "Fast Learner",
-  "Adaptability",
-  "Team Collaboration",
-  "Communication",
-  "Leadership",
-  "Analytical Thinking",
 ];
 
 export type Education = {

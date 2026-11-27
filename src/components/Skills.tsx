@@ -1,15 +1,9 @@
 import Section from "./Section";
 import Reveal from "./Reveal";
-import { skillGroups, softSkills } from "@/data/resume";
+import { skillGroups } from "@/data/resume";
 import styles from "./sections.module.css";
 
-// Flat list for the scrolling marquee strip.
-const marqueeSkills = [
-  "Laravel", "PHP", "Next.js", "React", "TypeScript", "MySQL", "MongoDB",
-  "Docker", "n8n", "AWS", "GitHub CI/CD", "Python", "REST APIs", "Metabase",
-  "FastAPI", "LangGraph", "LangChain", "RAG", "Multi-Agent Systems",
-  "PGVector", "ChromaDB", "Langfuse", "MCP", "Prompt Engineering",
-];
+const marqueeSkills = skillGroups.flatMap(({ skills }) => skills.slice(0, 4));
 
 export default function Skills() {
   return (
@@ -48,11 +42,6 @@ export default function Skills() {
             </p>
           </li>
         ))}
-        <li className="rise relative grid gap-2 py-5 md:grid-cols-[14rem_minmax(0,1fr)] md:gap-8">
-          <span aria-hidden className="rule" />
-          <h3 className="font-mono text-[11px] font-medium tracking-[0.14em] text-dim uppercase md:pt-1">Beyond code</h3>
-          <p className="leading-relaxed text-muted">{softSkills.join(" · ")}</p>
-        </li>
         <li aria-hidden className="rule relative! block" />
       </ul>
     </Section>

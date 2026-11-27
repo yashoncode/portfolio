@@ -47,7 +47,7 @@ function ThemeToggle() {
 
 function DownloadCV() {
   return (
-    <a href="/Yashwanth-D-Resume.pdf" download
+    <a href={`/Yashwanth-D-Resume.pdf?v=${process.env.NEXT_PUBLIC_CV_VERSION}`} download="Yashwanth-D-Resume.pdf"
       className="glass inline-flex h-9 items-center justify-center gap-2 rounded-md px-3 font-mono text-xs font-medium text-fg hover:text-accent">
       <Download size={14} /> Download CV
     </a>

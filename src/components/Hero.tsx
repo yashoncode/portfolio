@@ -3,7 +3,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { ArrowDown, ArrowRight, ArrowUpRight, Clock3, Radio } from "lucide-react";
 import { profile, stats, type StatDetail } from "@/data/resume";
-import CareerRoute from "./CareerRoute";
 import StatModal from "./StatModal";
 import { CountUp } from "./motion";
 import styles from "./Hero.module.css";
@@ -76,7 +75,7 @@ function Identity() {
         {profile.tagline}
       </p>
       <p className="mt-3 max-w-[34rem] text-sm leading-relaxed text-muted sm:text-[0.97rem]">
-        Full-stack Laravel, React and Next.js for logistics and freight forwarding, plus open-source agentic AI: multi-agent systems, RAG pipelines and FastAPI.
+        {profile.heroDescription}
       </p>
       <div className="mt-7 flex flex-wrap items-center gap-3">
         <a href="#projects" className={styles.primaryAction}>
@@ -90,50 +89,42 @@ function Identity() {
   );
 }
 
-/** One ruled strip, cells split by hairlines, instead of a row of tiles. */
+/** A ledger: figure, label, and a cue for rows that lead somewhere. */
 function Manifest({ totalStars }: { totalStars: number | null }) {
   const [detail, setDetail] = useState<StatDetail | null>(null);
 
+  const row = (value: string, label: string, cue?: ReactNode) => (
+    <>
+      <span className={styles.fig}><CountUp value={value} /></span>
+      <span className={styles.rowLabel}>{label}</span>
+      {cue && <span className={styles.rowCue} aria-hidden="true">{cue}</span>}
+    </>
+  );
+
   return (
     <>
-      <div className={styles.manifest} role="group" aria-label="Career and GitHub figures">
-        {stats.map((stat) => {
-          const numeric = /^\d/.test(stat.value);
-          const content = (
-            <>
-              <span className={numeric ? styles.figure : styles.word}>
-                {numeric ? <CountUp value={stat.value} /> : stat.value}
-              </span>
-              <span className={styles.captions}>
-                <span className={styles.label}>{stat.label}</span>
-                <span className={styles.fun}>{stat.fun}</span>
-              </span>
-              {(stat.href || stat.detail) && (
-                <span className={styles.cue}>{stat.detail ? "How" : "See"} <span aria-hidden="true">→</span></span>
-              )}
-            </>
-          );
-          if (stat.href) {
-            return <a key={stat.label} className={styles.cell} href={stat.href}>{content}</a>;
-          }
-          if (stat.detail) {
-            const d = stat.detail;
-            return (
-              <button key={stat.label} type="button" aria-haspopup="dialog" className={styles.cell} onClick={() => setDetail(d)}>
-                {content}
+      <ul className={styles.manifest} aria-label="Career and GitHub figures">
+        {stats.map((stat) => (
+          <li key={stat.label}>
+            {stat.href ? (
+              <a className={styles.row} href={stat.href}>{row(stat.value, stat.label, "→")}</a>
+            ) : stat.detail ? (
+              <button type="button" aria-haspopup="dialog" className={styles.row} onClick={() => setDetail(stat.detail!)}>
+                {row(stat.value, stat.label, "+")}
               </button>
-            );
-          }
-          return <div key={stat.label} className={styles.cell}>{content}</div>;
-        })}
+            ) : (
+              <div className={styles.row}>{row(stat.value, stat.label)}</div>
+            )}
+          </li>
+        ))}
         {totalStars !== null && (
-          <a className={`${styles.cell} ${styles.stars}`} href={profile.links.github} target="_blank" rel="noreferrer">
-            <span className={styles.figure}><CountUp value={totalStars.toLocaleString("en-US")} /></span>
-            <span className={styles.label}>GitHub stars across my repos</span>
-            <span className={styles.cue}><i className={styles.liveDot} aria-hidden="true" />Live from GitHub</span>
-          </a>
+          <li>
+            <a className={`${styles.row} ${styles.stars}`} href={profile.links.github} target="_blank" rel="noreferrer">
+              {row(totalStars.toLocaleString("en-US"), "GitHub stars, live", <i className={styles.liveDot} />)}
+            </a>
+          </li>
         )}
-      </div>
+      </ul>
       <StatModal detail={detail} onDismiss={() => setDetail(null)} />
     </>
   );
@@ -141,9 +132,11 @@ function Manifest({ totalStars }: { totalStars: number | null }) {
 
 export default function Hero({
   children,
+  nowPanel,
   totalStars = null,
 }: {
   children?: ReactNode;
+  nowPanel: ReactNode;
   totalStars?: number | null;
 }) {
   return (
@@ -160,7 +153,7 @@ export default function Hero({
         </div>
         <div className={styles.identityAndRoute}>
           <Identity />
-          <CareerRoute />
+          {nowPanel}
         </div>
         <Manifest totalStars={totalStars} />
         {children && <div className="mt-10 sm:mt-12">{children}</div>}
