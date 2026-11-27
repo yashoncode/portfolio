@@ -166,9 +166,9 @@ export const experience: Experience[] = [
         text: "Built and maintain the finance module. Webhooks keep invoices, purchase orders and bills in sync with the Zoho Books API. The module automates profit and revenue reporting and tracks vendor bill payments and expenses.",
       },
       {
-        icon: "layout",
-        title: "AI copilot in the Next.js app",
-        text: "Integrated an AI copilot into Stockarea's Next.js frontend. I build the backend APIs and React interfaces for internal web apps.",
+        icon: "table",
+        title: "Google Sheets for daily operations",
+        text: "Automated the Google Sheets that operations teams use for day-to-day updates. Apps Script pulls data in, fills the sheets and sends the updates, so nobody has to compile them by hand.",
       },
       {
         icon: "zap",
